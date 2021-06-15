@@ -3099,7 +3099,7 @@ url = ["furl (>=0.4.1)"]
 
 [[package]]
 name = "techlib-nr-common-metadata"
-version = "3.0.0a47"
+version = "3.0.0a48"
 description = "NR common data types"
 category = "main"
 optional = false
