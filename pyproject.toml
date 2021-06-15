@@ -10,7 +10,6 @@ authors = ["Daniel Kopecký <Daniel.Kopecky@techlib.cz>", "Denys Chaplyhin <chap
 readme = "README.md"
 packages = [{include='nr_theses_metadata'}]
 
-
 [tool.poetry.dependencies]
 python = "^3.8"
 techlib-nr-common-metadata = "^3.0.0a47"
