@@ -1,4 +1,4 @@
-# NR-Theses
+# nr-theses-metadata
 
 [![Build Status](https://travis-ci.org/Narodni-repozitar/nr-theses.svg?branch=master)](https://travis-ci.org/Narodni-repozitar/nr-theses)
 [![Coverage Status](https://coveralls.io/repos/github/Narodni-repozitar/nr-theses/badge.svg?branch=master)](https://coveralls.io/github/Narodni-repozitar/nr-theses?branch=master)
@@ -14,8 +14,8 @@ General libraries extending [Invenio](https://github.com/inveniosoftware) are co
  Knihovna se instaluje ze zdroje.
 
  ```bash
-git clone git@github.com:Narodni-repozitar/nr-theses.git
-cd nr-common
+git clone git@github.com:Narodni-repozitar/nr-theses-metadata.git
+cd nr-common-metadata
 pip install poetry
 poetry install
 ```
