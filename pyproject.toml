@@ -1,7 +1,7 @@
 [tool]
 [tool.poetry]
 name = "techlib-nr-theses-metadata"
-version = "1.0.0a12"
+version = "1.0.0a13"
 description = "Czech National Repository theses data model."
 license = "MIT"
 keywords = ["Czech", "Nation", "Repository", "Invenio", "theses"]
@@ -32,9 +32,6 @@ oarepo-fsm = "^1.5.0"
 
 [tool.poetry.plugins.'invenio_jsonschemas.schemas']
 'nr_theses_metadata' = 'nr_theses_metadata.jsonschemas'
-
-[tool.poetry.plugins.'invenio_search.mappings']
-'nr_theses_metadata' = 'nr_theses_metadata.mappings'
 
 [tool.poetry.plugins.'oarepo_mapping_includes']
 'nr_theses_metadata' = 'nr_theses_metadata.mapping_includes'
