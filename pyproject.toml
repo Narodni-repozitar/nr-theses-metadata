@@ -1,7 +1,7 @@
 [tool]
 [tool.poetry]
 name = "techlib-nr-theses-metadata"
-version = "1.0.0a11"
+version = "1.0.0a12"
 description = "Czech National Repository theses data model."
 license = "MIT"
 keywords = ["Czech", "Nation", "Repository", "Invenio", "theses"]
