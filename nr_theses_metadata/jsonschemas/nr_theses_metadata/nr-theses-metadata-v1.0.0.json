@@ -8,8 +8,8 @@
             "properties": {
                 "dateDefended": {
                     "description": "Defence date of a thesis or desartion. Expected as YYYY-MM-DD.",
-                    "$comment": "pokud neosahuje samostatné pole dateIssued, tak se přebírá toto datum do pole dateIssued",
-                    "type": "string"
+                    "$comment": "ve většině případů stejné jako dateIssued",
+                    "$ref": "#/definitions/date"
                 },
                 "defended": {
                     "description": "It indicates whether the thesis was defended successfully or not.",
@@ -19,16 +19,13 @@
                     "description": "It takes over metadata on grantor, i.e. a university that assigned the degree, from Institutions taxonomy. Contains name of university, faculty and department.",
                     "$ref": "../taxonomy-v2.0.0.json#/definitions/TermArray"
                 },
-                "studyField": {
-                    "description": "Taxonomy driven study field under which the thesis was created. The taxonomy consists only unique values obtained at the input. Aliases (replacement of abbreviations) will be created on the input of data in specific cases.",
-                    "$ref": "../taxonomy-v2.0.0.json#/definitions/TermArray"
+                "studyFields": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
-            },
-            "required": [
-                "dateDefended",
-                "defended",
-                "degreeGrantor"
-            ]
+            }
         }
     ]
 }
