@@ -73,12 +73,12 @@ target/
 
 
 # temporary
-scripts
-nr_theses_metadata
+#scripts
+#nr_theses_metadata
 docker-data
 docker_services.yml
-poetry.lock
-pyproject.toml
+#poetry.lock
+#pyproject.toml
 clear.sh
 run.py
 

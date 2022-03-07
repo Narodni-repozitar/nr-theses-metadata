@@ -1,0 +1,9 @@
+from nr_theses_metadata.resources.config import NrThesesMetadataResourceConfig
+from nr_theses_metadata.resources.resource import NrThesesMetadataResource
+from nr_theses_metadata.services.config import NrThesesMetadataServiceConfig
+from nr_theses_metadata.services.service import NrThesesMetadataService
+
+NR_THESES_METADATA_RESOURCE_CONFIG = NrThesesMetadataResourceConfig
+NR_THESES_METADATA_RESOURCE_CLASS = NrThesesMetadataResource
+NR_THESES_METADATA_SERVICE_CONFIG = NrThesesMetadataServiceConfig
+NR_THESES_METADATA_SERVICE_CLASS = NrThesesMetadataService

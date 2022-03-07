@@ -1,0 +1,62 @@
+[tool.poetry]
+name = "nr-theses-metadata"
+version = "1.0.0.dev1"
+description = "A sample application for nr_theses_metadata"
+authors = []
+
+[build-system]
+requires = ["poetry-core>=1.0.8"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.plugins.'invenio_base.api_apps']
+nr_theses_metadata = "nr_theses_metadata.ext:NrThesesMetadataExt"
+
+[tool.poetry.dependencies.invenio]
+version = "^3.5.0a3"
+extras = ["base", "auth", "metadata", "files", "postgresql", "elasticsearch7"]
+optional = true
+allow-prereleases = true
+
+[tool.poetry.dependencies.pyyaml]
+version = ">=6"
+optional = true
+
+[tool.poetry.dependencies.invenio-rest]
+version = "^1.2.8"
+optional = true
+allow-prereleases = true
+
+[tool.poetry.dependencies.invenio-records-resources]
+version = "^0.18.3"
+optional = true
+allow-prereleases = true
+
+[tool.poetry.extras]
+sample-app = ["invenio", "invenio-records-resources", "pyyaml"]
+
+[tool.poetry.dependencies.deepmerge]
+version = "^1.0.1"
+
+[tool.poetry.dependencies.langcodes]
+version = "^3.3.0"
+
+[tool.poetry.plugins.'invenio_db.alembic']
+nr_theses_metadata = "nr_theses_metadata:alembic"
+
+[tool.poetry.plugins.'invenio_db.models']
+nr_theses_metadata = "nr_theses_metadata.records.models"
+
+[tool.poetry.plugins.'invenio_base.api_blueprints']
+NrThesesMetadata = "nr_theses_metadata.views:create_blueprint_from_app"
+
+[tool.poetry.plugins.'invenio_search.mappings']
+nr_theses_metadata = "nr_theses_metadata.records.mappings"
+
+[tool.poetry.plugins.'invenio_jsonschemas.schemas']
+nr_theses_metadata = "nr_theses_metadata.records.jsonschemas"
+
+[tool.poetry.plugins.'oarepo_ui.models']
+nr_theses_metadata = "nr_theses_metadata:oarepo_ui"
