@@ -12,6 +12,8 @@
 
 from flask import Blueprint
 
+from nr_theses_metadata.records_ui.searchapp import search_app_context
+
 # from .filters import (
 #     can_list_files,
 #     get_scheme_label,
@@ -59,6 +61,6 @@ def create_ui_blueprint(app):
     # blueprint.add_app_template_filter(get_scheme_label)
 
     # Register context processor
-    # blueprint.app_context_processor(search_app_context)
+    blueprint.app_context_processor(search_app_context)
 
     return blueprint

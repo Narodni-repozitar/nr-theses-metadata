@@ -3,7 +3,7 @@
 {%- extends config.BASE_TEMPLATE %}
 {%- block javascript %}
   {{ super() }}
-  {{ webpack['nr-theses-metadata-search'] }}
+  {{ webpack['nr-theses-metadata-search.js'] }}
 {%- endblock %}
 {%- block page_body %}
   <div data-invenio-search-config='{{ search_app_config(app_id="theses-search") | tojson }}'></div>
