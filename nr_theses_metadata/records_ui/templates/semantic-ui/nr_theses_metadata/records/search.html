@@ -1,0 +1,10 @@
+
+{%- set title = _("Search results") %}
+{%- extends config.BASE_TEMPLATE %}
+{%- block javascript %}
+  {{ super() }}
+  {{ webpack['nr-theses-metadata-search'] }}
+{%- endblock %}
+{%- block page_body %}
+  <div data-invenio-search-config='{{ search_app_config(app_id="theses-search") | tojson }}'></div>
+{%- endblock page_body %}

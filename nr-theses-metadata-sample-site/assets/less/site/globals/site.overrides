@@ -1,2 +1,2 @@
-@import "@less/nr_theses_metadata_sample_app/theme";
+@import "@less/nr_theses_metadata/theme";
 @import "site.variables";

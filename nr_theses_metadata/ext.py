@@ -44,3 +44,7 @@ class NrThesesMetadataExt(object):
         app.config.setdefault(
             "NR_THESES_METADATA_SERVICE_CLASS", config.NR_THESES_METADATA_SERVICE_CLASS
         )
+        app.config.setdefault(
+            "APP_UI_ROUTES", config.APP_UI_ROUTES
+        )
+

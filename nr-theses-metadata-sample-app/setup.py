@@ -82,21 +82,8 @@ setup(
         "flask.commands": [
             "rdm-records = nr_theses_metadata_sample_app.cli:rdm_records",
         ],
-        "invenio_base.blueprints": [
-            "nr_theses_metadata_sample_app_records = "
-            "nr_theses_metadata_sample_app.records_ui.views:create_blueprint",
-            "nr_theses_metadata_sample_app_requests = "
-            "nr_theses_metadata_sample_app.requests_ui.views:create_ui_blueprint",
-            "nr_theses_metadata_sample_app = nr_theses_metadata_sample_app.theme.views:create_blueprint",
-        ],
-        "invenio_assets.webpack": [
-            "nr_theses_metadata_sample_app_theme = nr_theses_metadata_sample_app.theme.webpack:theme",
-        ],
         "invenio_config.module": [
             "nr_theses_metadata_sample_app = nr_theses_metadata_sample_app.config",
-        ],
-        "invenio_i18n.translations": [
-            "messages = nr_theses_metadata_sample_app",
         ],
     },
     extras_require=extras_require,

@@ -11,6 +11,10 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.dependencies]
 python = "^3.9"
 
+[tool.poetry.plugins.'invenio_base.apps']
+# TODO: register as UI app too
+nr_theses_metadata = "nr_theses_metadata.ext:NrThesesMetadataExt"
+
 [tool.poetry.plugins.'invenio_base.api_apps']
 nr_theses_metadata = "nr_theses_metadata.ext:NrThesesMetadataExt"
 
@@ -42,6 +46,19 @@ version = "^1.0.1"
 
 [tool.poetry.dependencies.langcodes]
 version = "^3.3.0"
+
+[tool.poetry.plugins.'invenio_base.blueprints']
+# TODO: generate & register these ui blueprints
+nr_theses_metadata_records = "nr_theses_metadata.records_ui.views:create_ui_blueprint"
+nr_theses_metadata_requests = "nr_theses_metadata.requests_ui.views:create_ui_blueprint"
+nr_theses_metadata = "nr_theses_metadata.theme.views:create_ui_blueprint"
+
+[tool.poetry.plugins.'invenio_assets.webpack']
+# TODO: generate & register this webpack theme config
+nr_theses_metadata_theme = "nr_theses_metadata.theme.webpack:theme"
+
+[tool.poetry.plugins.'invenio_i18n.translations']
+messages = "nr_theses_metadata"
 
 [tool.poetry.plugins.'invenio_db.alembic']
 nr_theses_metadata = "nr_theses_metadata:alembic"

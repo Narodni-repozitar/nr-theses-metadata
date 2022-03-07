@@ -4,19 +4,15 @@ cd `dirname $0`/..
 
 set -e
 
-python -c 'import sys; exit(1) if sys.version_info.major < 3 or sys.version_info.major == 3 and sys.version_info.minor < 9 else exit(0)' || {
-  echo "Bad python version, use at least 3.9"
-  exit 1
-}
-
 python3.9 -m venv .venv
 source .venv/bin/activate
 
 pip install invenio-cli
 
 cd nr-theses-metadata-sample-site
+invenio-cli check-requirements -d
 invenio-cli install
-invenio-cli services setup -N
+invenio-cli services setup -N -f
 
 cd ..
 

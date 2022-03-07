@@ -104,50 +104,6 @@ BABEL_DEFAULT_TIMEZONE = "Europe/Prague"
 #     ('fr', _('French'))
 # ]
 
-
-# Invenio-Theme
-# =============
-# See https://invenio-theme.readthedocs.io/en/latest/configuration.html
-
-APP_THEME = ["semantic-ui"]
-"""Application theme."""
-
-BASE_TEMPLATE = "invenio_theme/page.html"
-"""Global base template."""
-
-COVER_TEMPLATE = "invenio_theme/page_cover.html"
-"""Cover page base template (used for e.g. login/sign-up)."""
-
-SETTINGS_TEMPLATE = "invenio_theme/page_settings.html"
-"""Settings base template."""
-
-THEME_FOOTER_TEMPLATE = "nr_theses_metadata_sample_app/footer.html"
-"""Footer base template."""
-
-THEME_FRONTPAGE = False
-"""Use default frontpage."""
-
-THEME_FRONTPAGE_TITLE = _("The turn-key research data management repository")
-"""Frontpage title."""
-
-THEME_HEADER_TEMPLATE = "nr_theses_metadata_sample_app/header.html"
-"""Header base template."""
-
-THEME_FRONTPAGE_TEMPLATE = "nr_theses_metadata_sample_app/frontpage.html"
-"""Frontpage template."""
-
-THEME_HEADER_LOGIN_TEMPLATE = "nr_theses_metadata_sample_app/header_login.html"
-"""Header login base template."""
-
-THEME_LOGO = "images/theme-logo.svg"
-"""Theme logo."""
-
-THEME_SITENAME = _("nr-theses-metadata Sample app")
-"""Site name."""
-
-SEARCH_UI_SEARCH_TEMPLATE = "nr_theses_metadata_sample_app/records/search.html"
-"""Search page's base template."""
-
 # Invenio-Communities
 # ===================
 
