@@ -47,4 +47,6 @@ class NrThesesMetadataExt(object):
         app.config.setdefault(
             "APP_UI_ROUTES", config.APP_UI_ROUTES
         )
-
+        app.config.setdefault(
+            "APP_SEARCH_FACETS", config.APP_SEARCH_FACETS
+        )

@@ -272,7 +272,7 @@ def search_app_context():
         'search_app_config': partial(
             search_app_config,
             'RECORD_SEARCH',
-            current_app.config.get('RECORD_FACETS', {}),
+            current_app.config.get('APP_SEARCH_FACETS', {}),
             # TODO: set to match your record model
             '/api/nr_theses_metadata', headers={"Accept": "application/json"}),
         'search_app_user_requests_config': partial(
