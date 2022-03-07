@@ -1,0 +1,5 @@
+settings:
+  python:
+    record-search-options-bases: [ oarepo_ui.services.search.UISearchOptions ]
+    record-service-config-bases: [ oarepo_ui.services.config.UIRecordServiceConfig ]
+    record-resource-config-class-bases: [ oarepo_ui.resources.config.UIResourceConfig ]

@@ -1,0 +1,39 @@
+version: 1.0.0
+title: Czech National Repository - theses
+oarepo:use: [ invenio, ./unsupported.yaml, ./taxonomy.yaml, ./docs.yaml ]
+
+plugins:
+  packages: [ oarepo-model-builder-multilingual, oarepo-model-builder-ui ]
+
+settings:
+  supported-langs:
+    cs: {}
+    en: {}
+
+oarepo:sample:
+  count: 1
+
+model:
+  properties:
+    metadata:
+      oarepo:use: "#/$defs/DocumentMetadata"
+      properties:
+        dateDefended:
+          oarepo:use: "#/$defs/Date"
+          oarepo:sample:
+            faker: date
+        defended:
+          type: boolean
+          oarepo:sample:
+          - true
+          - false
+        degreeGrantor[]:
+          oarepo:use: "#/$defs/TaxonomyTerm"
+        studyFields[]:
+          type: keyword
+        # todo: this will be moved later to secondary community
+        collection:
+          type: keyword
+oarepo:ui:
+  translation:
+    default: "en"

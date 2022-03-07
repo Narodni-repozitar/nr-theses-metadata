@@ -1,0 +1,18 @@
+oarepo:model-validation:
+  jsonschema-property:
+    properties:
+      $comment:
+        type: string
+      $description:
+        type: string
+      enum:
+        type: array
+        items:
+          type: string
+      uniqueItems:
+        type: boolean
+      format:
+        type: string
+      minItems:
+        type: integer
+
