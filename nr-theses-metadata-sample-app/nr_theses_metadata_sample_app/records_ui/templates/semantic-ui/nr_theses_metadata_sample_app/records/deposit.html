@@ -1,0 +1,33 @@
+
+{%- if not record.is_published and record.versions.index and record.versions.index > 1%}
+  {%- set title = _("New version") %}
+{%- elif not record.is_published %}
+  {%- set title = _("New upload") %}
+{% else %}
+  {%- set title = _("Edit upload") %}
+{%- endif %}
+{%- extends config.BASE_TEMPLATE %}
+
+{%- block page_body %}
+  {%- if record %}
+  <input id="deposits-record" type="hidden" name="deposits-record" value='{{record | tojson }}'></input>
+  {%- endif %}
+  {%- if community %}
+  <input id="deposits-draft-community" type="hidden" name="deposits-draft-community" value='{{community | tojson }}'></input>
+  {%- endif %}
+  {%- if files %}
+  <input id="deposits-record-files" type="hidden" name="deposits-record-files" value='{{files | tojson }}'></input>
+  {%- endif %}
+  {%- if forms_config %}
+  <input type="hidden" name="deposits-config" value='{{forms_config | tojson }}'></input>
+  {%- endif %}
+  {%- if permissions %}
+  <input id="deposits-record-permissions" type="hidden" name="deposits-record-permissions" value='{{permissions | tojson }}'></input>
+  {%- endif %}
+  <div id="deposit-form"></div>
+{%- endblock page_body %}
+
+{%- block javascript %}
+    {{ super() }}
+    {{ webpack['nr-theses-metadata-sample-app-deposit.js'] }}
+{%- endblock %}

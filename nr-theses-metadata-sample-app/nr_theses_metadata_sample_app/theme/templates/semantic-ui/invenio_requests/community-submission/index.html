@@ -1,0 +1,24 @@
+
+{% extends "invenio_requests/details/index.html" %}
+
+{% block javascript %}
+{{ super() }}
+{{ webpack['nr_theses_metadata_sample_app-requests.js']}}
+{% endblock %}
+
+{% block request_topic %}
+  <h1 class="ui header">
+    <div class="ui label green">New submission</div>
+    {{ request.topic.metadata.title }}</h1><br/>
+  <div class="ui horizontal list" role="list">
+    {% for item in request.topic.metadata.creators %}
+      <div class="item" role="listitem">
+        <div class="content"><i class="user icon"></i>
+          {{ item.person_or_org.name }}</div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock request_topic %}
+
+{% block conversation %}
+{% endblock conversation %}

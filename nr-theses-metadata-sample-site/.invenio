@@ -1,0 +1,41 @@
+[cli]
+flavour = oarepo
+logfile = /logs/invenio-cli.log
+
+[cookiecutter]
+project_name = nr-theses-metadata Sample site
+project_shortname = nr-theses-metadata-sample-site
+project_site = oarepo.org
+github_repo = oarepo/nr-theses-metadata-sample-site
+description = Testing OARepo Site instance for nr-theses-metadata datamodel.
+author_name = CESNET
+author_email = info@oarepo.org
+year = 2022
+python_version = 3.9
+database = postgresql
+elasticsearch = 7
+file_storage = S3
+development_tools = yes
+app_package = nr-theses-metadata-sample-app
+app_package_path = ../nr-theses-metadata-sample-app
+datamodel_package = 
+datamodel_package_path = 
+_template = gh:oarepo/cookiecutter-oarepo-instance
+
+[files]
+app_data = {'vocabularies': {'.gitkeep': '22c2e25700ed996461cfd10914ab8c8b50834c99d3167ea593730803ff4677e5'}, 'README.md': 'd58978488626bdeddc791a15a39e341a4ed06f202b84d0c0d4aa9ef49481c6d9', 'vocabularies.yaml': '58639b3dc6c8697ce5c72d87edd814a7a1737f37dc3dbe6584e90c32d1114577'}
+docker = {'nginx': {'test.crt': '90d8e44a0eed270d0b79f5ec6573cfee7b50d1966933cc419794a713511db70c', 'Dockerfile': '541326766beaba2e8492255c99e11aa76640d71329ceab5bcab1c8d6a979bd5c', 'test.key': '54c4d17662d92299a366b917151bd71455d6910a6cb1ab17ff23ce99bbdbc7dd', 'nginx.conf': '6c9a6e372fc340dfcd3b49e6a30bd7bd36af41d79d1d093b7b3ba5f4c9d781b4', 'conf.d': {'default.conf': '56083b8ec8c2bc0aaab41e6db46785f2391f18a99744918e48ed14bfe91f0f43'}}, 'pgadmin': {'servers.json': 'b8775518999e419d073a4028278f7463deb8a88fbbd84e7af5d737bd7241c428'}, 'uwsgi': {'uwsgi_rest.ini': 'c36fc5021baf15f375b3b6c825f7753e5d166319c5fe38a85b604391ce5b37b6', 'uwsgi_ui.ini': 'c80168dc8d29086b876caab41b5057fddef46bdc748c5ecf213f684aa73cc90c'}}
+invenio.cfg = 4a427ede2a89d6684eb3577c64cdbf5f4f1d4f8e22a54eb243bcafd67d019778
+docker-services.yml = 54522a5db74f2f04ab0c3dc538ee82c10d55b35eeabe6ceba190b80645d40d7c
+dockerfile = f9b6dd1f450643016d5b4bf6261f6400ec75d208df4f8b348ce2b3ac2a29c5e3
+readme.md = 4de635b07998f64f7ebec62473ebf07d2afaececf32a81c2352fd896c173f170
+pipfile = ebd114110725525436658ec95e6b73e8bab52732b584b05b9f0f23783d89c3a2
+.dockerignore = 21241bc12cdf4ac5f209d6b191adc8f25eb89af93ce5c4c3f72c86661162d7b5
+.gitignore = af1182c70588e583daeb35809e6cdfe3408425d438c3ceb282b1f4b8360290e2
+static = {'images': {'theme-logo.svg': '5af2c7b67a09798cba3d50cc2e811ca9fd2ff73b40d9d2a52a97237b9ed44008'}}
+docker-compose.full.yml = 632d383d04be0dacdebb97b3edef113294227cb74e4550e1e2b6ca4d1487db79
+templates = {'.gitkeep': 'd4756cdf68d94c670c924f9d57d44718f666e457727701486435b57a97e52c5f', 'README.md': '07f5914ab2a86453e9750c27b8f1e2c3df4950b1645b4e68dbc1fed6b94f7127'}
+docker-compose.yml = fe999c3201380e715354172b4e0124ac4dfc668b94e1278c4ab27b7fba2cad86
+data = {'default': {'.gitkeep': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'}}
+assets = {'less': {'theme.config': 'f59cd959ec605703728a3aba43949eaee2967c3886a2646e420238b29bf8796f', 'README.md': 'd2b8147415b5a0e0cba587417f50c890a14dc2914c8a08f138658f8e79529fdd', 'site': {'globals': {'site.variables': 'ebdd4abbc0c2415bf2152564c824b5329a5779433f50bee3e39e942ead082540', 'site.overrides': 'a26f731fa88ee23f58462f3ddb140eef7ee3bdbde5552047315d1f8c471ba8f8'}}}, 'templates': {'.gitkeep': '22c2e25700ed996461cfd10914ab8c8b50834c99d3167ea593730803ff4677e5', 'search': {'.gitkeep': '22c2e25700ed996461cfd10914ab8c8b50834c99d3167ea593730803ff4677e5'}}}
+

@@ -1,0 +1,8 @@
+
+{% if
+record.metadata.subjects %}
+  <section id="keywords-and-subjects" aria-label="{{ _('Keywords and subjects') }}" class="ui segment oarepo-sidebar">
+    <h2 class="ui small header">{{ _('Keywords and subjects') }}</h2>
+    {%- include "nr_theses_metadata_sample_app/records/details/subjects.html" %}
+  </section>
+{% endif %}

@@ -1,0 +1,13 @@
+
+{%- extends config.PREVIEWER_ABSTRACT_TEMPLATE %}
+
+{%- block head %}
+{% for css_bundle in css_bundles %}
+{{ webpack[css_bundle] }}
+{% endfor %}
+{%- endblock %}
+
+{% block panel %}
+<img class="iiif-preview-img" src="{{ file_url }}" style="max-width: 100%;">
+{% endblock %}
+

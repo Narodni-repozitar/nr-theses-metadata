@@ -1,0 +1,4 @@
+
+{%- for template_name in config.get("APP_DETAIL_SIDE_BAR_TEMPLATES", []) -%}
+  {% include template_name %}
+{%- endfor -%}
