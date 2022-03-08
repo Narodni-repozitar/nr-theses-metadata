@@ -34,7 +34,6 @@ export const ResultsListItem = ({ result, index }) => {
   const access_status = 'Open'
   const access_status_icon = 'unlock'
   const createdDate = _get(result, 'ui.created', 'No creation date found.')
-  console.log(result, index)
   const creators = result.ui.creators.creators.slice(0, 3)
 
   const description_stripped = _get(result, 'ui.abstract', 'No description')

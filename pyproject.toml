@@ -60,6 +60,14 @@ nr_theses_metadata = "nr_theses_metadata:alembic"
 [tool.poetry.plugins.'invenio_db.models']
 nr_theses_metadata = "nr_theses_metadata.records.models"
 
+[tool.poetry.plugins.'invenio_base.api_blueprints']
+NrThesesMetadata = "nr_theses_metadata.views:create_api_blueprint"
+
+[tool.poetry.plugins.'invenio_base.blueprints']
+NrThesesMetadataStaticToBeMoved = "nr_theses_metadata.views:static_blueprint"
+NrThesesMetadataUI = "nr_theses_metadata.views:create_ui_blueprint"
+NrThesesMetadataRecordsUI = "nr_theses_metadata.views:create_records_ui_blueprint"
+
 [tool.poetry.plugins.'invenio_search.mappings']
 nr_theses_metadata = "nr_theses_metadata.records.mappings"
 

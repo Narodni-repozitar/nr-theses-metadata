@@ -17,7 +17,6 @@ class NrThesesMetadataExt(object):
         """Flask application initialization."""
         self.init_config(app)
         self.init_resource(app)
-        self.register_blueprints(app)
         app.extensions["nr_theses_metadata"] = self
 
     def init_resource(self, app):
@@ -37,11 +36,6 @@ class NrThesesMetadataExt(object):
             config=app.config["NR_THESES_METADATA_RECORDS_UI_RESOURCE_CONFIG"](),
             api_config=self.resource.config
         )
-
-    def register_blueprints(self, app):
-        app.register_blueprint(self.resource.as_blueprint())
-        app.register_blueprint(self.ui_resource.as_blueprint())
-        app.register_blueprint(self.records_ui_resource.as_blueprint())
 
     def init_config(self, app):
         """Initialize configuration."""
