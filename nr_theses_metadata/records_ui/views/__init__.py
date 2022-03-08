@@ -29,6 +29,9 @@ from nr_theses_metadata.records_ui.searchapp import search_app_context
 #
 # Registration
 #
+from .detail import record_detail
+
+
 def create_ui_blueprint(app):
     """Register blueprint routes on app."""
     routes = app.config.get("APP_UI_ROUTES")
@@ -37,6 +40,11 @@ def create_ui_blueprint(app):
         "nr_theses_metadata_sample_app_records",
         __name__,
         template_folder="../templates",
+    )
+
+    blueprint.add_url_rule(
+        routes["record_detail"],
+        view_func=record_detail,
     )
 
     # Deposit URL rules

@@ -1,0 +1,50 @@
+{% if use_theme_basic_template|default(true) %}
+{%- extends config.BASE_TEMPLATE %}
+{% endif %}
+
+{%- set title = record.metadata.title -%}
+{%- set metadata = record.metadata %}
+
+{%- block page_body %}
+  <div class="ui container">
+    <div class="ui relaxed grid mt-5">
+      <div class="two column row top-padded">
+
+        {# Main content #}
+        <article class="sixteen wide tablet eleven wide computer column main-record-content">
+
+          {%- block record_body -%}
+
+            {%- block record_header -%}
+            {%- endblock record_header -%}
+
+            {# Title #}
+            {%- block record_title -%}
+              <section id="record-title-section" aria-label="{{ _('Record title and creators') }}">
+                <h1 id="record-title">{{ metadata.title }}</h1>
+
+              </section>
+            {%- endblock record_title -%}
+
+          {%- endblock record_body %}
+        </article>
+
+        {# Sidebar #}
+        <aside class="sixteen wide tablet five wide computer column sidebar" aria-label="{{ _('Record details') }}">
+          {% block record_sidebar %}
+          {% endblock record_sidebar %}
+        </aside>
+      </div>
+    </div>
+
+  </div>
+
+{%- endblock page_body %}
+
+{%- block javascript %}
+{% if use_theme_basic_template|default(true) %}
+{{ super() }}
+{% else %}
+{% include config.THEME_JAVASCRIPT_TEMPLATE %}
+{% endif %}
+{%- endblock javascript %}
