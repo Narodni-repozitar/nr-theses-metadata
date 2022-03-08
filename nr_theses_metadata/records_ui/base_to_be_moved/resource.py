@@ -1,18 +1,12 @@
-import inspect
-import os
-from functools import partial
-
 from flask import g, render_template
 from flask_resources import Resource, route, resource_requestctx
 from invenio_records_resources.resources import (
-    RecordResourceConfig as InvenioRecordResourceConfig, RecordResourceConfig,
+    RecordResourceConfig,
 )
 from invenio_records_resources.resources.records.resource import request_read_args, request_view_args
-from pathlib import Path
 from invenio_records_resources.services import RecordService
 
 from .config import UIResourceConfig
-from nr_theses_metadata.records_ui.searchapp import sort_config, facets_config, SearchAppConfig
 
 
 #

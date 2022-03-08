@@ -1,17 +1,8 @@
 import inspect
-import os
-from functools import partial
-
-from flask import g, render_template
-from flask_resources import Resource, route, resource_requestctx
-from invenio_records_resources.resources import (
-    RecordResourceConfig as InvenioRecordResourceConfig, RecordResourceConfig,
-)
-from invenio_records_resources.resources.records.resource import request_read_args, request_view_args
 from pathlib import Path
-from invenio_records_resources.services import RecordService
 
-from nr_theses_metadata.records_ui.searchapp import sort_config, facets_config, SearchAppConfig
+from invenio_records_resources.resources import (
+    RecordResourceConfig as InvenioRecordResourceConfig, )
 
 
 class UIResourceConfig(InvenioRecordResourceConfig):
@@ -24,11 +15,17 @@ class UIResourceConfig(InvenioRecordResourceConfig):
     components = None
     template_folder = None
 
+    # handled by RecordTemplateContextComponent
+    record_sort_options = []
+    record_sort_default = 'bestmatch'
+    record_sort_default_no_query = 'newest'
+    record_facets = []
+
     @property
     def components(self):
         # import here to break circular dependencies
-        from .template_processor import RecordTemplateProcessor
-        return [RecordTemplateProcessor]
+        from .record_template_context_component import RecordTemplateContextComponent
+        return [RecordTemplateContextComponent]
 
     def get_template_folder(self):
         if not self.template_folder:

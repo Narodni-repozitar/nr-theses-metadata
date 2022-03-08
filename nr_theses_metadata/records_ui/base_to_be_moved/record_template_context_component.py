@@ -1,16 +1,45 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright (C) 2018-2021 CERN.
-#
-# Invenio-App-RDM is free software; you can redistribute it and/or modify
-# it under the terms of the MIT License; see LICENSE file for more details.
-
-"""Configuration helper for React-SearchKit."""
-
 from copy import deepcopy
-from functools import partial
+from typing import List, Dict
 
-from flask import current_app
+from nr_theses_metadata.records_ui.base_to_be_moved.resource import UIResource
+
+
+class RecordTemplateContextComponent:
+    config_context_name = 'record_template_context'
+    config_context_key = 'record_template_context_key'
+    config_context_key_default = 'search_app_config'  # TODO: better name here?
+    config_sort_options = 'record_sort_options'
+    config_sort_default = 'record_sort_default'
+    config_sort_default_no_query = 'record_sort_default_no_query'
+    config_facets = 'record_facets'
+
+    def __init__(self, resource: UIResource):
+        self.resource = resource
+
+    def search_app_context(self, template_contexts):
+        app_ctx = getattr(self.resource.config, self.config_context_name)
+        opts = dict(
+            endpoint=app_ctx.get('endpoint', self.resource.api_config.url_prefix),
+            headers={"Accept": "application/json"},
+            grid_view=False,
+            # do it better
+            sort=SortConfig(
+                self.resource.service.config.search.sort_options,
+                getattr(self.resource.config, self.config_sort_options),
+                getattr(self.resource.config, self.config_sort_default),
+                getattr(self.resource.config, self.config_sort_default_no_query)
+            ),
+            facets=FacetsConfig(self.resource.service.config.search.facets,
+                                getattr(self.resource.config, self.config_facets)),
+        )
+        overrides = app_ctx.get('overrides') or {}
+
+        def wrapped(**kwargs):
+            _opts = {**opts, **kwargs}
+            return SearchAppConfig.generate(_opts, **overrides)
+
+        context_key = getattr(self.resource.config, self.config_context_key, self.config_context_key_default)
+        template_contexts[context_key] = wrapped
 
 
 class OptionsSelector:
@@ -21,7 +50,7 @@ class OptionsSelector:
         # Ensure all selected options are availabe.
         for o in selected_options:
             assert o in available_options, \
-                    f"Selected option '{o}' is undefined."
+                f"Selected option '{o}' is undefined."
 
         self.available_options = available_options
         self.selected_options = selected_options
@@ -89,6 +118,18 @@ class FacetsConfig(OptionsSelector):
 
 class SearchAppConfig:
     """Configuration generator for React-SearchKit."""
+    endpoint: str
+    hidden_params: List
+    app_id: str
+    list_view: bool
+    grid_view: bool
+    default_size: int
+    default_page: int
+    initial_filters: List
+    headers: List
+    facets: List
+    pagination_options: Dict
+    sort: SortConfig
 
     default_options = dict(
         endpoint=None,
@@ -194,12 +235,12 @@ class SearchAppConfig:
             raise ValueError(
                 'Parameter default_size should be part of pagination_options')
         return {
-                "resultsPerPage": [
-                    {"text": str(option), "value": option}
-                    for option in self.pagination_options
-                ],
-                "defaultValue": self.default_size,
-            }
+            "resultsPerPage": [
+                {"text": str(option), "value": option}
+                for option in self.pagination_options
+            ],
+            "defaultValue": self.default_size,
+        }
 
     @property
     def defaultSortingOnEmptyQueryString(self):
@@ -227,60 +268,3 @@ class SearchAppConfig:
         }
         config.update(kwargs)
         return config
-
-
-#
-# Application state context processors
-#
-def sort_config(config_name):
-    """Sort configuration."""
-    return SortConfig(
-        current_app.config['RECORD_SORT_OPTIONS'],
-        current_app.config[config_name].get('sort', []),
-        current_app.config[config_name].get('sort_default', None),
-        current_app.config[config_name].get('sort_default_no_query'),
-    )
-
-
-def facets_config(config_name, available_facets):
-    """Facets configuration."""
-    return FacetsConfig(
-        available_facets,
-        current_app.config[config_name].get('facets', [])
-    )
-
-
-def search_app_config(
-    config_name, available_facets, endpoint, overrides=None, **kwargs
-):
-    """Search app config."""
-    opts = dict(
-        endpoint=endpoint,
-        headers={"Accept": "application/json"},
-        grid_view=False,
-        sort=sort_config(config_name),
-        facets=facets_config(config_name, available_facets),
-    )
-    opts.update(kwargs)
-    overrides = overrides or {}
-    return SearchAppConfig.generate(opts, **overrides)
-
-
-def search_app_context():
-    """Search app context processor."""
-    return {
-        'search_app_config': partial(
-            search_app_config,
-            'RECORD_SEARCH',
-            current_app.config.get('APP_SEARCH_FACETS', {}),
-            # TODO: set to match your record model
-            '/api/nr_theses_metadata', headers={"Accept": "application/json"}),
-        'search_app_user_requests_config': partial(
-            search_app_config,
-            'SEARCH_USER_REQUESTS',
-            current_app.config['REQUESTS_FACETS'],
-            '/api/requests',
-            headers={"Accept": "application/json"},
-            initial_filters=[["is_open", "true"]]
-        )
-    }
