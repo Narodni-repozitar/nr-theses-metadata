@@ -5,24 +5,201 @@
 {%- set title = record.metadata.title -%}
 {%- set metadata = record.metadata %}
 
+{% macro langtag(lang) -%}
+<div class="q-chip row inline bg-primary no-wrap items-center text-primary q-chip--colored q-chip--dense q-chip--outline q-chip--square q-ma-none col-auto self-start"
+     style="font-size: 14px;">
+    <div class="q-chip__content col row no-wrap items-center q-anchor--skip">
+        <div class="q-px-xs bg-primary text-white">{{lang}}</div>
+    </div>
+</div>
+{%- endmacro %}
+
+
 {%- block page_body %}
-<div class="ui container">
+<style>
+
+    .bg-grey-3 {
+        background: #eee !important;
+    }
+
+    .row {
+        display: flex
+    }
+
+    .col {
+
+    }
+
+    .inline {
+        display: inline-block;
+    }
+
+
+    .items-center {
+        align-items: center;
+    }
+
+    .q-mt-lg {
+        margin-top: 2em !important;
+    }
+
+    .q-avatar {
+        border-radius: 50%;
+        display: inline-block;
+        font-size: 48px;
+        height: 1em;
+        position: relative;
+        vertical-align: middle;
+        width: 1em;
+    }
+
+    .q-avatar__content {
+        font-size: .5em;
+    }
+
+    q-icon {
+        word-wrap: normal;
+        fill: currentColor;
+        box-sizing: initial;
+        direction: ltr;
+        height: 1em;
+        letter-spacing: normal;
+        line-height: 1;
+        position: relative;
+        text-align: center;
+        text-transform: none;
+        white-space: nowrap;
+        width: 1em;
+    }
+
+
+    .q-icon > img, .q-icon > svg {
+        height: 1em;
+        width: 1em;
+    }
+
+    .text-primary {
+        color: #0478f0 !important;
+    }
+
+    .q-chip {
+        background: #e0e0e0;
+        border-radius: 16px;
+        color: #000000de;
+        font-size: 14px;
+        height: 2em;
+        margin: 4px;
+        max-width: 100%;
+        outline: 0;
+        padding: 0.5em 0.9em;
+        position: relative;
+        vertical-align: middle;
+        width: fit-content;
+    }
+
+    .q-chip--dense {
+        border-radius: 12px;
+        height: 1.5em;
+        padding: 0 0.4em;
+    }
+
+    .q-chip--square {
+        border-radius: 4px;
+    }
+
+    .q-chip--outline {
+        background: #0000 !important;
+        border: 1px solid;
+    }
+
+    .q-ma-none {
+        margin: 0;
+    }
+
+    @media (min-width: 0) {
+        .col-0, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col-auto, .col-xs-0, .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-auto {
+            flex: 0 0 auto;
+        }
+    }
+
+    .q-chip .q-avatar {
+        border-radius: 16px;
+        font-size: 2em;
+        margin-left: -0.45em;
+        margin-right: 0.2em;
+    }
+
+    .q-chip--dense .q-avatar {
+        border-radius: 12px;
+        font-size: 1.5em;
+        margin-left: -0.27em;
+        margin-right: 0.1em;
+    }
+
+    .q-chip--square .q-avatar {
+        border-radius: 3px 0 0 3px;
+    }
+
+
+    .self-start {
+        align-self: flex-start;
+    }
+
+    .flex-center, .items-center {
+        align-items: center;
+    }
+
+    .no-wrap {
+        flex-wrap: nowrap;
+    }
+
+    .q-chip__content {
+        white-space: nowrap;
+    }
+
+    .text-white {
+        color: #fff !important;
+    }
+
+    .bg-primary {
+        background: #0478f0 !important;
+    }
+
+    /* ====================== */
+
+    .title {
+        font-size: 40px !important;
+        padding: 0;
+        margin: 0;
+        font-weight: 400;
+    }
+
+    .record-page {
+        font-size: 16px;
+    }
+
+    label {
+        font-weight: 500;
+        display: inline-block;
+        padding-right: 30px;
+    }
+</style>
+<div class="ui container record-page">
     <div class="ui relaxed grid mt-5">
-        <div class="two column row top-padded">
+        <div class="row top-padded">
 
             {# Main content #}
-            <article class="sixteen wide tablet eleven wide computer column main-record-content">
+            <article class="sixteen wide tablet sixteen wide computer column main-record-content">
                 {%- block record_body -%}
 
 
                 {%- block record_header -%}
-                <div class="row q-my-sm full-width justify-between">
-                    <div class="col-auto column items-start q-mb-sm">
-                        <button class="q-btn q-btn-item non-selectable no-outline q-btn--flat q-btn--rectangle text-primary q-btn--actionable q-focusable q-hoverable col-auto"
-                                tabindex="0" type="button"><span class="q-focus-helper"></span><span
-                                class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i
-                                class="q-icon on-left notranslate material-icons" aria-hidden="true" role="img">arrow_back</i><span
-                                class="block">Zpět na výsledky vyhledávání</span></span></button>
+                <div class="ui grid stackable">
+                    <div class="ui column items-center">
+                        <a href="" class="row items-center">
+                            <span class="q-icon on-left notranslate material-icons">arrow_back</span>
+                            <span>Zpět na výsledky vyhledávání</span>
+                        </a>
                     </div>
                 </div>
                 {%- endblock record_header -%}
@@ -30,41 +207,33 @@
 
                 {# Title #}
                 {%- block record_title -%}
-                <section id="record-title-section" aria-label="{{ _('Record title and creators') }}">
-                    <h1 id="record-title">{{ metadata.title }}</h1>
-
-                </section>
-                {%- endblock record_title -%}
-                <div class="col-auto column items-end text-left"></div>
-                <div class="row q-mt-lg"><span class="q-icon" aria-hidden="true" role="presentation"
-                                               title="otevřený přístup" style="font-size: 64px;"><img
-                        src="/icons/locks/zamky_open_access.png"></span>
-                    <div class="title col"><span><!----><span>Raw data for A1901 and A2103</span><!----><!----></span>
-                    </div>
+                <section id="record-title-section" aria-label="{{ _('Record title and creators') }}"
+                         class="row q-mt-lg items-center">
+                    <span class="q-icon" aria-hidden="true" role="presentation"
+                          title="otevřený přístup" style="font-size: 64px;"><img
+                            src="/static/icons/locks/zamky_open_access.png"></span>
+                    <h1 class="title col"><span><!----><span>{{metadata.title}}</span><!----><!----></span>
+                    </h1>
                     <div class="col-auto"><!----></div>
-                </div>
-                <div class="row q-my-xl q-gutter-sm no-wrap">
-                    <div class="col-3 q-pl-md q-py-md rounded-borders bg-grey-3">
+                </section>
+
+                {%- endblock record_title -%}
+
+                <div class="ui two column grid q-mt-lg">
+                    <div class="rounded-borders four wide column">
                         <div class="column full-height q-pr-lg">
-                            <div class="row label-block q-mt-none q-mb-sm full-width q-mb-lg col-auto self-start block"
-                                 style="max-width: 128px;"><span class="label">Licence: &nbsp;&nbsp;</span>
-                                <div class="q-img q-img--menu" role="img" title="[object Object]" style="width: 128px;">
-                                    <div style="padding-bottom: 34.9876%;"></div>
-                                    <div class="q-img__container absolute-full"><img
-                                            class="q-img__image q-img__image--with-transition q-img__image--loaded"
-                                            width="0" loading="lazy" aria-hidden="true" draggable="false"
-                                            src="/img/by-nc.9857fdf5.png"
-                                            style="object-fit: cover; object-position: 50% 50%;"></div>
-                                    <div class="q-img__content absolute-full q-anchor--skip"><!----></div>
-                                </div>
+                            <div>
+                                <div class="label">Licence: &nbsp;&nbsp;</div>
+                                <img src="/static/images/licenses/by-nc.png" style="width: 50%"/>
                             </div>
-                            <div class="row label-block"><span class="label">Identifikátor objektu: &nbsp;&nbsp;</span>
+                            <div class="row label-block q-mt-lg"><span
+                                    class="label">Identifikátor objektu: &nbsp;&nbsp;</span>
                             </div><!----><!---->
                             <div class="q-chip row inline no-wrap items-center text-primary q-chip--colored q-chip--dense q-chip--outline q-chip--square q-ma-none col-auto self-start"
                                  style="font-size: 14px;">
                                 <div class="q-chip__content col row no-wrap items-center q-anchor--skip">
-                                    <div class="q-avatar bg-primary text-white q-chip--colored text-weight-bolder">
-                                        <div class="q-avatar__content row flex-center overflow-hidden">DOI</div>
+                                    <div class="q-avatar bg-primary text-white q-chip--colored text-weight-bolder row items-center">
+                                        <div class="q-avatar__content">DOI</div>
                                     </div>
                                     <div class="q-px-xs"><a href="https://doi.org/10.48700/datst.3q9we-bks74"
                                                             target="_blank">10.48700/datst.3q9we-bks74</a></div>
@@ -79,7 +248,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-9 q-pl-sm"><!----><!---->
+                    <div class="nine wide column"><!----><!---->
+                        {% for title in metadata.additionalTitles %}
+                        <div>
+                            <label>{{title.titleType}}: </label>
+                            {{ langtag(title.title.0.lang) }}
+                            {{ title.title.0.value }}
+                        </div>
+                        {% endfor %}
+                        <div>{{metadata}}</div>
+
                         <div class="row label-block"><span class="label">Osoby: &nbsp;&nbsp;</span>
                             <div class="row authors full-height items-baseline text-primary text-weight-medium">
                                 <div class="creator"><!----><a class="cursor-pointer" target="_blank">Průša,
@@ -213,6 +391,8 @@
                         <div class="row label-block"><span class="label">Práva: &nbsp;&nbsp;</span><span class="row"><!----><span><!----><span>Creative Commons Uveďte původ-Neužívejte komerčně 4.0 Mezinárodní licence</span>
                             <!----><!----></span></span></div><!----></div>
                 </div>
+
+
                 <div class="row q-my-xl full-width justify-between">
                     <div class="col-auto column items-start q-mb-xl">
                         <button class="q-btn q-btn-item non-selectable no-outline q-btn--flat q-btn--rectangle text-primary q-btn--actionable q-focusable q-hoverable col-auto"
@@ -273,10 +453,10 @@
             </article>
 
             {# Sidebar #}
-            <aside class="sixteen wide tablet five wide computer column sidebar" aria-label="{{ _('Record details') }}">
+            <!-- aside class="sixteen wide tablet five wide computer column sidebar" aria-label="{{ _('Record details') }}">
                 {% block record_sidebar %}
                 {% endblock record_sidebar %}
-            </aside>
+            </aside -->
         </div>
     </div>
 
