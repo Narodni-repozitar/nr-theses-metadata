@@ -49,8 +49,7 @@ version = "^3.3.0"
 
 [tool.poetry.plugins.'invenio_base.blueprints']
 # TODO: generate & register these ui blueprints
-nr_theses_metadata_records = "nr_theses_metadata.records_ui.views:create_ui_blueprint"
-nr_theses_metadata_requests = "nr_theses_metadata.requests_ui.views:create_ui_blueprint"
+nr_theses_metadata_records = "nr_theses_metadata.views:create_ui_blueprint_from_app"
 nr_theses_metadata = "nr_theses_metadata.theme.views:create_ui_blueprint"
 
 [tool.poetry.plugins.'invenio_assets.webpack']

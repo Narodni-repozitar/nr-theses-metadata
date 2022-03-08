@@ -1,14 +1,16 @@
-from isbnlib import meta
+from nr_theses_metadata.records_ui.resource import NrThesesMetadataUIResourceConfig, NrThesesMetadataUIResource
 from nr_theses_metadata.resources.config import NrThesesMetadataResourceConfig
 from nr_theses_metadata.resources.resource import NrThesesMetadataResource
 from nr_theses_metadata.services.config import NrThesesMetadataServiceConfig
-from nr_theses_metadata.services.service import NrThesesMetadataService
 from nr_theses_metadata.services.facets import metadata_accessRights, metadata_languages, metadata_resourceType
+from nr_theses_metadata.services.service import NrThesesMetadataService
 
 NR_THESES_METADATA_RESOURCE_CONFIG = NrThesesMetadataResourceConfig
 NR_THESES_METADATA_RESOURCE_CLASS = NrThesesMetadataResource
 NR_THESES_METADATA_SERVICE_CONFIG = NrThesesMetadataServiceConfig
 NR_THESES_METADATA_SERVICE_CLASS = NrThesesMetadataService
+NR_THESES_METADATA_UI_RESOURCE_CONFIG = NrThesesMetadataUIResourceConfig
+NR_THESES_METADATA_UI_RESOURCE_CLASS = NrThesesMetadataUIResource
 
 # TODO: generate UI routes from data model
 APP_UI_ROUTES = {

@@ -7,6 +7,7 @@ class NrThesesMetadataExt(object):
     def __init__(self, app=None):
         """Extension initialization."""
         self.resource = None
+        self.ui_resource = None
         self.service = None
         if app:
             self.init_app(app)
@@ -26,6 +27,11 @@ class NrThesesMetadataExt(object):
             service=self.service,
             config=app.config["NR_THESES_METADATA_RESOURCE_CONFIG"](),
         )
+        self.ui_resource = app.config["NR_THESES_METADATA_UI_RESOURCE_CLASS"](
+            service=self.service,
+            config=app.config["NR_THESES_METADATA_UI_RESOURCE_CONFIG"](),
+            api_config=self.resource.config
+        )
 
     def init_config(self, app):
         """Initialize configuration."""
@@ -36,6 +42,15 @@ class NrThesesMetadataExt(object):
         app.config.setdefault(
             "NR_THESES_METADATA_RESOURCE_CLASS",
             config.NR_THESES_METADATA_RESOURCE_CLASS,
+        )
+        # TODO: generate these
+        app.config.setdefault(
+            "NR_THESES_METADATA_UI_RESOURCE_CONFIG",
+            config.NR_THESES_METADATA_UI_RESOURCE_CONFIG,
+        )
+        app.config.setdefault(
+            "NR_THESES_METADATA_UI_RESOURCE_CLASS",
+            config.NR_THESES_METADATA_UI_RESOURCE_CLASS,
         )
         app.config.setdefault(
             "NR_THESES_METADATA_SERVICE_CONFIG",
