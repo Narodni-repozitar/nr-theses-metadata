@@ -1,7 +1,9 @@
-from nr_theses_metadata.records_ui.base_to_be_moved import UIResourceConfig, UIResource
+
+from nr_theses_metadata.records_ui.base_to_be_moved import RecordsUIResourceConfig
+from nr_theses_metadata.records_ui.base_to_be_moved import RecordsUIResource
 
 
-class RecordsUIResourceConfig(UIResourceConfig):
+class NrThesesMetadataRecordsUIResourceConfig(RecordsUIResourceConfig):
     """NrThesesMetadataRecord resource config."""
 
     blueprint_name = "NrThesesMetadataRecordsUI"
@@ -16,5 +18,5 @@ class RecordsUIResourceConfig(UIResourceConfig):
     }
 
 
-class RecordsUIResource(UIResource):
+class NrThesesMetadataRecordsUIResource(RecordsUIResource):
     pass

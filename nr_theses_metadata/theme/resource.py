@@ -2,12 +2,14 @@ import inspect
 from pathlib import Path
 
 from flask import render_template
-from flask_resources import route, Resource, ResourceConfig
 from flask_babelex import get_locale
+from flask_resources import route
+
+from nr_theses_metadata.records_ui.base_to_be_moved import UIResourceConfig, UIResource
 
 
-class ThemeUIResourceConfig(ResourceConfig):
-    """NrThesesMetadataRecord resource config."""
+class NrThesesMetadataUIResourceConfig(UIResourceConfig):
+    """NrThesesMetadata resource config."""
 
     blueprint_name = "NrThesesMetadataThemeUI"
     url_prefix = "/"
@@ -29,10 +31,12 @@ class ThemeUIResourceConfig(ResourceConfig):
         tf = Path(self.template_folder)
         if not tf.is_absolute():
             tf = Path(inspect.getfile(type(self))).parent.absolute().joinpath(tf).absolute()
+        print(tf)
         return str(tf)
 
 
-class ThemeUIResource(Resource):
+class NrThesesMetadataUIResource(UIResource):
+    config: NrThesesMetadataUIResourceConfig
 
     def create_url_rules(self):
         """Create the URL rules for the record resource."""

@@ -6,7 +6,7 @@ from invenio_records_resources.resources import (
 from invenio_records_resources.resources.records.resource import request_read_args, request_view_args
 from invenio_records_resources.services import RecordService
 
-from .config import UIResourceConfig
+from .config import UIResourceConfig, RecordsUIResourceConfig
 
 
 #
@@ -15,6 +15,36 @@ from .config import UIResourceConfig
 class UIResource(Resource):
     """Record resource."""
     config: UIResourceConfig
+
+    def __init__(self, config=None):
+        """Constructor."""
+        super(UIResource, self).__init__(config)
+
+    def as_blueprint(self, **options):
+        if 'template_folder' not in options:
+            template_folder = self.config.get_template_folder()
+            if template_folder:
+                options['template_folder'] = template_folder
+        return super().as_blueprint(**options)
+
+    #
+    # Pluggable components
+    #
+    @property
+    def components(self):
+        """Return initialized service components."""
+        return (c(self) for c in self.config.components or [])
+
+    def run_components(self, action, *args, **kwargs):
+        """Run components for a given action."""
+
+        for component in self.components:
+            if hasattr(component, action):
+                getattr(component, action)(*args, **kwargs)
+
+
+class RecordsUIResource(UIResource):
+    config: RecordsUIResourceConfig
     api_config: RecordResourceConfig
     service: RecordService
 
@@ -23,7 +53,7 @@ class UIResource(Resource):
         super(UIResource, self).__init__(config)
         self.api_config = api_config
         self.service = service
-
+    
     def create_url_rules(self):
         """Create the URL rules for the record resource."""
         routes = self.config.routes
@@ -32,10 +62,6 @@ class UIResource(Resource):
         ]
 
     def as_blueprint(self, **options):
-        if 'template_folder' not in options:
-            template_folder = self.config.get_template_folder()
-            if template_folder:
-                options['template_folder'] = template_folder
         blueprint = super().as_blueprint(**options)
         blueprint.app_context_processor(lambda: self._search_app_context())
         return blueprint
@@ -60,18 +86,3 @@ class UIResource(Resource):
             self.config.detail_template,
             record=record_ui
         )
-
-    #
-    # Pluggable components
-    #
-    @property
-    def components(self):
-        """Return initialized service components."""
-        return (c(self) for c in self.config.components or [])
-
-    def run_components(self, action, *args, **kwargs):
-        """Run components for a given action."""
-
-        for component in self.components:
-            if hasattr(component, action):
-                getattr(component, action)(*args, **kwargs)
