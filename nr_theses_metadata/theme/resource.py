@@ -31,7 +31,6 @@ class NrThesesMetadataUIResourceConfig(UIResourceConfig):
         tf = Path(self.template_folder)
         if not tf.is_absolute():
             tf = Path(inspect.getfile(type(self))).parent.absolute().joinpath(tf).absolute()
-        print(tf)
         return str(tf)
 
 

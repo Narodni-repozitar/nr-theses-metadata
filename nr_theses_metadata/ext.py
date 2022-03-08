@@ -39,6 +39,7 @@ class NrThesesMetadataExt(object):
         )
 
     def register_blueprints(self, app):
+        app.register_blueprint(self.resource.as_blueprint())
         app.register_blueprint(self.ui_resource.as_blueprint())
         app.register_blueprint(self.records_ui_resource.as_blueprint())
 
