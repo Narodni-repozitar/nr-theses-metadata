@@ -19,8 +19,8 @@ class RecordTemplateContextComponent:
     def search_app_context(self, template_contexts):
         app_ctx = getattr(self.resource.config, self.config_context_name)
         opts = dict(
-            endpoint=app_ctx.get('endpoint', self.resource.api_config.url_prefix),
-            headers={"Accept": "application/json"},
+            endpoint=app_ctx.get('endpoint', f"/api{self.resource.api_config.url_prefix}"),
+            headers={"Accept": "application/vnd.inveniordm.v1+json"},
             grid_view=False,
             # do it better
             sort=SortConfig(

@@ -24,15 +24,6 @@ class NrThesesMetadataUIResourceConfig(UIResourceConfig):
         "help_search": "/help/search",
     }
 
-    def get_template_folder(self):
-        if not self.template_folder:
-            return None
-
-        tf = Path(self.template_folder)
-        if not tf.is_absolute():
-            tf = Path(inspect.getfile(type(self))).parent.absolute().joinpath(tf).absolute()
-        return str(tf)
-
 
 class NrThesesMetadataUIResource(UIResource):
     config: NrThesesMetadataUIResourceConfig

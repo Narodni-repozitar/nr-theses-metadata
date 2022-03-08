@@ -77,12 +77,8 @@ class RecordsUIResource(UIResource):
     def detail(self):
         """Read an item."""
         record = self.service.read(g.identity, resource_requestctx.view_args["pid_value"])
-        # TODO:
-        # record_ui = UIJSONSerializer().serialize_object_to_dict(record.to_dict())
-        record_ui = record.to_dict()
-        record_ui['ui'] = {**record_ui}
-
+       
         return render_template(
             self.config.detail_template,
-            record=record_ui
+            record=record
         )

@@ -1,8 +1,10 @@
 import inspect
 from pathlib import Path
+from flask_resources import ResponseHandler, JSONSerializer
 
 from invenio_records_resources.resources import (
     RecordResourceConfig as InvenioRecordResourceConfig, )
+from nr_theses_metadata.resources.serializers_to_be_moved.ui import UIJSONSerializer
 
 
 class UIResourceConfig(InvenioRecordResourceConfig):   
@@ -26,6 +28,11 @@ class RecordsUIResourceConfig(UIResourceConfig):
     }
     detail_template = None
     app_contexts = None
+
+    response_handlers = {
+        "application/json": ResponseHandler(JSONSerializer()),
+        "application/vnd.inveniordm.v1+json": ResponseHandler(UIJSONSerializer()),
+    }
 
      # handled by RecordTemplateContextComponent
     record_sort_options = []
