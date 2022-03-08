@@ -25,7 +25,7 @@ class RecordsUIResourceConfig(UIResourceConfig):
         "detail": "/<pid_value>",
     }
     detail_template = None
-    search_app_contexts = None
+    app_contexts = None
 
      # handled by RecordTemplateContextComponent
     record_sort_options = []

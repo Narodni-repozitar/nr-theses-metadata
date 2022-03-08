@@ -31,31 +31,19 @@ import { SearchItemCreators } from '../utils'
 
 export const ResultsListItem = ({ result, index }) => {
   const access_status_id = _get(result, 'ui.accessRights', 'open')
-  const access_status = 'test'    // TODO: doplneno aby slo kompilovat
-  const access_status_icon = 'test'  // TODO: doplneno aby slo kompilovat
-  const createdDate = _get(
-    result,
-    'ui.created',
-    'No creation date found.',
-  )
+  const access_status = 'Open'
+  const access_status_icon = 'unlock'
+  const createdDate = _get(result, 'ui.created', 'No creation date found.')
   const creators = result.ui.creators.creators.slice(0, 3)
 
-  const description_stripped = _get(
-    result,
-    'ui.abstract',
-    'No description',
-  )
+  const description_stripped = _get(result, 'ui.abstract', 'No description')
 
   const publicationDate = _get(
     result,
     'ui.dateIssued',
     'No publication date found.',
   )
-  const resource_type = _get(
-    result,
-    'ui.resourceType',
-    'No resource type',
-  )
+  const resource_type = _get(result, 'ui.resourceType', 'No resource type')
   const subjects = _get(result, 'ui.subjects', [])
   const title = _get(result, 'metadata.title', 'No title')
   const version = _get(result, 'ui.version', null)
