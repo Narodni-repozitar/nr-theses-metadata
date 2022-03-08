@@ -29,31 +29,31 @@ import { SearchBar } from '@js/invenio_search_ui/components'
 import { i18next } from '@translations/nr_theses_metadata/i18next'
 import { SearchItemCreators } from '../utils'
 
-export const RDMRecordResultsListItem = ({ result, index }) => {
-  const access_status_id = _get(result, 'ui.access_status.id', 'open')
-  const access_status = _get(result, 'ui.access_status.title_l10n', 'Open')
-  const access_status_icon = _get(result, 'ui.access_status.icon', 'unlock')
+export const ResultsListItem = ({ result, index }) => {
+  const access_status_id = _get(result, 'ui.accessRights', 'open')
+  const access_status =
+  const access_status_icon =
   const createdDate = _get(
     result,
-    'ui.created_date_l10n_long',
+    'ui.created',
     'No creation date found.',
   )
   const creators = result.ui.creators.creators.slice(0, 3)
 
   const description_stripped = _get(
     result,
-    'ui.description_stripped',
+    'ui.abstract',
     'No description',
   )
 
   const publicationDate = _get(
     result,
-    'ui.publication_date_l10n_long',
+    'ui.dateIssued',
     'No publication date found.',
   )
   const resource_type = _get(
     result,
-    'ui.resource_type.title_l10n',
+    'ui.resourceType',
     'No resource type',
   )
   const subjects = _get(result, 'ui.subjects', [])

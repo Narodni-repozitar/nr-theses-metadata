@@ -1,11 +1,11 @@
 from nr_theses_metadata.records_ui.base_to_be_moved import UIResourceConfig, UIResource
 
 
-class NrThesesMetadataUIResourceConfig(UIResourceConfig):
+class RecordsUIResourceConfig(UIResourceConfig):
     """NrThesesMetadataRecord resource config."""
 
-    blueprint_name = "NrThesesMetadataUI"
-    url_prefix = "/records/"
+    blueprint_name = "NrThesesMetadataRecordsUI"
+    url_prefix = "/documents/"
     template_folder = "templates"
 
     detail_template = "nr_theses_metadata/records/detail.html"
@@ -16,5 +16,5 @@ class NrThesesMetadataUIResourceConfig(UIResourceConfig):
     }
 
 
-class NrThesesMetadataUIResource(UIResource):
+class RecordsUIResource(UIResource):
     pass

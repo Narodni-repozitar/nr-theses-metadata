@@ -10,46 +10,8 @@
 
 """Routes for general pages provided by nr-theses-metadata."""
 
-from flask import Blueprint, current_app, render_template
-from flask_babelex import get_locale
-from flask_babelex import lazy_gettext as _
 
-#
-# Registration
-#
 def create_ui_blueprint(app):
-    """Blueprint for the routes and resources provided by nr-theses-metadata."""
-    routes = app.config.get("APP_UI_ROUTES")
-
-    blueprint = Blueprint(
-        "nr_theses_metadata",
-        __name__,
-        template_folder="templates",
-        static_folder="static",
-    )
-
-    blueprint.add_url_rule(routes["index"], view_func=index)
-    blueprint.add_url_rule(routes["help_search"], view_func=help_search)
-
+    """Create  blueprint."""
+    blueprint = app.extensions["nr_theses_metadata"].ui_resource.as_blueprint()
     return blueprint
-
-#
-# Views
-#
-def index():
-    """Frontpage."""
-    return render_template(
-        current_app.config["THEME_FRONTPAGE_TEMPLATE"],
-    )
-
-
-def help_search():
-    """Search help guide."""
-    # Default to rendering english page if locale page not found.
-    locale = get_locale()
-    return render_template(
-        [
-            f"nr_theses_metadata/help/search.{locale}.html",
-            "nr_theses_metadata/help/search.en.html",
-        ]
-    )

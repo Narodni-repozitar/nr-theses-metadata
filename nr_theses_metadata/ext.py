@@ -8,6 +8,7 @@ class NrThesesMetadataExt(object):
         """Extension initialization."""
         self.resource = None
         self.ui_resource = None
+        self.records_ui_resource = None
         self.service = None
         if app:
             self.init_app(app)
@@ -28,8 +29,11 @@ class NrThesesMetadataExt(object):
             config=app.config["NR_THESES_METADATA_RESOURCE_CONFIG"](),
         )
         self.ui_resource = app.config["NR_THESES_METADATA_UI_RESOURCE_CLASS"](
-            service=self.service,
             config=app.config["NR_THESES_METADATA_UI_RESOURCE_CONFIG"](),
+        )
+        self.records_ui_resource = app.config["NR_THESES_METADATA_RECORDS_UI_RESOURCE_CLASS"](
+            service=self.service,
+            config=app.config["NR_THESES_METADATA_RECORDS_UI_RESOURCE_CONFIG"](),
             api_config=self.resource.config
         )
 
@@ -53,14 +57,19 @@ class NrThesesMetadataExt(object):
             config.NR_THESES_METADATA_UI_RESOURCE_CLASS,
         )
         app.config.setdefault(
+            "NR_THESES_METADATA_RECORDS_UI_RESOURCE_CONFIG",
+            config.NR_THESES_METADATA_RECORDS_UI_RESOURCE_CONFIG,
+        )
+        app.config.setdefault(
+            "NR_THESES_METADATA_RECORDS_UI_RESOURCE_CLASS",
+            config.NR_THESES_METADATA_RECORDS_UI_RESOURCE_CLASS,
+        )
+        app.config.setdefault(
             "NR_THESES_METADATA_SERVICE_CONFIG",
             config.NR_THESES_METADATA_SERVICE_CONFIG,
         )
         app.config.setdefault(
             "NR_THESES_METADATA_SERVICE_CLASS", config.NR_THESES_METADATA_SERVICE_CLASS
-        )
-        app.config.setdefault(
-            "APP_UI_ROUTES", config.APP_UI_ROUTES
         )
         app.config.setdefault(
             "APP_SEARCH_FACETS", config.APP_SEARCH_FACETS
