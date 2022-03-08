@@ -1,4 +1,4 @@
-from .base_resource import UIResourceConfig, UIResource
+from nr_theses_metadata.records_ui.base_to_be_moved import UIResourceConfig, UIResource
 
 
 class NrThesesMetadataUIResourceConfig(UIResourceConfig):
@@ -10,11 +10,9 @@ class NrThesesMetadataUIResourceConfig(UIResourceConfig):
 
     detail_template = "nr_theses_metadata/records/detail.html"
 
-    app_contexts = {
-        'search_app_config': {
-            'config_name': 'RECORD_SEARCH',   # tohle pujde do kytek
-            'available_facets': {},
-        }
+    record_template_context = {
+        'config_name': 'RECORD_SEARCH',   # tohle pujde do kytek
+        'available_facets': {},
     }
 
 

@@ -11,27 +11,8 @@ from invenio_records_resources.resources.records.resource import request_read_ar
 from pathlib import Path
 from invenio_records_resources.services import RecordService
 
+from .config import UIResourceConfig
 from nr_theses_metadata.records_ui.searchapp import sort_config, facets_config, SearchAppConfig
-
-
-class UIResourceConfig(InvenioRecordResourceConfig):
-    routes = {
-        "search": "",
-        "detail": "/<pid_value>",
-    }
-    detail_template = None
-    app_contexts = None
-    components = None
-    template_folder = None
-
-    def get_template_folder(self):
-        if not self.template_folder:
-            return None
-
-        tf = Path(self.template_folder)
-        if not tf.is_absolute():
-            tf = Path(inspect.getfile(type(self))).parent.absolute().joinpath(tf).absolute()
-        return str(tf)
 
 
 #
@@ -68,31 +49,7 @@ class UIResource(Resource):
     def _search_app_context(self):
         """function providing flask template app context processors"""
         ret = {}
-        self.run_components('search_app_context', returned_components=ret, resource=self)
-        return ret
-
-        # bude v komponente
-        for key, app_ctx in self.config.app_contexts.items():
-            """Search app config."""
-
-            def config_generator(app_ctx):
-                opts = dict(
-                    endpoint=app_ctx.get('endpoint', self.api_config.url_prefix),
-                    headers={"Accept": "application/json"},
-                    grid_view=False,
-                    # do it better
-                    sort=sort_config(app_ctx['config_name']),
-                    facets=facets_config(app_ctx['config_name'], app_ctx['available_facets']),
-                )
-                overrides = app_ctx.get('overrides') or {}
-
-                def wrapped(**kwargs):
-                    _opts = {**opts, **kwargs}
-                    return SearchAppConfig.generate(_opts, **overrides)
-
-                return wrapped
-
-            ret[key] = config_generator(app_ctx)
+        self.run_components('search_app_context', template_contexts=ret)
         return ret
 
     @request_read_args
@@ -103,7 +60,7 @@ class UIResource(Resource):
         # TODO:
         # record_ui = UIJSONSerializer().serialize_object_to_dict(record.to_dict())
         record_ui = record.to_dict()
-        record_ui['ui'] = {}
+        record_ui['ui'] = {**record_ui}
 
         return render_template(
             self.config.detail_template,
