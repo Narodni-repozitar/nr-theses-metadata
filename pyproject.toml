@@ -63,6 +63,9 @@ nr_theses_metadata = "nr_theses_metadata.records.models"
 [tool.poetry.plugins.'invenio_base.api_blueprints']
 NrThesesMetadata = "nr_theses_metadata.views:create_blueprint_from_app"
 
+[tool.poetry.plugins.'invenio_base.blueprints']
+NrThesesMetadataStaticToBeMoved = "nr_theses_metadata.views:static_blueprint"
+
 [tool.poetry.plugins.'invenio_search.mappings']
 nr_theses_metadata = "nr_theses_metadata.records.mappings"
 

@@ -31,8 +31,8 @@ import { SearchItemCreators } from '../utils'
 
 export const ResultsListItem = ({ result, index }) => {
   const access_status_id = _get(result, 'ui.accessRights', 'open')
-  const access_status =
-  const access_status_icon =
+  const access_status = 'test'    // TODO: doplneno aby slo kompilovat
+  const access_status_icon = 'test'  // TODO: doplneno aby slo kompilovat
   const createdDate = _get(
     result,
     'ui.created',
