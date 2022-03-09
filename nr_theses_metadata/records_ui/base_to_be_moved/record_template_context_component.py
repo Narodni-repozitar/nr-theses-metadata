@@ -51,7 +51,6 @@ class OptionsSelector:
         for o in selected_options:
             assert o in available_options, \
                 f"Selected option '{o}' is undefined."
-
         self.available_options = available_options
         self.selected_options = selected_options
 
@@ -100,9 +99,10 @@ class FacetsConfig(OptionsSelector):
 
     def map_option(self, key, option):
         """Generate an RSK aggregation option."""
-        title = option.get('title', option['facet']._label)
+        print(option)
+        title = getattr(option, 'title', getattr(option, '_label'))
 
-        ui = deepcopy(option['ui'])
+        ui = deepcopy(getattr(option, 'ui', {}))
         ui.update({
             'aggName': key,
             'title': title,

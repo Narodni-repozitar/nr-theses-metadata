@@ -38,7 +38,7 @@ class RecordsUIResourceConfig(UIResourceConfig):
     record_sort_options = []
     record_sort_default = 'bestmatch'
     record_sort_default_no_query = 'newest'
-    record_facets = []
+    record_facets = ['metadata_accessRights', 'metadata_rights', 'metadata_fundingReferences_funder']
 
     @property
     def components(self):

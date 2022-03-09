@@ -3,6 +3,7 @@
 from elasticsearch_dsl import Facet
 from elasticsearch_dsl.query import Nested
 from invenio_records_resources.services.records.facets import TermsFacet
+from flask_babelex import lazy_gettext as _
 
 
 class NestedLabeledFacet(Facet):
@@ -45,10 +46,10 @@ metadata_defended = TermsFacet(field="metadata.defended")
 metadata_collection = TermsFacet(field="metadata.collection")
 
 
-metadata_resourceType = TermsFacet(field="metadata.resourceType")
+metadata_resourceType = TermsFacet(field="metadata.resourceType", label=_('Resource type'))
 
 
-metadata_dateIssued = TermsFacet(field="metadata.dateIssued")
+metadata_dateIssued = TermsFacet(field="metadata.dateIssued", label=_('Date issued'))
 
 
 metadata_dateAvailable = TermsFacet(field="metadata.dateAvailable")
@@ -66,7 +67,7 @@ metadata_methods = TermsFacet(field="metadata.methods")
 metadata_technicalInfo = TermsFacet(field="metadata.technicalInfo")
 
 
-metadata_accessRights = TermsFacet(field="metadata.accessRights")
+metadata_accessRights = TermsFacet(field="metadata.accessRights", label=_('Access rights'))
 
 
 metadata_version = TermsFacet(field="metadata.version")
@@ -89,7 +90,7 @@ metadata_originalRecord = TermsFacet(field="metadata.originalRecord")
 metadata_degreeGrantor = TermsFacet(field="metadata.degreeGrantor")
 
 
-metadata_studyFields = TermsFacet(field="metadata.studyFields")
+metadata_studyFields = TermsFacet(field="metadata.studyFields", label=_('Study field'))
 
 
 metadata_additionalTitles_title = TermsFacet(field="metadata.additionalTitles.title")
@@ -182,10 +183,10 @@ metadata_subjects = TermsFacet(field="metadata.subjects")
 metadata_subjectCategories = TermsFacet(field="metadata.subjectCategories")
 
 
-metadata_languages = TermsFacet(field="metadata.languages")
+metadata_languages = TermsFacet(field="metadata.languages", label=_('Language'))
 
 
-metadata_rights = TermsFacet(field="metadata.rights")
+metadata_rights = TermsFacet(field="metadata.rights", label=_('License'))
 
 
 metadata_relatedItems_itemURL = TermsFacet(field="metadata.relatedItems.itemURL")
@@ -322,7 +323,8 @@ metadata_fundingReferences_projectID = TermsFacet(
 
 
 metadata_fundingReferences_funder = TermsFacet(
-    field="metadata.fundingReferences.funder"
+    field="metadata.fundingReferences.funder",
+    label=_('Funder')
 )
 
 

@@ -54,7 +54,7 @@ export const ResultsListItem = ({result, index}) => {
     const access_status =
         access_rights[0].toUpperCase() + access_rights.substring(1)
     const access_status_icon = 'unlock'
-    const createdDate = _get(result, 'ui.created', 'No creation date found.')
+    const createdDate = _get(result, 'created', 'No creation date found.')
     const creators = result.ui.creators.slice(0, 3)
 
     const description = _get(result, 'ui.abstract', 'No description')
@@ -82,7 +82,6 @@ export const ResultsListItem = ({result, index}) => {
         return match[0].value
     })
 
-    console.log(subjects_localized)
     const title = _get(result, 'metadata.title', 'No title')
     const version = _get(result, 'ui.version', null)
 
@@ -263,6 +262,7 @@ export const SearchHelpLinks = () => {
 }
 
 export const RDMRecordFacets = ({aggs, currentResultsState}) => {
+    console.log(aggs)
     return (
         <aside aria-label={i18next.t('filters')} id="search-filters">
             <Toggle
