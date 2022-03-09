@@ -18,6 +18,7 @@ class RecordTemplateContextComponent:
 
     def search_app_context(self, template_contexts):
         app_ctx = getattr(self.resource.config, self.config_context_name)
+        print(self.resource.service.config.search.sort_options)
         opts = dict(
             endpoint=app_ctx.get('endpoint', f"/api{self.resource.api_config.url_prefix}"),
             headers={"Accept": "application/vnd.inveniordm.v1+json"},
@@ -25,12 +26,14 @@ class RecordTemplateContextComponent:
             # do it better
             sort=SortConfig(
                 self.resource.service.config.search.sort_options,
-                getattr(self.resource.config, self.config_sort_options),
+                # this makes ALL available sort options selected
+                self.resource.service.config.search.sort_options.keys(),
+                # getattr(self.resource.config, self.config_sort_options),
                 getattr(self.resource.config, self.config_sort_default),
                 getattr(self.resource.config, self.config_sort_default_no_query)
             ),
             facets=FacetsConfig(self.resource.service.config.search.facets,
-                                # TODO: this is for facets debugging
+                                # TODO: this makes ALL facets selected for debugging
                                 self.resource.service.config.search.facets.keys())
                                 # getattr(self.resource.config, self.config_facets)),
         )
@@ -101,7 +104,6 @@ class FacetsConfig(OptionsSelector):
 
     def map_option(self, key, option):
         """Generate an RSK aggregation option."""
-        print(option)
         title = getattr(option, 'title', getattr(option, '_label'))
 
         ui = deepcopy(getattr(option, 'ui', {}))
