@@ -10,10 +10,13 @@
                 {%- block navbar_header %}
                   {%- block brand %}
                     {%- if config.THEME_LOGO %}
+                    <div>
                       <a class="logo-link" href="/">
-                        <img class="ui tiny image"
-                             src="{{ url_for('static', filename=config.THEME_LOGO) }}"
-                             alt="{{ _(config.THEME_SITENAME) }}"/>
+                        <div class="logo-container">
+                          <img class="ui tiny image"
+                                src="{{ url_for('static', filename=config.THEME_LOGO) }}"
+                                alt="{{ _(config.THEME_SITENAME) }}"/>
+                        </div>
                       </a>
                     {%- else %}
                       <a class="logo" href="/">{{ _(config.THEME_SITENAME) }}</a>

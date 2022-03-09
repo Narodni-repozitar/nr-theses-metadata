@@ -3,3 +3,33 @@
 *******************************/
 
 @import "@less/invenio_theme/theme/elements/input.overrides";
+
+/* Frontpage centered search bar */
+#header-search-bar.ui.center.aligned {
+    max-width: unset;
+    margin: 25px 0 25px 0;
+    .ui.input {
+            height: 56px !important;
+            font-size: @font-size-big;
+            
+            &>input {
+                height: 56px !important;
+                font-size: @font-size-big;
+            }
+        }
+}
+
+/* Desktop menu */
+@media all and (min-width: 1000px) {
+    #header-search-bar {
+        .ui.input {
+            width: 500px !important;
+            height: 38px !important;
+
+            &>input {
+                width: 500px !important;
+                height: 38px !important;
+            }
+        }
+    }
+}

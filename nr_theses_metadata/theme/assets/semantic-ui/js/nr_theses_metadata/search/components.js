@@ -361,7 +361,7 @@ export const NRToggleComponent = ({
 }
 
 export const NRCountComponent = ({ totalResults }) => {
-  return <Label>{totalResults.toLocaleString('en-US')}</Label>
+  return <Label>{totalResults.toLocaleString()}</Label>
 }
 
 export const NREmptyResults = (props) => {

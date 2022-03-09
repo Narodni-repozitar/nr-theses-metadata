@@ -7,6 +7,14 @@
         <div class="ui grid">
           <div class="oarepo-footer">
             {%- block footer_top_left %}
+            <div class="ui row grid">
+              <div class="oarepo-footer">
+                <h2 class="ui small header inverted">{{_ ("Contact")}}</h2>
+                <p class="margin-small">
+                  <a href="mailto:support@narodni-repozitar.cz">support@narodni-repozitar.cz</a>
+                </p>
+              </div>
+            </div>
             {%- endblock footer_top_left %}
           </div>
           <div class="six wide column right aligned">
@@ -25,7 +33,7 @@
             {%- block footer_bottom_left %}
             {% trans invenio_rdm="http://inveniosoftware.org/products/rdm" %}Powered by <a
               href="{{invenio_rdm}}">InvenioRDM</a>{% endtrans %}
-            {%- endblock footer_bottom_left %}
+              {%- endblock footer_bottom_left %}
           </div>
           <div class="eight wide column right aligned">
             {%- block footer_bottom_right %}

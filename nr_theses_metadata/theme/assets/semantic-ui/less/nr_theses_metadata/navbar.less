@@ -36,6 +36,13 @@ nav {
 .logo-link {
   width: 100%;
   padding: 0px !important;
+
+  & > .logo-container {
+    width: fit-content;
+    padding: 10px 20px 10px 20px;
+    background-color: @white;
+    border-radius: 10px;
+  }
 }
 
 .oarepo-sign-buttons {
@@ -117,6 +124,7 @@ nav {
 #header-search-bar {
   width: auto;
   text-align: center;
+  margin-left: 10px;
 
   .ui.action.input {
     margin-right: 40px;
@@ -213,7 +221,7 @@ nav {
   }
 
   #header-search-bar {
-    width: 250px;
+    max-width: 550px;
     text-align: left;
   }
 }

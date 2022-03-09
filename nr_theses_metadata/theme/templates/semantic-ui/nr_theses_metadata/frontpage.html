@@ -5,19 +5,37 @@
 {%- include "nr_theses_metadata/header_frontpage.html" %}
 {%- endblock page_header %}
 {%- block page_body %}
-{%- block first_section%}
-<div class="get-started-section section-content-white-bg">
-  <h2 class="section-title frontpage-title">{{ _("You've successfully installed NUŠL!") }}</h2>
-  <div class="row inline-row">
-    <div class="inline-row-pane">
-      <div class="goto-button">
-        <a href="https://inveniordm.docs.cern.ch" target="_blank"><i class="file alternate outline icon"></i>{{ _("Docs") }}</a>
+<div id="frontpage-search-bar" class="ui vertical masthead center aligned segment cover-page">
+  <div class="ui text container">
+    <div class="ui header">
+      {%- if config.THEME_FRONTPAGE_LOGO %}
+        <img class="ui medium image frontpage-logo"
+              src="{{ url_for('static', filename=config.THEME_FRONTPAGE_LOGO) }}"
+              alt="{{ _(config.THEME_SITENAME) }}"/>
+      {%- else %}
+        <a class="logo" href="/">{{ _(config.THEME_SITENAME) }}</a>
+      {%- endif %}
+    </div>
+    <div class="ui label purple">
+      <h1 class="ui header inverted medium">{{ _(config.THEME_FRONTPAGE_TITLE) }}</h1>
+    </div>
+    <div class="sixteen wide column frontpage-search">
+      {%- block frontpage_title %}
+      {%- endblock frontpage_title %}
+      {%- block frontpage_form %}
+      <div class="ui center aligned grid" id="header-search-bar">
+        <form class="form" action="{{ config.THEME_SEARCH_ENDPOINT }}"
+              role="search">
+          <div class="ui action icon input">
+            <input type="text" name="q" placeholder="{{ _('Search') }}">
+            <button type="submit" class="ui icon search button" aria-label="{{ _('Search') }}">
+              <i class="icon search"></i>
+            </button>
+          </div>
+        </form>
       </div>
-      <div class="goto-button">
-        <a href="https://github.com/inveniosoftware" target="_blank"><i class="github icon"></i>{{ _("Code") }}</a>
-      </div>
+      {%- endblock frontpage_form %}
     </div>
   </div>
 </div>
-{%- endblock first_section%}
 {%- endblock page_body%}
