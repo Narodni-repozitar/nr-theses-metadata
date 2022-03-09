@@ -29,7 +29,7 @@ class NrThesesMetadataServiceConfig(InvenioRecordServiceConfig):
     @property
     def links_item(self):
         return {
-            "self": RecordLink("/nr_theses_metadata/{id}"),
+            "self": RecordLink("/api/nr_theses_metadata/{id}"),
         }
 
     links_search = pagination_links("/nr_theses_metadata/{?args*}")

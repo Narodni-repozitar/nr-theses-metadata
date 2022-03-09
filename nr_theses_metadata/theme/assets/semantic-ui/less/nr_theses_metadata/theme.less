@@ -24,7 +24,7 @@ body {
   display: flex;
   flex-direction: column;
   font-family: Roboto, -apple-system, Helvetica Neue, Helvetica, Arial,
-    sans-serif !important;
+  sans-serif !important;
 }
 
 h1,
@@ -34,7 +34,7 @@ h4,
 h5,
 h6 {
   font-family: Roboto, -apple-system, Helvetica Neue, Helvetica, Arial,
-    sans-serif !important;
+  sans-serif !important;
 }
 
 #main {
@@ -515,4 +515,57 @@ a.subject:hover {
   dd.subject {
     margin-bottom: 3px;
   }
+}
+
+.ui.inverted.transparent.menu {
+  background-color: transparent
+}
+
+.ui.transparent.label {
+  background-color: transparent;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.ui.label.bolder {
+  padding-left: 0;
+  margin-left: 0;
+  color: inherit;
+  font-size: inherit;
+  background: transparent;
+  font-weight: bolder;
+}
+
+.ui.reduced.label {
+  padding: 0.0833em 0.233em;
+  font-weight: normal;
+}
+
+.display-row {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 1em;
+
+  & > .ui.label {
+    min-width: 10em;
+    display: block
+  }
+
+  & > :last-child {
+    display: block
+  }
+}
+
+.if-not-first:first-child {
+  display: none;
+}
+
+.if-not-second:first-child {
+  display: none;
+}
+
+.if-not-second:nth-child(2) {
+  display: none;
 }

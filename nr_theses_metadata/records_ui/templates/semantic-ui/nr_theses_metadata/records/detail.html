@@ -5,213 +5,65 @@
 {%- set title = record.metadata.title -%}
 {%- set metadata = record.metadata %}
 
-{% macro langtag(lang) -%}
-<div class="q-chip row inline bg-primary no-wrap items-center text-primary q-chip--colored q-chip--dense q-chip--outline q-chip--square q-ma-none col-auto self-start"
-     style="font-size: 14px;">
-    <div class="q-chip__content col row no-wrap items-center q-anchor--skip">
-        <div class="q-px-xs bg-primary text-white">{{lang}}</div>
-    </div>
+{%- macro accessRightsIcon(accessRights) -%}
+{%- if accessRights == "otevřený přístup" -%}
+/static/icons/locks/zamky_open_access.svg
+{%- elif accessRights == "omezený přístup" -%}
+/static/icons/locks/zamky_Partialy_closed_access.svg
+{%- else -%}
+/static/icons/locks/zamky_Closed_access.svg
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro accessRightsFile(file_type, accessRights, classes) -%}
+<div style="position: relative;">
+    <img style="display: block; width: 100%; height: auto; padding-bottom: 8px;"
+         src="/static/icons/files/{{file_type}}.svg"
+         title="typ přístupu"
+    />
+    <img class="ui mini image" style="position: absolute; bottom: 0; right: 0; margin-right: 2px;"
+         src="{{accessRightsIcon(accessRights)}}"
+         title="typ přístupu"
+    />
 </div>
+{%- endmacro -%}
+
+{% macro langtag(lang) -%}
+<div class="ui basic green reduced label">{{lang}}</div>
 {%- endmacro %}
 
 {% macro vertbar() %}
-<div style="border-left: 2px solid lightgreen; margin-left: .1em; margin-right: .1em; display: inline-block; line-height: 100%">&nbsp;</div>
+<div style="border-left: 2px solid lightgreen; margin-left: .2em; margin-right: .1em; display: inline-block; line-height: 100%">
+    &nbsp;
+</div>
 {% endmacro %}
 
 {% macro double_vertbar() %}
-<div style="width: 2px; overflow-x: clip; border-left: 2px solid lightgreen; margin:0; display: inline-block; line-height: 70%">&nbsp;</div>
-<div style="width: 2px; overflow-x: clip; border-left: 2px solid lightgreen; margin:0; display: inline-block; line-height: 70%">&nbsp;</div>
+<div style="width: 1px; overflow-x: clip; border-left: 2px solid lightgreen; margin:0; display: inline-block; line-height: 90%">
+    &nbsp;
+</div>
+<div style="width: 1px; overflow-x: clip; border-left: 2px solid lightgreen; margin:0; display: inline-block; line-height: 90%">
+    &nbsp;
+</div>
 {% endmacro %}
 
 
 {%- block page_body %}
-<style>
 
-    .bg-grey-3 {
-        background: #eee !important;
-    }
-
-    .row {
-        display: flex
-    }
-
-    .col {
-
-    }
-
-    .inline {
-        display: inline-block;
-    }
-
-
-    .items-center {
-        align-items: center;
-    }
-
-    .q-mt-lg {
-        margin-top: 2em !important;
-    }
-
-    .q-avatar {
-        border-radius: 50%;
-        display: inline-block;
-        font-size: 48px;
-        height: 1em;
-        position: relative;
-        vertical-align: middle;
-        width: 1em;
-    }
-
-    .q-avatar__content {
-        font-size: .5em;
-    }
-
-    q-icon {
-        word-wrap: normal;
-        fill: currentColor;
-        box-sizing: initial;
-        direction: ltr;
-        height: 1em;
-        letter-spacing: normal;
-        line-height: 1;
-        position: relative;
-        text-align: center;
-        text-transform: none;
-        white-space: nowrap;
-        width: 1em;
-    }
-
-
-    .q-icon > img, .q-icon > svg {
-        height: 1em;
-        width: 1em;
-    }
-
-    .text-primary {
-        color: #0478f0 !important;
-    }
-
-    .q-chip {
-        background: #e0e0e0;
-        border-radius: 16px;
-        color: #000000de;
-        font-size: 14px;
-        height: 2em;
-        margin: 4px;
-        max-width: 100%;
-        outline: 0;
-        padding: 0.5em 0.9em;
-        position: relative;
-        vertical-align: middle;
-        width: fit-content;
-    }
-
-    .q-chip--dense {
-        border-radius: 12px;
-        height: 1.5em;
-        padding: 0 0.4em;
-    }
-
-    .q-chip--square {
-        border-radius: 4px;
-    }
-
-    .q-chip--outline {
-        background: #0000 !important;
-        border: 1px solid;
-    }
-
-    .q-ma-none {
-        margin: 0;
-    }
-
-    @media (min-width: 0) {
-        .col-0, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col-auto, .col-xs-0, .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-auto {
-            flex: 0 0 auto;
-        }
-    }
-
-    .q-chip .q-avatar {
-        border-radius: 16px;
-        font-size: 2em;
-        margin-left: -0.45em;
-        margin-right: 0.2em;
-    }
-
-    .q-chip--dense .q-avatar {
-        border-radius: 12px;
-        font-size: 1.5em;
-        margin-left: -0.27em;
-        margin-right: 0.1em;
-    }
-
-    .q-chip--square .q-avatar {
-        border-radius: 3px 0 0 3px;
-    }
-
-
-    .self-start {
-        align-self: flex-start;
-    }
-
-    .flex-center, .items-center {
-        align-items: center;
-    }
-
-    .no-wrap {
-        flex-wrap: nowrap;
-    }
-
-    .q-chip__content {
-        white-space: nowrap;
-    }
-
-    .text-white {
-        color: #fff !important;
-    }
-
-    .bg-primary {
-        background: #0478f0 !important;
-    }
-
-    /* ====================== */
-
-    .title {
-        font-size: 32px !important;
-        padding: 0;
-        margin: 0;
-        font-weight: 400;
-    }
-
-    .record-page {
-        font-size: 16px;
-    }
-
-    label {
-        min-width: 8em;
-        font-weight: 500;
-        display: inline-block;
-        padding-right: 1em;
-    }
-
-    .record-row {
-        padding-top: 1em;
-    }
-</style>
 <div class="ui container record-page">
     <div class="ui relaxed grid mt-5">
         <div class="row top-padded">
 
             {# Main content #}
-            <article class="sixteen wide tablet fourteen wide computer column main-record-content">
+            <article class="wide column main-record-content">
                 {%- block record_body -%}
 
 
                 {%- block record_header -%}
                 <div class="ui grid stackable">
-                    <div class="ui column items-center">
-                        <a href="" class="row items-center">
-                            <span class="q-icon on-left notranslate material-icons">arrow_back</span>
+                    <div class="ui column">
+                        <a href="/search">   <!-- TODO: url with filters, page etc -->
+                            <i class="icon arrow left"></i>
                             <span>Zpět na výsledky vyhledávání</span>
                         </a>
                     </div>
@@ -221,288 +73,224 @@
 
                 {# Title #}
                 {%- block record_title -%}
-                <section id="record-title-section" aria-label="{{ _('Record title and creators') }}"
-                         class="row q-mt-lg items-center">
-                    <span class="q-icon" aria-hidden="true" role="presentation"
-                          title="otevřený přístup" style="font-size: 64px;"><img
-                            src="/static/icons/locks/zamky_open_access.png"></span>
-                    <h1 class="title col"><span><!----><span>{{metadata.title}}</span><!----><!----></span>
-                    </h1>
-                    <div class="col-auto"><!----></div>
-                </section>
+                <div class="ui header">
+                    <section id="record-title-section" aria-label="{{ _('Record title') }}">
+                        <h1 class="title">
+                            <div style="display: flex; align-items: start; column-gap: 5px;">
+                                <!--                                <img class="ui avatar image"-->
+                                <!--                                     src="{{accessRightsIcon(metadata.accessRights)}}"-->
+                                <!--                                     title="otevřený přístup"-->
+                                <!--                                />-->
+                                <div>
+                                    {{metadata.title}}
+                                </div>
+                            </div>
+                        </h1>
+                    </section>
+                    <div class="ui hidden divider"></div>
+                </div>
+
 
                 {%- endblock record_title -%}
+                <div class="ui grid">
+                    {# hlavni blok #}
+                    <div class="ui eleven wide column">
+                        <div class="ui inverted vertical transparent section">
+                            {% for title in metadata.additionalTitles %}
+                            <div class="display-row">
+                                <label class="ui bolder label">{{title.titleType}}: </label>
+                                <div>
+                                    {{ langtag(title.title.0.lang) }}
+                                    <span>
+                                        {{ title.title.0.value }}
+                                    </span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="ui inverted vertical transparent section">
+                            <div class="display-row">
+                                <label class="ui bolder label">Osoby: </label>
+                                <div>
+                                    {% for person in metadata.creators %}
+                                    {% if loop.index0 %} {{ vertbar() }} {% endif %}
+                                    {{ person.fullName }}
+                                    {% endfor %}
+                                    {% if metadata.contributors %} {{ double_vertbar() }}{%endif%}
+                                    {% for person in metadata.contributors %}
+                                    {% if loop.index0 %} {{ vertbar() }} {% endif %}
+                                    {{ person.fullName }} ({{person.role}})
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui inverted vertical transparent section">
+                            <div class="display-row">
+                                <label class="ui bolder label">Datum: </label>
+                                <div>
+                                    {{ (metadata.dateIssued or '')[:4] }}
+                                    {% if metadata.dateModified and metadata.dateIssued %}
+                                    {{ double_vertbar() }}
+                                    {% endif %}
+                                    {% if (metadata.dateIssued or '')[:4] != (metadata.dateModified or '')[:4] %}
+                                    {{ (metadata.dateModified or '')[:4] }} (upraveno)
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="ui two column grid q-mt-lg">
-                    <div class="rounded-borders five wide column">
-                        <div class="column full-height q-pr-lg">
-                            <div>
-                                <div class="label">Licence: &nbsp;&nbsp;</div>
+                        <div class="ui inverted vertical transparent section">
+                            <div class="display-row">
+                                <label class="ui bolder label">Jazyk: </label>
+                                <div>
+                                    {% for lang in metadata.languages %}
+                                    {% if loop.index0 %} {{ vertbar() }} {% endif %}
+                                    {{lang}}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui inverted vertical transparent section">
+                            <div class="display-row">
+                                <label class="ui bolder label">Typ dokumentu: </label>
+                                <div>
+                                    {{metadata.resourceType}}
+                                    {% if metadata.defended %}
+                                    <span style="color: green">&nbsp;(obhájeno) </span>
+                                    {% else %}
+                                    <span style="color: darkred">&nbsp;(neobhájeno) </span>
+                                    {% endif %}
+                                    {% if metadata.extent %}
+                                    {{ double_vertbar() }}
+                                    {{ metadata.extent }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- todo: identifikator dila, doi, vydavatel, edice -->
+                        <div class="ui inverted vertical transparent section">
+                            <div class="display-row">
+                                <label class="ui bolder label">Klíčová slova: </label>
+                                <!-- TODO: by language, ne jenom cs a en; bude to chtit preprocessing -->
+                                <div>
+                                    <div>
+                                        {{ langtag("cs") }}
+                                        {% for subject in metadata.subjects %}
+                                        {% for s in subject.subject %}
+                                        {% if s.lang == 'cs' %}
+                                        <span class="if-not-second">{{ vertbar() }}</span>
+                                        <span>{{s.value}}</span>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% endfor %}
+                                    </div>
+                                    <div>
+                                        {{ langtag("en") }}
+                                        {% for subject in metadata.subjects %}
+                                        {% for s in subject.subject %}
+                                        {% if s.lang == 'en' %}
+                                        <span class="if-not-second">{{ vertbar() }}</span>
+                                        <span>{{s.value}}</span>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui inverted vertical transparent section">
+                            <div class="display-row">
+                                <label class="ui bolder label">Abstrakt: </label>
+                                <div>
+                                    TODO: nastylovat
+                                    <div class="ui tabular menu">
+                                        <div class="item active" data-tab="abstract-cs">cs</div>
+                                        <div class="item" data-tab="abstract-en">en</div>
+                                    </div>
+                                    {% for a in metadata.abstract %}
+                                    <div class="ui tab {% if a.lang == 'cs'%}active{%endif%}"
+                                         data-tab="abstract-{{a.lang}}">
+                                        {{a.value}}
+                                    </div>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- todo: poznamka, akce, je soucasti, projekt -->
+                        <div class="ui inverted vertical transparent section">
+                            <div class="display-row">
+                                <label class="ui bolder label">Instituce / grantor: </label>
+                                <div>
+                                    {% for d in metadata.degreeGrantor %}
+                                    {% if loop.index0 %} {{ vertbar() }} {% endif %}
+                                    {{d}}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- todo: prava -->
+                        <div class="ui inverted vertical transparent section">
+                            <div class="display-row">
+                                <label class="ui bolder label">Dostupnost: </label>
+                                <div>
+                                    {% for a in metadata.accessibility %}
+                                    <div>
+                                        {{ langtag(a.lang) }}
+                                        <span>
+                                            {{ a.value }}
+                                        </span>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui inverted vertical transparent section">
+                            <div class="display-row">
+                                <label class="ui bolder label">Původní záznam: </label>
+                                <a href="{{metadata.originalRecord}}" target="_blank">
+                                    {{metadata.originalRecord}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {# spacer #}
+                    <div class="ui one wide column"></div>
+                    {# levy block #}
+                    <div class="ui four wide column">
+                        <div class="ui inverted vertical transparent section">
+                            <!-- div>
+                                Vypada to ze zatim tam zadnou licenci nemame, takze tohle je prazdne
+
+                                <div class="ui fluid">Licence: &nbsp;&nbsp;</div>
                                 <img src="/static/images/licenses/by-nc.png" style="width: 50%"/>
+                            </div -->
+                            <div>
+                                <div class="ui fluid bolder label">Kolekce: &nbsp;&nbsp;</div>
+                                {{metadata.collection}}
                             </div>
-                            <div class="row label-block q-mt-lg"><span
-                                    class="label">Identifikátor objektu: &nbsp;&nbsp;</span>
-                            </div><!----><!---->
-                            <div class="q-chip row inline no-wrap items-center text-primary q-chip--colored q-chip--dense q-chip--outline q-chip--square q-ma-none col-auto self-start"
-                                 style="font-size: 14px;">
-                                <div class="q-chip__content col row no-wrap items-center q-anchor--skip">
-                                    <div class="q-avatar bg-primary text-white q-chip--colored text-weight-bolder row items-center">
-                                        <div class="q-avatar__content">DOI</div>
+                            <div class="ui hidden divider"></div>
+                            <div>
+                                <div class="ui fluid bolder label">Metadata: &nbsp;&nbsp;</div>
+                                <a href="{{record.links.self}}" target="_blank">{{record.links.self}}</a>
+                            </div>
+                            <div class="ui hidden divider"></div>
+
+                            <a href="{{metadata.originalRecord}}" target="_blank">
+                                <div style="display: flex; align-items: center; margin-left: -20px;" class="wide">
+                                    <div style="flex: 1 1 0">
+                                        {{accessRightsFile('pdf', metadata.accessRights, "small")}}
                                     </div>
-                                    <div class="q-px-xs"><a href="https://doi.org/10.48700/datst.3q9we-bks74"
-                                                            target="_blank">10.48700/datst.3q9we-bks74</a></div>
-                                </div>
-                            </div>
-                            <div class="row label-block block q-mt-lg"><span
-                                    class="label">Stav záznamu: &nbsp;&nbsp;</span>
-                                <p>Veřejný</p></div>
-                            <div class="row label-block block q-mt-lg"><span
-                                    class="label">V komunitě: &nbsp;&nbsp;</span>
-                                <div><a href="/general/datasets/all/">General community</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="eleven wide column"><!----><!---->
-                        {% for title in metadata.additionalTitles %}
-                        <div class="record-row">
-                            <label>{{title.titleType}}: </label>
-                            {{ langtag(title.title.0.lang) }}
-                            {{ title.title.0.value }}
-                        </div>
-                        {% endfor %}
-                        <div class="record-row">
-                            <label>Osoby: </label>
-                            {% for person in metadata.creators %}
-                                {% if loop.index0 %} {{ vertbar() }} {% endif %}
-                                {{ person.fullName }}
-                            {% endfor %}
-                            {% if metadata.contributors %} {{ double_vertbar() }}{%endif%}
-                            {% for person in metadata.contributors %}
-                                {% if loop.index0 %} {{ vertbar() }} {% endif %}
-                                {{ person.fullName }} ({{person.role}})
-                            {% endfor %}
-                        </div>
-                        <div class="record-row">
-                            <label>Datum: </label>
-                            {{ (metadata.dateIssued or '')[:4] }}
-                            {% if metadata.dateModified and metadata.dateIssued %}
-                            {{ double_vertbar() }}
-                            {% endif %}
-                            {% if (metadata.dateIssued or '')[:4] != (metadata.dateModified or '')[:4] %}
-                            {{ (metadata.dateModified or '')[:4] }} (upraveno)
-                            {% endif %}
-                        </div>
-
-                        <div class="record-row">
-                            <label>Jazyk: </label>
-                            {% for lang in metadata.languages %}
-                                {% if loop.index0 %} {{ vertbar() }} {% endif %}
-                                {{lang}}
-                            {% endfor %}
-                        </div>
-
-                        <div class="record-row">
-                        </div>
-
-                        <div class="record-row">
-                        </div>
-
-                        <div class="record-row">
-                        </div>
-
-                        <div>{{metadata}}</div>
-
-                        <div class="row label-block"><span class="label">Osoby: &nbsp;&nbsp;</span>
-                            <div class="row authors full-height items-baseline text-primary text-weight-medium">
-                                <div class="creator"><!----><a class="cursor-pointer" target="_blank">Průša,
-                                    Jiří</a><span><i
-                                        class="q-icon text-accent notranslate material-icons cursor-pointer q-pa-xs q-mb-xs"
-                                        aria-hidden="true" role="presentation"
-                                        title="scopusID: 60060658">badge</i></span><!----></div>
-                                <div class="creator">
-                                    <hr class="q-separator q-separator--vertical bg-secondary vertical-line"
-                                        aria-orientation="vertical">
-                                    <a class="cursor-pointer" target="_blank">Cifra, Michal</a><span><div
-                                        class="q-img q-img--menu cursor-pointer q-pa-xs q-mb-xs" role="img"
-                                        aria-label="orcid: 0000-0002-8853-9523" style="width: 24px;"><div
-                                        style="padding-bottom: 100%;"></div><div class="q-img__container absolute-full"><img
-                                        class="q-img__image q-img__image--with-transition q-img__image--loaded"
-                                        width="0" loading="lazy" aria-hidden="true" draggable="false"
-                                        src="data:image/png;base64,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"
-                                        style="object-fit: cover; object-position: 50% 50%;"></div><div
-                                        class="q-img__content absolute-full q-anchor--skip"></div></div></span><!---->
-                                </div><!----></div>
-                        </div>
-                        <div class="row label-block"><span class="label">Datum zveřejnění: &nbsp;&nbsp;</span>
-                            <div class="year-lang">
-                                <div class="row"><span>2022-01-28</span></div>
-                            </div>
-                        </div><!----><!---->
-                        <div class="row label-block"><span class="label">Jazyk: &nbsp;&nbsp;</span>
-                            <div><span class="row inline"><!----><span><!----><span>angličtina</span><!---->
-                                <!----></span></span><!----></div>
-                        </div>
-                        <div class="row label-block"><span class="label">Vydavatel: &nbsp;&nbsp;</span>
-                            <div><span class="row cursor-pointer text-primary inline"><!----><span><!----><span>Ústav fotoniky a elektroniky AV ČR</span>
-                                <!----><!----></span></span><!----></div>
-                        </div><!---->
-                        <div class="row label-block"><span class="label">Oborové kategorie: &nbsp;&nbsp;</span><!---->
-                            <!----><span
-                                    class="row text-primary cursor-pointer"><!----><span><!----><span>Přírodní vědy</span>
-                                <!----><!----></span></span><!---->
-                            <hr class="q-separator q-separator--vertical bg-secondary vertical-line-left"
-                                aria-orientation="vertical">
-                            <hr class="q-separator q-separator--vertical bg-secondary vertical-line-right"
-                                aria-orientation="vertical">
-                            <span class="row text-primary cursor-pointer"><!----><span><!----><span>Chemické vědy</span>
-                                <!----><!----></span></span><!---->
-                            <hr class="q-separator q-separator--vertical bg-secondary vertical-line-left"
-                                aria-orientation="vertical">
-                            <hr class="q-separator q-separator--vertical bg-secondary vertical-line-right"
-                                aria-orientation="vertical">
-                            <span class="row text-primary cursor-pointer"><!----><span><!----><span>Biologie</span>
-                                <!----><!----></span></span><!---->
-                            <hr class="q-separator q-separator--vertical bg-secondary vertical-line-left"
-                                aria-orientation="vertical">
-                            <hr class="q-separator q-separator--vertical bg-secondary vertical-line-right"
-                                aria-orientation="vertical">
-                            <span class="row text-primary cursor-pointer"><!----><span><!----><span>Fyzikální chemie</span>
-                                <!----><!----></span></span><!---->
-                            <hr class="q-separator q-separator--vertical bg-secondary vertical-line-left"
-                                aria-orientation="vertical">
-                            <hr class="q-separator q-separator--vertical bg-secondary vertical-line-right"
-                                aria-orientation="vertical">
-                            <span class="row text-primary cursor-pointer"><!----><span><!----><span>Biofyzika</span>
-                                <!----><!----></span></span><!---->
-                            <hr class="q-separator q-separator--vertical bg-secondary vertical-line-left"
-                                aria-orientation="vertical">
-                            <hr class="q-separator q-separator--vertical bg-secondary vertical-line-right"
-                                aria-orientation="vertical">
-                            <span class="row text-primary cursor-pointer"><!----><span><!----><span>Technické vědy, inženýrství</span>
-                                <!----><!----></span></span></div>
-                        <div class="row label-block"><span class="label">Abstrakt: &nbsp;&nbsp;</span>
-                            <div class="q-tabs row no-wrap items-center q-tabs--not-scrollable q-tabs--horizontal q-tabs__arrows--outside q-tabs--dense bold inline multilingual-text-tabs items-baseline"
-                                 role="tablist"><!---->
-                                <div class="q-tabs__content row no-wrap items-center self-stretch hide-scrollbar relative-position q-tabs__content--align-justify">
-                                    <div class="q-tab relative-position self-stretch flex flex-center text-center q-tab--active text-secondary q-tab--no-caps q-focusable q-hoverable cursor-pointer q-px-none"
-                                         tabindex="0" role="tab" aria-selected="true">
-                                        <div class="q-focus-helper" tabindex="-1"></div>
-                                        <div class="q-tab__content self-stretch flex-center relative-position q-anchor--skip non-selectable column">
-                                            <div class="row no-padding"><!----><span class="q-px-md">angličtina</span>
-                                            </div>
-                                        </div>
-                                        <div class="q-tab__indicator absolute-bottom text-transparent"></div>
+                                    <div style="flex: 1.5 1 0">
+                                        Hlavní text práce volně dostupný
                                     </div>
                                 </div>
-                                <i class="q-icon notranslate material-icons q-tabs__arrow q-tabs__arrow--left absolute q-tab__icon"
-                                   aria-hidden="true" role="presentation">chevron_left</i><i
-                                        class="q-icon notranslate material-icons q-tabs__arrow q-tabs__arrow--right absolute q-tab__icon q-tabs__arrow--faded"
-                                        aria-hidden="true" role="presentation">chevron_right</i></div>
-                            <div class="q-tab-panels q-panel-parent bg-transparent multilingual-text-tab-content">
-                                <div class="q-panel scroll" role="tabpanel" style="--q-transition-duration: 300ms;">
-                                    <div class="q-tab-panel">
-                                        <div><span>Molecular dynamics simulations trajectories of kinesin motor domain on microtubule in an intense electric field. Four different electric field directions, and four different field strengths were explored. The data can serve further to researchers in the field of bionanotechnology, bioelectromagnetics and biophysics.</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row label-block"><span class="label">Metodologie: &nbsp;&nbsp;</span>
-                            <div class="q-tabs row no-wrap items-center q-tabs--not-scrollable q-tabs--horizontal q-tabs__arrows--outside q-tabs--dense bold inline multilingual-text-tabs items-baseline"
-                                 role="tablist"><!---->
-                                <div class="q-tabs__content row no-wrap items-center self-stretch hide-scrollbar relative-position q-tabs__content--align-justify">
-                                    <div class="q-tab relative-position self-stretch flex flex-center text-center q-tab--active text-secondary q-tab--no-caps q-focusable q-hoverable cursor-pointer q-px-none"
-                                         tabindex="0" role="tab" aria-selected="true">
-                                        <div class="q-focus-helper" tabindex="-1"></div>
-                                        <div class="q-tab__content self-stretch flex-center relative-position q-anchor--skip non-selectable column">
-                                            <div class="row no-padding"><!----><span class="q-px-md">angličtina</span>
-                                            </div>
-                                        </div>
-                                        <div class="q-tab__indicator absolute-bottom text-transparent"></div>
-                                    </div>
-                                </div>
-                                <i class="q-icon notranslate material-icons q-tabs__arrow q-tabs__arrow--left absolute q-tab__icon"
-                                   aria-hidden="true" role="presentation">chevron_left</i><i
-                                        class="q-icon notranslate material-icons q-tabs__arrow q-tabs__arrow--right absolute q-tab__icon q-tabs__arrow--faded"
-                                        aria-hidden="true" role="presentation">chevron_right</i></div>
-                            <div class="q-tab-panels q-panel-parent bg-transparent multilingual-text-tab-content">
-                                <div class="q-panel scroll" role="tabpanel" style="--q-transition-duration: 300ms;">
-                                    <div class="q-tab-panel">
-                                        <div><span>Gromacs 2018 software and CHARMM36(mar2019) force field was used to generate molecular dynamics trajectories.</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!----><!----><!---->
-                        <div class="row label-block"><span class="label">Projekt: &nbsp;&nbsp;</span><!---->
-                            <!----><span>GX20-06873X<!----></span>
-                            <hr class="q-separator q-separator--vertical bg-secondary vertical-line"
-                                aria-orientation="vertical">
-                            <span>SubTHz on-chip devices for controlling protein nanomachines<!----></span>
-                            <hr class="q-separator q-separator--vertical bg-secondary vertical-line"
-                                aria-orientation="vertical"><!----><span class="row"><!----><span><!----><span>Grantová agentura České republiky</span>
-                                <!----><!----></span></span></div>
-                        <div class="row label-block"><span class="label">Práva: &nbsp;&nbsp;</span><span class="row"><!----><span><!----><span>Creative Commons Uveďte původ-Neužívejte komerčně 4.0 Mezinárodní licence</span>
-                            <!----><!----></span></span></div><!----></div>
-                </div>
-
-
-                <div class="row q-my-xl full-width justify-between">
-                    <div class="col-auto column items-start q-mb-xl">
-                        <button class="q-btn q-btn-item non-selectable no-outline q-btn--flat q-btn--rectangle text-primary q-btn--actionable q-focusable q-hoverable col-auto"
-                                tabindex="0" type="button"><span class="q-focus-helper"></span><span
-                                class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i
-                                class="q-icon on-left notranslate material-icons" aria-hidden="true" role="img">arrow_back</i><span
-                                class="block">Zpět na výsledky vyhledávání</span></span></button>
-                    </div>
-                    <div class="col-auto column items-end text-left"></div>
-                </div>
-                <div class="q-page-sticky row flex-center fixed-top-right q-page-sticky--shrink"
-                     style="transform: translate(0px, 108px); margin: 20px 38px;">
-                    <div>
-                        <div class="q-pa-md row items-start q-gutter-md relative-position">
-                            <button class="q-btn q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle q-btn--rounded bg-primary text-white q-btn--actionable q-focusable q-hoverable q-btn--fab absolute-top-right q-morph--invisible"
-                                    tabindex="0" type="button"><span class="q-focus-helper"></span><span
-                                    class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i
-                                    class="q-icon notranslate material-icons" aria-hidden="true" role="img">published_with_changes</i>
-                                <!----></span></button>
-                            <div class="q-card q-card--bordered q-card--square no-border-radius q-card--flat no-shadow absolute-top-right transparent-grey">
-                                <div class="q-card__section q-card__section--vert">
-                                    <div class="row justify-between">
-                                        <div class="text-h7 text-bold self-center col-auto"><i
-                                                class="q-icon notranslate material-icons q-pr-sm" aria-hidden="true"
-                                                role="presentation"
-                                                style="font-size: 24px;">published_with_changes</i><span>Akce</span>
-                                        </div>
-                                        <button class="q-btn q-btn-item non-selectable no-outline q-btn--flat q-btn--round text-secondary q-btn--actionable q-focusable q-hoverable col-auto q-pa-sm"
-                                                tabindex="0" type="button"
-                                                style="font-size: 10px; min-width: 0px; min-height: 0px;"><span
-                                                class="q-focus-helper"></span><span
-                                                class="q-btn__content text-center col items-center q-anchor--skip justify-center row"><i
-                                                class="q-icon notranslate material-icons" aria-hidden="true" role="img">close_fullscreen</i>
-                                            <!----></span></button>
-                                    </div>
-                                </div>
-                                <div class="q-list q-list--bordered q-list--separator q-list--dark q-list--padding bg-primary-dark-transparent">
-                                    <div class="q-item q-item-type row no-wrap q-item--clickable q-link cursor-pointer q-focusable q-hoverable"
-                                         tabindex="0">
-                                        <div class="q-focus-helper" tabindex="-1"></div>
-                                        <div class="q-item__section column q-item__section--side justify-center q-item__section--avatar">
-                                            <i class="q-icon notranslate material-icons" aria-hidden="true"
-                                               role="presentation">download</i></div>
-                                        <div class="q-item__section column q-item__section--main justify-center">
-                                            <div class="q-item__label text-uppercase text-caption text-weight-bold">
-                                                Zobrazit metadata záznamu
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
-
-
                 {%- endblock record_body %}
             </article>
 
@@ -513,7 +301,6 @@
             </aside -->
         </div>
     </div>
-
 </div>
 
 {%- endblock page_body %}
@@ -524,4 +311,5 @@
 {% else %}
 {% include config.THEME_JAVASCRIPT_TEMPLATE %}
 {% endif %}
+<script>$('.tabular.menu .item').tab();</script>
 {%- endblock javascript %}
