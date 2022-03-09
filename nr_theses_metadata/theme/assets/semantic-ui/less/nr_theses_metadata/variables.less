@@ -7,28 +7,30 @@
  * under the terms of the MIT License; see LICENSE file for more details.
  */
 
-@linkColor: #005b9e;
+@linkColor: darken(@brand-primary, 10%);
 @linkUnderline: none;
 @linkHoverColor: darken(saturate(@linkColor, 20), 15, relative);
 @linkHoverUnderline: underline;
 
-@focusedFormBorderColor: #2185D0;
-@focusedFormMutedBorderColor: #2185D0;
+@focusedFormBorderColor: #2185d0;
+@focusedFormMutedBorderColor: #2185d0;
 
-@errorText: #9f3a38;
+@errorText: #c10015;
 
-@navbar_background_image: linear-gradient(12deg, rgba(3, 119, 205, 1), rgba(3, 119, 205, 1) 15%, rgba(251, 130, 115, 0.69));
-@navbar_background_color: rgba(3,119,205,1);
-@brand-primary: #0377cd;
+@navbar_background_image: #fff;
+@navbar_background_color: #fff;
+@brand-primary: rgb(4, 120, 240);
 @versionActive: #d9edf7;
 
-@green: #048622;
+@green: rgb(35, 210, 110);
 @signupColor: @green;
-@searchButtonColor: #fb8273;
+@searchButtonColor: @green;
+
+@dark: #666666;
 
 @coverPageDefaultMargin: 0;
 
-@accessRightOpen: @green;
+@accessRightOpen: darken(@green, 10%);
 @accessRightRestricted: @red;
 @accessRightEmbargoed: @yellow;
 @accessRightMetadataOnly: @red;
@@ -38,9 +40,9 @@
 @embargoed-components-background-color: #c7a00014;
 @embargoed-components-border-color: #c9ba9b;
 
-@footerLightColor: #0377cd;
-@footerDarkColor: #0047a8;
-@footerTextLightColor:#ffffff;
+@footerLightColor: lighten(@dark, 5%);
+@footerDarkColor: @dark;
+@footerTextLightColor: #ffffff;
 @footerTextDarkColor: #ffffff;
 
 @font-size-base: 14px;

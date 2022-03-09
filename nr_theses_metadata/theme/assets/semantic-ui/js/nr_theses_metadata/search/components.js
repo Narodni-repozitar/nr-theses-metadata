@@ -98,7 +98,9 @@ export const NRResultsListItem = ({ result, index }) => {
           </Label>
           {nuslIDs.map((nid) => (
             <Label size="tiny" key={nid.uri}>
-              <a target="_blank" href={nid.uri}>{nid.label}</a>
+              <a target="_blank" href={nid.uri}>
+                {nid.label}
+              </a>
             </Label>
           ))}
         </Item.Extra>
