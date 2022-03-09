@@ -7,6 +7,7 @@
 
 import axios from 'axios'
 import _get from 'lodash/get'
+import _isArray from 'lodash/isArray'
 import { DateTime } from 'luxon'
 import React from 'react'
 import { i18next } from '@translations/nr_theses_metadata/i18next'
@@ -117,4 +118,32 @@ export function SearchItemCreators({ creators }) {
       {index < creators.length - 1 && ';'}
     </span>
   ))
+}
+
+
+export function localizedSubjects(result) {
+    const lang = i18next.language.toString()
+    const subjects = _get(result, 'ui.subjects', []).map(s => s.subject)
+    return subjects.map(s => {
+      const match = s.filter(ss => ss.lang === lang )
+        if (!match.length && s.length > 0) {
+            return s[0].value
+        }
+        return match[0].value
+    })
+}
+
+
+export function localizedDescription(result) {
+    const lang = i18next.language.toString()
+    const description = _get(result, 'ui.abstract', 'No description')
+    let description_localized = description
+    if (_isArray(description)) {
+        description_localized = description.filter((d) => d.lang === lang).map(d => d.value)
+
+        if (!description_localized.length && description.length > 0) {
+            description_localized = description[0]
+        }
+    }
+    return description_localized
 }

@@ -1,16 +1,17 @@
 import inspect
 from pathlib import Path
-from flask_resources import ResponseHandler, JSONSerializer
 
+from flask_resources import ResponseHandler, JSONSerializer
 from invenio_records_resources.resources import (
     RecordResourceConfig as InvenioRecordResourceConfig, )
+
 from nr_theses_metadata.resources.serializers_to_be_moved.ui import UIJSONSerializer
 
 
-class UIResourceConfig(InvenioRecordResourceConfig):   
+class UIResourceConfig(InvenioRecordResourceConfig):
     components = None
     template_folder = None
-    
+
     def get_template_folder(self):
         if not self.template_folder:
             return None
@@ -34,11 +35,12 @@ class RecordsUIResourceConfig(UIResourceConfig):
         "application/vnd.inveniordm.v1+json": ResponseHandler(UIJSONSerializer()),
     }
 
-     # handled by RecordTemplateContextComponent
+    # handled by RecordTemplateContextComponent
     record_sort_options = []
     record_sort_default = 'bestmatch'
     record_sort_default_no_query = 'newest'
-    record_facets = ['metadata_accessRights', 'metadata_rights', 'metadata_fundingReferences_funder']
+    record_facets = ['metadata_accessRights', 'metadata_rights', 'metadata_fundingReferences_funder',
+                     'metadata_languages', 'metadata_creators_fullName']
 
     @property
     def components(self):

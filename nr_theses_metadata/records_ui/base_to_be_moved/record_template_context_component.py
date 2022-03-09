@@ -30,7 +30,9 @@ class RecordTemplateContextComponent:
                 getattr(self.resource.config, self.config_sort_default_no_query)
             ),
             facets=FacetsConfig(self.resource.service.config.search.facets,
-                                getattr(self.resource.config, self.config_facets)),
+                                # TODO: this is for facets debugging
+                                self.resource.service.config.search.facets.keys())
+                                # getattr(self.resource.config, self.config_facets)),
         )
         overrides = app_ctx.get('overrides') or {}
 
@@ -104,6 +106,7 @@ class FacetsConfig(OptionsSelector):
 
         ui = deepcopy(getattr(option, 'ui', {}))
         ui.update({
+            'field': option._params['field'],
             'aggName': key,
             'title': title,
         })

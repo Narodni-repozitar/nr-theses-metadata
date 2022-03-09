@@ -6,31 +6,51 @@
 // Invenio App RDM is free software; you can redistribute it and/or modify it
 // under the terms of the MIT License; see LICENSE file for more details.
 
+import React, { Component } from 'react'
+import { withState } from 'react-searchkit'
 import { createSearchAppInit } from '@js/invenio_search_ui'
 import {
-  RDMBucketAggregationElement,
-  RDMRecordFacets,
-  RDMRecordFacetsValues,
-  RDMRecordResultsGridItem,
-  ResultsListItem,
-  RDMRecordSearchBarContainer,
-  RDMRecordSearchBarElement,
-  RDMCountComponent,
-  RDMEmptyResults,
-  RDMErrorComponent,
-  RDMToggleComponent,
+  NRBucketAggregationElement,
+  NRRecordFacets,
+  NRRecordFacetsValues,
+  NRResultsGridItem,
+  NRResultsListItem,
+  NRRecordSearchBarContainer,
+  NRRecordSearchBarElement,
+  NRCountComponent,
+  NREmptyResults,
+  NRErrorComponent,
+  NRToggleComponent,
 } from './components'
 
+class _StateLogger extends Component {
+  render() {
+    return (
+      <div>
+        Current results state{' '}
+        <pre>{JSON.stringify(this.props.currentResultsState, null, 2)}</pre>
+      </div>
+    )
+  }
+}
+
+const renderResultsList = (results) => {
+  const State = withState(_StateLogger)
+  console.log(results)
+  return <State></State>
+}
+
 const initSearchApp = createSearchAppInit({
-  'BucketAggregation.element': RDMBucketAggregationElement,
-  'BucketAggregationValues.element': RDMRecordFacetsValues,
-  'ResultsGrid.item': RDMRecordResultsGridItem,
-  'EmptyResults.element': RDMEmptyResults,
-  'ResultsList.item': ResultsListItem,
-  'SearchApp.facets': RDMRecordFacets,
-  'SearchApp.searchbarContainer': RDMRecordSearchBarContainer,
-  'SearchBar.element': RDMRecordSearchBarElement,
-  'Count.element': RDMCountComponent,
-  'Error.element': RDMErrorComponent,
-  'SearchFilters.ToggleComponent': RDMToggleComponent,
+  'BucketAggregation.element': NRBucketAggregationElement,
+  'BucketAggregationValues.element': NRRecordFacetsValues,
+  'ResultsGrid.item': NRResultsGridItem,
+  'EmptyResults.element': NREmptyResults,
+  // ResultsList: renderResultsList,
+  'ResultsList.item': NRResultsListItem,
+  'SearchApp.facets': NRRecordFacets,
+  'SearchApp.searchbarContainer': NRRecordSearchBarContainer,
+  'SearchBar.element': NRRecordSearchBarElement,
+  'Count.element': NRCountComponent,
+  'Error.element': NRErrorComponent,
+  'SearchFilters.ToggleComponent': NRToggleComponent,
 })

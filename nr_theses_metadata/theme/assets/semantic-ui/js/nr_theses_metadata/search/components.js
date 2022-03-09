@@ -6,7 +6,7 @@
 //
 // Invenio App RDM is free software; you can redistribute it and/or modify it
 // under the terms of the MIT License; see LICENSE file for more details.
-import React, {useState} from 'react'
+import React, {Fragment, useState} from 'react'
 import {
     Button,
     Card,
@@ -23,16 +23,14 @@ import {
 } from 'semantic-ui-react'
 import {BucketAggregation, Toggle, withState} from 'react-searchkit'
 import _get from 'lodash/get'
-import _isArray from 'lodash/isArray'
 import _truncate from 'lodash/truncate'
 import Overridable from 'react-overridable'
 import {SearchBar} from '@js/invenio_search_ui/components'
 import {i18next} from '@translations/nr_theses_metadata/i18next'
-import {SearchItemCreators} from '../utils'
+import {localizedDescription, localizedSubjects, SearchItemCreators} from '../utils'
 
 
-export const ResultsListItem = ({result, index}) => {
-    const lang = i18next.language.toString()
+export const NRResultsListItem = ({result, index}) => {
     const access_rights = _get(result, 'ui.accessRights', 'open')
     let access_rights_class = 'open'
     let access_rights_icon = 'unlock'
@@ -57,30 +55,12 @@ export const ResultsListItem = ({result, index}) => {
     const createdDate = _get(result, 'created', 'No creation date found.')
     const creators = result.ui.creators.slice(0, 3)
 
-    const description = _get(result, 'ui.abstract', 'No description')
-    let description_localized = description
-    if (_isArray(description)) {
-        description_localized = description.filter((d) => d.lang === lang).map(d => d.value)
-
-        if (!description_localized.length && description.length > 0) {
-            description_localized = description[0]
-        }
-    }
-
     const publicationDate = _get(
         result,
         'ui.dateIssued',
         'No publication date found.',
     )
     const resource_type = _get(result, 'ui.resourceType', 'No resource type')
-    const subjects = _get(result, 'ui.subjects', []).map(s => s.subject)
-    const subjects_localized = subjects.map(s => {
-      const match = s.filter(ss => ss.lang === lang )
-        if (!match.length && s.length > 0) {
-            return s[0].value
-        }
-        return match[0].value
-    })
 
     const title = _get(result, 'metadata.title', 'No title')
     const version = _get(result, 'ui.version', null)
@@ -93,7 +73,7 @@ export const ResultsListItem = ({result, index}) => {
             <Item.Content>
                 <Item.Extra className="labels-actions">
                     <Label size="tiny" color="blue">
-                        {publicationDate} ({version})
+                        {publicationDate} {version &&  <Fragment>({version})</Fragment>}
                     </Label>
                     <Label size="tiny" color="grey">
                         {resource_type}
@@ -112,10 +92,10 @@ export const ResultsListItem = ({result, index}) => {
                     <SearchItemCreators creators={creators}/>
                 </Item>
                 <Item.Description>
-                    {_truncate(description_localized, {length: 350})}
+                    {_truncate(localizedDescription(result), {length: 350})}
                 </Item.Description>
                 <Item.Extra>
-                    {subjects_localized.map((subject, index) => (
+                    {localizedSubjects(result).map((subject, index) => (
                         <Label key={index} size="tiny">
                             {subject}
                         </Label>
@@ -134,25 +114,20 @@ export const ResultsListItem = ({result, index}) => {
 }
 
 // TODO: Update this according to the full List item template?
-export const RDMRecordResultsGridItem = ({result, index}) => {
-    const description_stripped = _get(
-        result,
-        'ui.description_stripped',
-        'No description',
-    )
+export const NRResultsGridItem = ({result, index}) => {
     return (
-        <Card fluid key={index} href={`/records/${result.pid}`}>
+        <Card fluid key={index} href={`/documents/${result.pid}`}>
             <Card.Content>
                 <Card.Header>{result.metadata.title}</Card.Header>
                 <Card.Description>
-                    {_truncate(description_stripped, {length: 200})}
+                    {_truncate(localizedDescription(result), {length: 200})}
                 </Card.Description>
             </Card.Content>
         </Card>
     )
 }
 
-export const RDMRecordSearchBarContainer = () => {
+export const NRRecordSearchBarContainer = () => {
     return (
         <Overridable id={'SearchApp.searchbar'}>
             <SearchBar/>
@@ -160,7 +135,7 @@ export const RDMRecordSearchBarContainer = () => {
     )
 }
 
-export const RDMRecordSearchBarElement = withState(
+export const NRRecordSearchBarElement = withState(
     ({
          placeholder: passedPlaceholder,
          queryString,
@@ -199,7 +174,7 @@ export const RDMRecordSearchBarElement = withState(
     },
 )
 
-export const RDMRecordFacetsValues = ({
+export const NRRecordFacetsValues = ({
                                           bucket,
                                           isSelected,
                                           onFilterClicked,
@@ -261,8 +236,7 @@ export const SearchHelpLinks = () => {
     )
 }
 
-export const RDMRecordFacets = ({aggs, currentResultsState}) => {
-    console.log(aggs)
+export const NRRecordFacets = ({aggs, currentResultsState}) => {
     return (
         <aside aria-label={i18next.t('filters')} id="search-filters">
             <Toggle
@@ -287,7 +261,7 @@ export const RDMRecordFacets = ({aggs, currentResultsState}) => {
     )
 }
 
-export const RDMBucketAggregationElement = ({
+export const NRBucketAggregationElement = ({
                                                 agg,
                                                 title,
                                                 containerCmp,
@@ -327,7 +301,7 @@ export const RDMBucketAggregationElement = ({
     )
 }
 
-export const RDMToggleComponent = ({
+export const NRToggleComponent = ({
                                        updateQueryFilters,
                                        userSelectionFilters,
                                        filterValue,
@@ -366,11 +340,11 @@ export const RDMToggleComponent = ({
     )
 }
 
-export const RDMCountComponent = ({totalResults}) => {
+export const NRCountComponent = ({totalResults}) => {
     return <Label>{totalResults.toLocaleString('en-US')}</Label>
 }
 
-export const RDMEmptyResults = (props) => {
+export const NREmptyResults = (props) => {
     const queryString = props.queryString
     const searchPath = props.searchPath || '/search'
 
@@ -423,7 +397,7 @@ export const RDMEmptyResults = (props) => {
     )
 }
 
-export const RDMErrorComponent = ({error}) => {
+export const NRErrorComponent = ({error}) => {
     return (
         <Message warning>
             <Message.Header>
