@@ -36,7 +36,7 @@ class RecordsUIResourceConfig(UIResourceConfig):
     }
 
     # handled by RecordTemplateContextComponent
-    record_sort_options = ['bestmatch']
+    record_sort_options = ['bestmatch', 'newest', 'oldest']
     record_sort_default = 'bestmatch'
     record_sort_default_no_query = 'newest'
     record_facets = ['metadata_accessRights', 'metadata_rights', 'metadata_fundingReferences_funder',

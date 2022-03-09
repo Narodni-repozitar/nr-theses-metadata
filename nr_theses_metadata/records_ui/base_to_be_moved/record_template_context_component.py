@@ -26,9 +26,7 @@ class RecordTemplateContextComponent:
             # do it better
             sort=SortConfig(
                 self.resource.service.config.search.sort_options,
-                # this makes ALL available sort options selected
-                self.resource.service.config.search.sort_options.keys(),
-                # getattr(self.resource.config, self.config_sort_options),
+                getattr(self.resource.config, self.config_sort_options),
                 getattr(self.resource.config, self.config_sort_default),
                 getattr(self.resource.config, self.config_sort_default_no_query)
             ),

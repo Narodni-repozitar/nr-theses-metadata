@@ -23,6 +23,7 @@ import {
 } from 'semantic-ui-react'
 import { BucketAggregation, Toggle, withState } from 'react-searchkit'
 import _get from 'lodash/get'
+import _capitalize from 'lodash/capitalize'
 import _truncate from 'lodash/truncate'
 import Overridable from 'react-overridable'
 import { SearchBar } from '@js/invenio_search_ui/components'
@@ -52,8 +53,7 @@ export const NRResultsListItem = ({ result, index }) => {
       access_rights_icon = 'tag'
       break
   }
-  const access_status =
-    access_rights[0].toUpperCase() + access_rights.substring(1)
+  const access_status = _capitalize(access_rights)
   const access_status_icon = 'unlock'
   const createdDate = _get(result, 'created', 'No creation date found.')
   const creators = result.ui.creators.slice(0, 3)
@@ -67,6 +67,15 @@ export const NRResultsListItem = ({ result, index }) => {
 
   const title = _get(result, 'metadata.title', 'No title')
   const version = _get(result, 'ui.version', null)
+
+  const nuslIDs = _get(result, 'metadata.systemIdentifiers', [])
+    .filter((id) => id.scheme === 'nusl')
+    .map((id) => {
+      return {
+        uri: id.identifier,
+        label: id.identifier.split('/').reverse()[0],
+      }
+    })
 
   // Derivatives
   // TODO: pass detail route from template context
@@ -87,6 +96,11 @@ export const NRResultsListItem = ({ result, index }) => {
             )}
             {access_status}
           </Label>
+          {nuslIDs.map((nid) => (
+            <Label size="tiny" key={nid.uri}>
+              <a target="_blank" href={nid.uri}>{nid.label}</a>
+            </Label>
+          ))}
         </Item.Extra>
         <Item.Header as="h2">
           <a href={viewLink}>{title}</a>
@@ -119,6 +133,7 @@ export const NRResultsListItem = ({ result, index }) => {
 // TODO: Update this according to the full List item template?
 export const NRResultsGridItem = ({ result, index }) => {
   return (
+    // TODO: pass detail route from template context
     <Card fluid key={index} href={`/documents/${result.pid}`}>
       <Card.Content>
         <Card.Header>{result.metadata.title}</Card.Header>
