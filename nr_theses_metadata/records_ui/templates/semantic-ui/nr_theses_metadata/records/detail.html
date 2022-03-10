@@ -28,6 +28,17 @@
 </div>
 {%- endmacro -%}
 
+{%- macro accessRightsText(accessRights) -%}
+{%- if accessRights == "otevřený přístup" -%}
+Hlavní text práce volně dostupný
+{%- elif accessRights == "omezený přístup" -%}
+Hlavní text práce s omezeným přístupem
+{%- else -%}
+Hlavní text práce nedostupný
+{%- endif -%}
+{%- endmacro -%}
+
+
 {% macro langtag(lang) -%}
 <div class="ui basic green reduced label">{{lang}}</div>
 {%- endmacro %}
@@ -44,6 +55,19 @@
 </div>
 <div style="width: 1px; overflow-x: clip; border-left: 2px solid lightgreen; margin:0; display: inline-block; line-height: 90%">
     &nbsp;
+</div>
+{% endmacro %}
+
+{% macro systemIdentifier(si) %}
+<div style="display: flex; align-items: center">
+    <div class="ui basic blue reduced label">{{ si.scheme }}</div>
+    <div style="margin-left: .5em; white-space: nowrap">
+        {% if si.identifier.startswith('http://') or si.identifier.startswith('https://') %}
+        <a href="{{si.identifier}}">{{si.identifier}}</a>
+        {% else %}
+        {{ si.identifier }}
+        {% endif %}
+    </div>
 </div>
 {% endmacro %}
 
@@ -158,7 +182,7 @@
                                     {{metadata.resourceType}}
                                     {% if metadata.defended %}
                                     <span style="color: green">&nbsp;(obhájeno) </span>
-                                    {% else %}
+                                    {% elif metadata.defended is false %}
                                     <span style="color: darkred">&nbsp;(neobhájeno) </span>
                                     {% endif %}
                                     {% if metadata.extent %}
@@ -205,10 +229,13 @@
                             <div class="display-row">
                                 <label class="ui bolder label">Abstrakt: </label>
                                 <div>
-                                    TODO: nastylovat
-                                    <div class="ui tabular menu">
-                                        <div class="item active" data-tab="abstract-cs">cs</div>
-                                        <div class="item" data-tab="abstract-en">en</div>
+                                    <div class="ui tabular nr menu">
+                                        <div class="item active" data-tab="abstract-cs">
+                                            <div>cs</div>
+                                        </div>
+                                        <div class="item" data-tab="abstract-en">
+                                            <div>en</div>
+                                        </div>
                                     </div>
                                     {% for a in metadata.abstract %}
                                     <div class="ui tab {% if a.lang == 'cs'%}active{%endif%}"
@@ -284,10 +311,21 @@
                                         {{accessRightsFile('pdf', metadata.accessRights, "small")}}
                                     </div>
                                     <div style="flex: 1.5 1 0">
-                                        Hlavní text práce volně dostupný
+                                        {{accessRightsText(metadata.accessRights)}}
                                     </div>
                                 </div>
                             </a>
+                            <div class="ui divider"></div>
+                            <div>
+                                <div class="ui fluid bolder label">Systémové identifikátory</div>
+                                <div>
+                                    {% for si in metadata.systemIdentifiers %}
+                                    <div style="margin-top: 1em;">
+                                        {{systemIdentifier(si)}}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

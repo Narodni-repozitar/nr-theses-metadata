@@ -543,6 +543,32 @@ a.subject:hover {
   font-weight: normal;
 }
 
+.ui.tabular.nr.menu {
+  border-bottom: none;
+  min-height: 0;
+  margin-bottom: 0.5rem;
+
+  & > .item {
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  & > .item div {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  & > .item:not(:first-child) div {
+    border-left: 1px solid #23d26e;
+  }
+
+  & > .active.item {
+    color: #23d26e;
+  }
+}
+
 .display-row {
   display: flex;
   align-items: baseline;
@@ -568,4 +594,8 @@ a.subject:hover {
 
 .if-not-second:nth-child(2) {
   display: none;
+}
+
+.ui.label .padded {
+  padding: 0.5833em 0.833em;
 }
