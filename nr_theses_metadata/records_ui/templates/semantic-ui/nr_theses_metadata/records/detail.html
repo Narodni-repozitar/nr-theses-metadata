@@ -30,11 +30,11 @@
 
 {%- macro accessRightsText(accessRights) -%}
 {%- if accessRights == "otevřený přístup" -%}
-Hlavní text práce volně dostupný
+Hlavní text práce<!-- volně dostupný -->
 {%- elif accessRights == "omezený přístup" -%}
-Hlavní text práce s omezeným přístupem
+Hlavní text práce<!-- s omezeným přístupem -->
 {%- else -%}
-Hlavní text práce nedostupný
+Hlavní text práce<!-- nedostupný -->
 {%- endif -%}
 {%- endmacro -%}
 
@@ -152,12 +152,18 @@ Hlavní text práce nedostupný
                             <div class="display-row">
                                 <label class="ui bolder label">Datum: </label>
                                 <div>
+                                    {% if metadata.dateIssued %}
                                     {{ (metadata.dateIssued or '')[:4] }}
-                                    {% if metadata.dateModified and metadata.dateIssued %}
+                                    {% endif %}
+                                    {% if metadata.dateModified and metadata.dateIssued and (metadata.dateIssued or '')[:4] != (metadata.dateModified or '')[:4] %}
                                     {{ double_vertbar() }}
                                     {% endif %}
                                     {% if (metadata.dateIssued or '')[:4] != (metadata.dateModified or '')[:4] %}
                                     {{ (metadata.dateModified or '')[:4] }} (upraveno)
+                                    {% endif %}
+                                    {% if metadata.dateDefended and (metadata.dateIssued or '')[:4] != (metadata.dateModified or '')[:4] %}
+                                    {{ double_vertbar() }}
+                                    {{ (metadata.dateDefended or '') }} (datum obhajoby)
                                     {% endif %}
                                 </div>
                             </div>
@@ -258,6 +264,18 @@ Hlavní text práce nedostupný
                                 </div>
                             </div>
                         </div>
+                        <!-- todo: poznamka, akce, je soucasti, projekt -->
+                        <div class="ui inverted vertical transparent section">
+                            <div class="display-row">
+                                <label class="ui bolder label">Oblast studia: </label>
+                                <div>
+                                    {% for d in metadata.studyFields %}
+                                    {% if loop.index0 %} {{ vertbar() }} {% endif %}
+                                    {{d}}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
                         <!-- todo: prava -->
                         <div class="ui inverted vertical transparent section">
                             <div class="display-row">
@@ -299,11 +317,6 @@ Hlavní text práce nedostupný
                                 {{metadata.collection}}
                             </div>
                             <div class="ui hidden divider"></div>
-                            <div>
-                                <div class="ui fluid bolder label">Metadata: &nbsp;&nbsp;</div>
-                                <a href="{{record.links.self}}" target="_blank">{{record.links.self}}</a>
-                            </div>
-                            <div class="ui hidden divider"></div>
 
                             <a href="{{metadata.originalRecord}}" target="_blank">
                                 <div style="display: flex; align-items: center; margin-left: -20px;" class="wide">
@@ -325,6 +338,11 @@ Hlavní text práce nedostupný
                                     </div>
                                     {% endfor %}
                                 </div>
+                            </div>
+                            <div class="ui hidden divider"></div>
+                            <div>
+                                <div class="ui fluid bolder label">Metadata: &nbsp;&nbsp;</div>
+                                <a href="{{record.links.self}}" target="_blank">{{record.links.self}}</a>
                             </div>
                         </div>
                     </div>

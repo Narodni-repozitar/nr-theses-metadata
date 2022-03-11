@@ -82,6 +82,7 @@ class NuslTransformer(OAITransformer):
         deduplicate(md, 'contributors')
         deduplicate(md, 'subjects')
         deduplicate(md, 'additionalTitles')
+        deduplicate(md, 'degreeGrantor')
 
         rec.ignore('909COq')  # "licensed", "openaire", ...
         rec.ignore('909COp')  # oai set
@@ -465,6 +466,7 @@ def transform_980_resource_type(md, rec, value):
             value = 'methodologies-without-certification'
 
     md["resourceType"] = {
+        "bakalarske_prace": "Bakalářská práce",
         "diplomove_prace": "Diplomová práce",
         "disertacni_prace": "Rigorózní práce",
         "rigorozni_prace": "Disertační práce",
@@ -907,10 +909,13 @@ def transform_502_degree_grantor(md, rec, value):
 def transform_7102_degree_grantor(md, rec, value):
     if value[3] != 'cze':
         return
+    if value[1] and value[1].startswith('Program '):
+        md.setdefault('studyFields', []).extend(value[1][len('Program '):])
+
     md.setdefault('degreeGrantor', []).extend(
         make_array(
             value[0], value[0],
-            value[1], value[1],
+            value[1] and not value[1].startswith('Program '), value[1],
             value[2], value[2]
         )
     )
