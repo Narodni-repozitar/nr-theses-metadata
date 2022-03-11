@@ -120,30 +120,30 @@ export function SearchItemCreators({ creators }) {
   ))
 }
 
-
 export function localizedSubjects(result) {
-    const lang = i18next.language.toString()
-    const subjects = _get(result, 'ui.subjects', []).map(s => s.subject)
-    return subjects.map(s => {
-      const match = s.filter(ss => ss.lang === lang )
-        if (!match.length && s.length > 0) {
-            return s[0].value
-        }
-        return match[0].value
-    })
+  const lang = i18next.language.toString()
+  const subjects = _get(result, 'ui.subjects', []).map((s) => s.subject)
+  return subjects.map((s) => {
+    const match = s.filter((ss) => ss.lang === lang)
+    if (!match.length && s.length > 0) {
+      return s[0].value
+    }
+    return match[0].value
+  })
 }
 
-
 export function localizedDescription(result) {
-    const lang = i18next.language.toString()
-    const description = _get(result, 'ui.abstract', 'No description')
-    let description_localized = description
-    if (_isArray(description)) {
-        description_localized = description.filter((d) => d.lang === lang).map(d => d.value)
+  const lang = i18next.language.toString()
+  const description = _get(result, 'ui.abstract', 'No description')
+  let description_localized = description
+  if (_isArray(description)) {
+    description_localized = description
+      .filter((d) => d.lang === lang)
+      .map((d) => d.value)
 
-        if (!description_localized.length && description.length > 0) {
-            description_localized = description[0]
-        }
+    if (!description_localized.length && description.length > 0) {
+      description_localized = description[0].value
     }
-    return description_localized
+  }
+  return description_localized
 }
