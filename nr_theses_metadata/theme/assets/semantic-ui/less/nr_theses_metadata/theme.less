@@ -24,7 +24,7 @@ body {
   display: flex;
   flex-direction: column;
   font-family: Roboto, -apple-system, Helvetica Neue, Helvetica, Arial,
-  sans-serif !important;
+    sans-serif !important;
 }
 
 h1,
@@ -34,7 +34,7 @@ h4,
 h5,
 h6 {
   font-family: Roboto, -apple-system, Helvetica Neue, Helvetica, Arial,
-  sans-serif !important;
+    sans-serif !important;
 }
 
 #main {
@@ -43,9 +43,26 @@ h6 {
 }
 
 .outer-navbar {
-  background-image: @navbar_background_image;
-  background-color: @navbar_background_color;
-  border-color: transparent;
+  background-color: transparent;
+  background-image: unset;
+
+  &::before {
+    content: '';
+    background-image: @navbar_background_image;
+    background-color: @navbar_background_color;
+    background-repeat: no-repeat;
+    border-color: transparent;
+    background-size: auto;
+    opacity: 0.4;
+    background-position: left top;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+    height: 73px;
+  }
 
   #invenio-nav {
     background: transparent;
@@ -518,7 +535,7 @@ a.subject:hover {
 }
 
 .ui.inverted.transparent.menu {
-  background-color: transparent
+  background-color: transparent;
 }
 
 .ui.transparent.label {
@@ -576,11 +593,11 @@ a.subject:hover {
 
   & > .ui.label {
     min-width: 10em;
-    display: block
+    display: block;
   }
 
   & > :last-child {
-    display: block
+    display: block;
   }
 }
 
