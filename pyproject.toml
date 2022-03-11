@@ -37,7 +37,7 @@ optional = true
 allow-prereleases = true
 
 [tool.poetry.dependencies.invenio-records-resources]
-version = "^0.18.3"
+version = "^0.19"
 optional = true
 allow-prereleases = true
 
