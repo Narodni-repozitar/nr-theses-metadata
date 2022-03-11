@@ -12,7 +12,7 @@ from nr_theses_metadata.records.multilingual_dumper import MultilingualDumper
 class NrThesesMetadataRecord(InvenioBaseRecord):
     model_cls = NrThesesMetadataMetadata
     schema = ConstantField(
-        "$schema", "http://localhost/schemas/nr-theses-metadata-1.0.0.json"
+        "$schema", "local://nr-theses-metadata-1.0.0.json"
     )
     index = IndexField("nr_theses_metadata-nr-theses-metadata-1.0.0")
     pid = PIDField(
