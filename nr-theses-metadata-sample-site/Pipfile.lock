@@ -137,19 +137,19 @@
         },
         "boto3": {
             "hashes": [
-                "sha256:a235c422239d1b468924b37faa95f5750c6abd43651fe7deb3976e10a331c991",
-                "sha256:b01d29305527fe8754a0c5847c0431ec677dca34069aaed9429ff178826ab366"
+                "sha256:8d6f3c548f0ee03d742f404c96515e7579fc6968135aaa50dd855a046698ff79",
+                "sha256:d857feb6af9932e1ee3a748060a2cd9fd6043dbbccf66976eda54586597efdc0"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==1.21.17"
+            "version": "==1.21.18"
         },
         "botocore": {
             "hashes": [
-                "sha256:29212b4be640efc047665650fee474357e884725a3e2a9bc029bca46a6ef0853",
-                "sha256:e61b9e6d0d5e384f8135211f05fc05694571505390293d939a9688ac08d4f62a"
+                "sha256:7ea8ef1ff7c4882ab59b337662f90ddf5ea860e95e7e209dca593a34ea585b1b",
+                "sha256:d2da7ccbc5ddd61fe3cd45fcbd3de380d9e3a15bfa8fbfd2d9259a93dcc60c56"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==1.24.17"
+            "version": "==1.24.18"
         },
         "cachelib": {
             "hashes": [
@@ -676,11 +676,11 @@
         },
         "importlib-metadata": {
             "hashes": [
-                "sha256:b36ffa925fe3139b2f6ff11d6925ffd4fa7bc47870165e3ac260ac7b4f91e6ac",
-                "sha256:d16e8c1deb60de41b8e8ed21c1a7b947b0bc62fab7e1d470bcdf331cea2e6735"
+                "sha256:1208431ca90a8cca1a6b8af391bb53c1a2db74e5d1cef6ddced95d4b2062edc6",
+                "sha256:ea4c597ebf37142f827b8f39299579e31685c31d3a438b59f469406afd0f2539"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==4.11.2"
+            "version": "==4.11.3"
         },
         "importlib-resources": {
             "hashes": [
@@ -1239,11 +1239,11 @@
         },
         "marshmallow": {
             "hashes": [
-                "sha256:04438610bc6dadbdddb22a4a55bcc7f6f8099e69580b2e67f5a681933a1f4400",
-                "sha256:4c05c1684e0e97fe779c62b91878f173b937fe097b356cd82f793464f5bc6138"
+                "sha256:2aaaab4f01ef4f5a011a21319af9fce17ab13bf28a026d1252adab0e035648d5",
+                "sha256:ff79885ed43b579782f48c251d262e062bce49c65c52412458769a4fb57ac30f"
             ],
-            "markers": "python_version >= '3.6'",
-            "version": "==3.14.1"
+            "markers": "python_version >= '3.7'",
+            "version": "==3.15.0"
         },
         "marshmallow-oneofschema": {
             "hashes": [
@@ -1364,8 +1364,11 @@
             "hashes": [
                 "sha256:0aa3b0abbbe658c593fedd88b3b6b09ab8c3e7954529fdf3be691be20675c318",
                 "sha256:0b9d08d0f7f554c1cfe66c96020644f99d84c56bfba177797fe8bc616ab31012",
+                "sha256:2be4051952bec6c8832b6426323ec432374f6a6864cdd35d9f5ea01df3a78929",
                 "sha256:36e55ebdee19c10a8bee6501b204dbcc8c0d173116ab8ac9f9eac045e434015f",
                 "sha256:3914a2192e3150f0a1d716be7581cacaa8416a9f1f8f9596442e6a9fc90aea77",
+                "sha256:6a9fc413fa6d573b3c49ea260c3be4d24c0b8f290ff8fb6d7b5c66a216ecd916",
+                "sha256:7384803a4ce56e9683192fe239d2314b709bf0fdba7ea17fb4ab8e8cc3a5769b",
                 "sha256:bb265ea5baae268fe7076ecd5c0a3c4ae475f50f28278c67bf5007af1defeb46"
             ],
             "path": "./dist/nr-theses-metadata-1.0.0.dev1.tar.gz",
@@ -1381,6 +1384,9 @@
                 "sha256:2ea41ffd9e621cd20255d884f3174706774f0be6446f56a106d717f2953b576b",
                 "sha256:35a618daefc34f3368e9b623f72f843cb32b7e5950cb647bc60f8f702e766260",
                 "sha256:5253698326b0548198f463a51250ccc5f8e27124e89594a931b38d7c91884e8b",
+                "sha256:67918d8fa6317b625fecd866f2626b49916410ec255014d16db0b568bd7a4ddc",
+                "sha256:9e08e843c66d44b27a462114b30be7c312b4dbe5c2fc764b5fe5996f24125861",
+                "sha256:a2f3ee161c54a336336948c577236c993ac145268b136fc132a27a4f44810fc0",
                 "sha256:e921ba63bc5146df53dafb413f392edcd0363aa2b193de3c7e89fbc9d003d89a"
             ],
             "path": "./dist/nr-theses-metadata-sample-app-1.0.0.dev1.tar.gz",
@@ -2266,11 +2272,11 @@
         },
         "check-manifest": {
             "hashes": [
-                "sha256:365c94d65de4c927d9d8b505371d08ee19f9f369c86b9ac3db97c2754c827c95",
-                "sha256:56dadd260a9c7d550b159796d2894b6d0bcc176a94cbc426d9bb93e5e48d12ce"
+                "sha256:3b575f1dade7beb3078ef4bf33a94519834457c7281dbc726b15c5466b55c657",
+                "sha256:b1923685f98c1c2468601a1a7bed655db549a25d43c583caded3860ad8308f8c"
             ],
             "index": "pypi",
-            "version": "==0.47"
+            "version": "==0.48"
         },
         "packaging": {
             "hashes": [
@@ -2302,14 +2308,6 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==59.6.0"
-        },
-        "toml": {
-            "hashes": [
-                "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b",
-                "sha256:b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f"
-            ],
-            "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3'",
-            "version": "==0.10.2"
         },
         "tomli": {
             "hashes": [

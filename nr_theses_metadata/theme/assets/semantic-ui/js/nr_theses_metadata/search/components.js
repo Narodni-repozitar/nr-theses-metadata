@@ -21,7 +21,7 @@ import {
   Message,
   Segment,
 } from 'semantic-ui-react'
-import { BucketAggregation, Toggle, withState } from 'react-searchkit'
+import { BucketAggregation, withState } from 'react-searchkit'
 import _get from 'lodash/get'
 import _capitalize from 'lodash/capitalize'
 import _truncate from 'lodash/truncate'
@@ -31,8 +31,10 @@ import { i18next } from '@translations/nr_theses_metadata/i18next'
 import {
   localizedDescription,
   localizedSubjects,
-  SearchItemCreators,
+  SearchItemCreatibutors,
+  SearchItemLanguages,
 } from '../utils'
+import { ValueSeparator } from '../components/ValueSeparator'
 
 export const NRResultsListItem = ({ result, index }) => {
   const access_rights = _get(result, 'ui.accessRights', 'open')
@@ -55,8 +57,10 @@ export const NRResultsListItem = ({ result, index }) => {
   }
   const access_status = _capitalize(access_rights)
   const access_status_icon = 'unlock'
-  const createdDate = _get(result, 'created', 'No creation date found.')
   const creators = result.ui.creators.slice(0, 3)
+  const contributors = result.ui.contributors?.slice(0, 3)
+
+  const languages = _get(result, 'ui.languages')
 
   const publicationDate = _get(
     result,
@@ -84,20 +88,38 @@ export const NRResultsListItem = ({ result, index }) => {
     <Item key={index}>
       <Item.Content>
         <Item.Extra className="labels-actions">
-          <Label size="tiny" color="blue">
+          <Label size="tiny" title={i18next.t('Publication date')} color="blue">
             {publicationDate} {version && <Fragment>({version})</Fragment>}
           </Label>
-          <Label size="tiny" color="grey">
+          <Label size="tiny" title={i18next.t('Resource type')} color="grey">
             {resource_type}
           </Label>
-          <Label size="tiny" className={`access-status ${access_rights_class}`}>
+          {languages.map((lang, index) => (
+            <Label
+              size="tiny"
+              title={i18next.t('Languages')}
+              color="purple"
+              key={index}
+            >
+              {lang.toUpperCase()}
+            </Label>
+          ))}
+          <Label
+            size="tiny"
+            title={i18next.t('Access status')}
+            className={`access-status ${access_rights_class}`}
+          >
             {access_status_icon && (
               <i className={`icon ${access_rights_icon}`} />
             )}
             {access_status}
           </Label>
           {nuslIDs.map((nid) => (
-            <Label size="tiny" key={nid.uri}>
+            <Label
+              title={i18next.t('Original NUSL identifier')}
+              size="tiny"
+              key={nid.uri}
+            >
               <a target="_blank" href={nid.uri}>
                 {nid.label}
               </a>
@@ -107,25 +129,31 @@ export const NRResultsListItem = ({ result, index }) => {
         <Item.Header as="h2">
           <a href={viewLink}>{title}</a>
         </Item.Header>
-        <Item className="creatibutors">
-          <SearchItemCreators creators={creators} />
-        </Item>
+        <Item.Meta
+          title={i18next.t('Creators and contributors')}
+          className="creatibutors"
+          style={{ position: 'relative' }}
+        >
+          <SearchItemCreatibutors creators={creators} />
+          {contributors && (
+            <Fragment>
+              <ValueSeparator double></ValueSeparator>
+              <SearchItemCreatibutors creators={contributors} />
+            </Fragment>
+          )}
+        </Item.Meta>
         <Item.Description>
           {_truncate(localizedDescription(result), { length: 350 })}
         </Item.Description>
-        <Item.Extra>
+        <Item.Extra title={i18next.t('Subjects')}>
           {localizedSubjects(result).map((subject, index) => (
-            <Label key={index} size="tiny">
-              {subject}
+            <Label style={{ opacity: 0.75 }} image key={index} size="tiny">
+              {subject.lang.toUpperCase()}
+              <Label.Detail className="item-subject-detail">
+                {_truncate(subject.value, { length: 100 })}
+              </Label.Detail>
             </Label>
           ))}
-          {createdDate && (
-            <div>
-              <small>
-                {i18next.t('Uploaded on')} <span>{createdDate}</span>
-              </small>
-            </div>
-          )}
         </Item.Extra>
       </Item.Content>
     </Item>
@@ -259,11 +287,6 @@ export const SearchHelpLinks = () => {
 export const NRRecordFacets = ({ aggs, currentResultsState }) => {
   return (
     <aside aria-label={i18next.t('filters')} id="search-filters">
-      <Toggle
-        title={i18next.t('Versions')}
-        label={i18next.t('View all versions')}
-        filterValue={['allversions', 'true']}
-      />
       {aggs.map((agg, index) => {
         return (
           <div className="ui accordion" key={`${agg.title}-${index}`}>

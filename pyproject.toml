@@ -4,7 +4,8 @@ version = "1.0.0.dev1"
 description = "A sample application for nr_theses_metadata"
 authors = []
 packages = [
-    { include = "nusl_oai" }
+    { include = "nusl_oai" },
+    { include = "nr_theses_metadata" }
 ]
 
 [build-system]

@@ -11,6 +11,7 @@ import _isArray from 'lodash/isArray'
 import { DateTime } from 'luxon'
 import React from 'react'
 import { i18next } from '@translations/nr_theses_metadata/i18next'
+import { ValueSeparator } from './components/ValueSeparator'
 
 /**
  * Wrap a promise to be cancellable and avoid potential memory leaks
@@ -53,7 +54,11 @@ export const axiosWithconfig = axios.create(apiConfig)
 export const timestampToRelativeTime = (timestamp) =>
   DateTime.fromISO(timestamp).toRelative()
 
-export function SearchItemCreators({ creators }) {
+export function SearchItemLanguages({ languages }) {
+  return
+}
+
+export function SearchItemCreatibutors({ creators }) {
   function getIcon(creator) {
     let ids = _get(creator, 'identifiers', [])
     let creatorName = _get(creator, 'fullName', 'No name')
@@ -115,7 +120,7 @@ export function SearchItemCreators({ creators }) {
     <span className="creatibutor-wrap" key={index}>
       {getLink(creator)}
       {getIcon(creator)}
-      {index < creators.length - 1 && ';'}
+      {index < creators.length - 1 && <ValueSeparator></ValueSeparator>}
     </span>
   ))
 }
@@ -126,9 +131,9 @@ export function localizedSubjects(result) {
   return subjects.map((s) => {
     const match = s.filter((ss) => ss.lang === lang)
     if (!match.length && s.length > 0) {
-      return s[0].value
+      return s[0]
     }
-    return match[0].value
+    return match[0]
   })
 }
 

@@ -578,11 +578,36 @@ a.subject:hover {
   }
 
   & > .item:not(:first-child) div {
-    border-left: 1px solid #23d26e;
+    border-left: 1px solid @green;
   }
 
   & > .active.item {
-    color: #23d26e;
+    color: @green;
+  }
+}
+
+.value-separator {
+  display: inline-block;
+  color: @green;
+  font-weight: bold;
+  margin: 0 0.6em 0 0.6em !important;
+
+  .vertical-bar {
+    display: inline-block;
+
+    &::before {
+      content: '';
+      width: 1px;
+      overflow-x: clip;
+      border-left: 2px solid @green;
+      margin: 0;
+      line-height: 90%;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: -1;
+    }
   }
 }
 
@@ -615,4 +640,12 @@ a.subject:hover {
 
 .ui.label .padded {
   padding: 0.5833em 0.833em;
+}
+
+.ui.image.label .detail.item-subject-detail {
+  background: white;
+  color: rgba(0, 0, 0, 0.87);
+  opacity: unset;
+  border: solid 1px @green;
+  border-left-width: 0px;
 }

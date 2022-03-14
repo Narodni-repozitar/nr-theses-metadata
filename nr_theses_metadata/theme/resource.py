@@ -16,7 +16,7 @@ class NrThesesMetadataUIResourceConfig(UIResourceConfig):
     template_folder = "templates"
 
     frontpage_template = "nr_theses_metadata/frontpage.html"
-    help_search_template = f"nr_theses_metadata/help/search.{get_locale()}.html",
+    help_search_template = f"nr_theses_metadata/help/search.{get_locale()}.html"
     help_search_fallback_template = "nr_theses_metadata/help/search.en.html"
 
     routes = {
@@ -45,6 +45,7 @@ class NrThesesMetadataUIResource(UIResource):
     def help_search(self):
         """Search help guide."""
         # Default to rendering english page if locale page not found.
+        lang = str()
         return render_template(
             [
                 self.config.help_search_template,
