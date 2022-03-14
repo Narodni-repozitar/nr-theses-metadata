@@ -305,7 +305,7 @@
                 "sha256:a0713dc7a1de3f06bc0df5a9567ad19ead2d3d5689b434768a6145bff77c0667",
                 "sha256:f184f0d851d96b6d29297354ed981b7dd71df7ff500d82fa6d11f0856bee8035"
             ],
-            "markers": "python_version < '4.0' and python_full_version >= '3.6.2'",
+            "markers": "python_version < '4' and python_full_version >= '3.6.2'",
             "version": "==0.3.0"
         },
         "click-plugins": {
@@ -392,7 +392,7 @@
                 "sha256:0f7569a4a6ff151958b64304071d370daa3243d15941a7beedf0c9fe5105603e",
                 "sha256:a851e51367fb93e9e1361732c1d60dab63eff98712e503ea7d92e6eccb109b4f"
             ],
-            "markers": "python_version >= '3.6' and python_version < '4.0'",
+            "markers": "python_version >= '3.6' and python_version < '4'",
             "version": "==2.2.1"
         },
         "dojson": {
@@ -642,7 +642,7 @@
                 "sha256:0ffd33fce16b54cccaec78d6ec73d95ad370e5df5a25255c8966a6147bd667ca",
                 "sha256:bfc2019f84fcd851419152320a6375604a0f1459c281b5b199b2cd0d2e727f8f"
             ],
-            "markers": "python_version >= '3.7' and python_version < '4.0'",
+            "markers": "python_version >= '3.7' and python_version < '4'",
             "version": "==6.1.1"
         },
         "future": {
@@ -1369,6 +1369,7 @@
                 "sha256:3914a2192e3150f0a1d716be7581cacaa8416a9f1f8f9596442e6a9fc90aea77",
                 "sha256:6a9fc413fa6d573b3c49ea260c3be4d24c0b8f290ff8fb6d7b5c66a216ecd916",
                 "sha256:7384803a4ce56e9683192fe239d2314b709bf0fdba7ea17fb4ab8e8cc3a5769b",
+                "sha256:81838ce8d9ab3af4080b335ba001bf74068757242aab561fab4f97433ac67110",
                 "sha256:bb265ea5baae268fe7076ecd5c0a3c4ae475f50f28278c67bf5007af1defeb46"
             ],
             "path": "./dist/nr-theses-metadata-1.0.0.dev1.tar.gz",
@@ -1385,6 +1386,7 @@
                 "sha256:35a618daefc34f3368e9b623f72f843cb32b7e5950cb647bc60f8f702e766260",
                 "sha256:5253698326b0548198f463a51250ccc5f8e27124e89594a931b38d7c91884e8b",
                 "sha256:67918d8fa6317b625fecd866f2626b49916410ec255014d16db0b568bd7a4ddc",
+                "sha256:6dc9ab19c2cef9ecc5dca1e271b2f12b7d3c4df2d68c1b2f024a8549e89c8009",
                 "sha256:9e08e843c66d44b27a462114b30be7c312b4dbe5c2fc764b5fe5996f24125861",
                 "sha256:a2f3ee161c54a336336948c577236c993ac145268b136fc132a27a4f44810fc0",
                 "sha256:e921ba63bc5146df53dafb413f392edcd0363aa2b193de3c7e89fbc9d003d89a"
@@ -1397,7 +1399,7 @@
                 "sha256:145e71c6273ab7ee85c930fed35dbc5374c1aa319ea49370ed4c53791d0141ce",
                 "sha256:d69b1134b6a27af1ef7ba015cc57203cc4157c2382aa123f05de849fcf3a33ca"
             ],
-            "markers": "python_version >= '3.9' and python_version < '4.0'",
+            "markers": "python_version >= '3.9' and python_version < '4'",
             "version": "==3.0.4"
         },
         "oauthlib": {
@@ -1596,7 +1598,7 @@
             "hashes": [
                 "sha256:b2163a246c585894d808f18783e19137cb70a0c18fb36748dc01fc6f109c1646"
             ],
-            "markers": "python_version >= '3.6' and python_version < '4.0'",
+            "markers": "python_version >= '3.6' and python_version < '4'",
             "version": "==22.3.5"
         },
         "pycparser": {
@@ -2077,7 +2079,7 @@
                 "sha256:000ca7f471a233c2251c6c7023ee85305721bfdf18621ebff4fd17a8653427ed",
                 "sha256:0e7c33d9a63e7ddfcb86780aac87befc2fbddf46c58dbb487e0855f7ceec283c"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4.0'",
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4'",
             "version": "==1.26.8"
         },
         "uwsgi": {

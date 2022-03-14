@@ -94,16 +94,6 @@ export const NRResultsListItem = ({ result, index }) => {
           <Label size="tiny" title={i18next.t('Resource type')} color="grey">
             {resource_type}
           </Label>
-          {languages.map((lang, index) => (
-            <Label
-              size="tiny"
-              title={i18next.t('Languages')}
-              color="purple"
-              key={index}
-            >
-              {lang.toUpperCase()}
-            </Label>
-          ))}
           <Label
             size="tiny"
             title={i18next.t('Access status')}
@@ -114,8 +104,20 @@ export const NRResultsListItem = ({ result, index }) => {
             )}
             {access_status}
           </Label>
+          {languages.map((lang, index) => (
+            <Label
+              size="tiny"
+              title={i18next.t('Languages')}
+              color="green"
+              basic
+              key={index}
+            >
+              {lang.toUpperCase()}
+            </Label>
+          ))}
           {nuslIDs.map((nid) => (
             <Label
+              basic
               title={i18next.t('Original NUSL identifier')}
               size="tiny"
               key={nid.uri}
@@ -147,7 +149,13 @@ export const NRResultsListItem = ({ result, index }) => {
         </Item.Description>
         <Item.Extra title={i18next.t('Subjects')}>
           {localizedSubjects(result).map((subject, index) => (
-            <Label style={{ opacity: 0.75 }} image key={index} size="tiny">
+            <Label
+              style={{ opacity: 0.6 }}
+              color="green"
+              image
+              key={index}
+              size="tiny"
+            >
               {subject.lang.toUpperCase()}
               <Label.Detail className="item-subject-detail">
                 {_truncate(subject.value, { length: 100 })}

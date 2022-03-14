@@ -40,34 +40,35 @@ Hlavní text práce<!-- nedostupný -->
 
 
 {% macro langtag(lang) -%}
-<div class="ui basic green reduced label">{{lang}}</div>
+<div class="ui basic green reduced label">{{lang.upper()}}</div>
 {%- endmacro %}
 
 {% macro vertbar() %}
-<div style="border-left: 2px solid lightgreen; margin-left: .2em; margin-right: .1em; display: inline-block; line-height: 100%">
-    &nbsp;
-</div>
+<div class="value-separator"><div class="vertical-bar"></div></div>
 {% endmacro %}
 
 {% macro double_vertbar() %}
-<div style="width: 1px; overflow-x: clip; border-left: 2px solid lightgreen; margin:0; display: inline-block; line-height: 90%">
-    &nbsp;
-</div>
-<div style="width: 1px; overflow-x: clip; border-left: 2px solid lightgreen; margin:0; display: inline-block; line-height: 90%">
-    &nbsp;
-</div>
+<div class="value-separator"><div class="vertical-bar"></div><div class="vertical-bar"></div></div>
+
 {% endmacro %}
 
 {% macro systemIdentifier(si) %}
-<div style="display: flex; align-items: center">
-    <div class="ui basic blue reduced label">{{ si.scheme }}</div>
-    <div style="margin-left: .5em; white-space: nowrap">
-        {% if si.identifier.startswith('http://') or si.identifier.startswith('https://') %}
-        <a href="{{si.identifier}}">{{si.identifier}}</a>
-        {% else %}
-        {{ si.identifier }}
-        {% endif %}
+<div style="display: flex; align-items: center" class="ui small labels">
+    {% if si.identifier.startswith('http://') or si.identifier.startswith('https://') %}
+    <a href="{{si.identifier}}" target="_blank" class="ui basic blue image label">
+        {{ si.scheme }}
+        <div class="detail {%- if si.identifier|length + si.scheme|length > 60 %} multiline{%- endif %}">
+            {{si.identifier }}
+        </div>
+    </a>
+    {% else %}
+    <div class="ui basic blue image label">
+        {{ si.scheme }}
+        <div class="detail {%- if si.identifier|length + si.scheme|length > 60 %} multiline{%- endif %}">
+            {{ si.identifier }}
+        </div>
     </div>
+    {% endif %}
 </div>
 {% endmacro %}
 
@@ -237,10 +238,10 @@ Hlavní text práce<!-- nedostupný -->
                                 <div>
                                     <div class="ui tabular nr menu">
                                         <div class="item active" data-tab="abstract-cs">
-                                            <div>cs</div>
+                                            <div>CS</div>
                                         </div>
                                         <div class="item" data-tab="abstract-en">
-                                            <div>en</div>
+                                            <div>EN</div>
                                         </div>
                                     </div>
                                     {% for a in metadata.abstract %}
