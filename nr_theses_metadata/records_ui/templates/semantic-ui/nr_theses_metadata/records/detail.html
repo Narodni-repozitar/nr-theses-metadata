@@ -57,14 +57,14 @@ Hlavní text práce<!-- nedostupný -->
     {% if si.identifier.startswith('http://') or si.identifier.startswith('https://') %}
     <a href="{{si.identifier}}" target="_blank" class="ui basic blue image label">
         {{ si.scheme }}
-        <div class="detail {%- if si.identifier|length + si.scheme|length > 60 %} multiline{%- endif %}">
+        <div class="detail {%- if si.identifier|length + si.scheme|length > 50 %} multiline{%- endif %}">
             {{si.identifier }}
         </div>
     </a>
     {% else %}
     <div class="ui basic blue image label">
         {{ si.scheme }}
-        <div class="detail {%- if si.identifier|length + si.scheme|length > 60 %} multiline{%- endif %}">
+        <div class="detail {%- if si.identifier|length + si.scheme|length > 50 %} multiline{%- endif %}">
             {{ si.identifier }}
         </div>
     </div>
