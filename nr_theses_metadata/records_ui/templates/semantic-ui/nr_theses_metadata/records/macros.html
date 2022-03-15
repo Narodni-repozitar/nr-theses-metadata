@@ -80,7 +80,9 @@ Hlavní text práce<!-- nedostupný -->
     {% if creatibutor.affiliations %}
         data-content="{{ creatibutor.affiliations|join('; ', attribute='1') }}"
     {% endif %}
-    href="{{url_for('invenio_search_ui.search', q='metadata.creators.fullName:"' + creatibutor.fullName + '"')}}"
+    href="{{url_for(
+        'invenio_search_ui.search',
+        q='metadata.creators.fullName:"' + creatibutor.fullName + '" metadata.contributors.fullName:"' + creatibutor.fullName + '"')}}"
     >
         <span class="creatibutor-name">
             {{- creatibutor.fullName -}}

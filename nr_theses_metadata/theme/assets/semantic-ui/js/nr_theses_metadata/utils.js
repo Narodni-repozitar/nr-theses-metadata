@@ -108,7 +108,7 @@ export function SearchItemCreatibutors({ creators }) {
     let link = (
       <a
         className="creatibutor-link"
-        href={`/search?q=metadata.creators.fullName:"${creatorName}"`}
+        href={`/search?q=metadata.creators.fullName:"${creatorName}"%20metadata.contributors.fullName:"${creatorName}"`}
         title={`${creatorName}: ${i18next.t('Search')}`}
       >
         <span className="creatibutor-name">{creatorName}</span>
