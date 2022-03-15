@@ -1363,7 +1363,8 @@
         "nr-theses-metadata": {
             "hashes": [
                 "sha256:48ca4df74633c0b9c7cb609cb710aa821191f718c31c214a9613a077ed6dc3cb",
-                "sha256:4c317d46549da39f6f920e2a0e76845835947b57427d12b24f4f0552227630f3"
+                "sha256:4c317d46549da39f6f920e2a0e76845835947b57427d12b24f4f0552227630f3",
+                "sha256:9202f3c5131dfdd6e5157c8e3cf0e34079b5f72550115314267669b6512b4187"
             ],
             "path": "./dist/nr-theses-metadata-1.0.0.dev1.tar.gz",
             "version": "==1.0.0.dev1"
@@ -1375,6 +1376,7 @@
                 "s3"
             ],
             "hashes": [
+                "sha256:25bfebfec764e41052f2c4dfb731b0995fd8a1255b68025975a81e5f4a2efcc9",
                 "sha256:2ea41ffd9e621cd20255d884f3174706774f0be6446f56a106d717f2953b576b",
                 "sha256:35a618daefc34f3368e9b623f72f843cb32b7e5950cb647bc60f8f702e766260",
                 "sha256:3943f45c534703369b8d688d1c28f4fd0ec873280ca33633654ad81043f92d87",
