@@ -39,7 +39,7 @@ class NestedLabeledFacet(Facet):
 
 metadata_dateDefended = TermsFacet(field="metadata.dateDefended", label=_('Date defended'))
 
-metadata_defended = TermsFacet(field="metadata.defended", label=_('Defended'))
+metadata_defended = TermsFacet(field="metadata.defended", label=_('Status of defence'), value_labels={'true': _('Defended'), 'false': _('Not defended')})
 
 metadata_collection = TermsFacet(field="metadata.collection", label=_('Collection'))
 

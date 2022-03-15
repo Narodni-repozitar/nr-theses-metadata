@@ -1,6 +1,6 @@
 [[package]]
 name = "alembic"
-version = "1.7.6"
+version = "1.7.7"
 description = "A database migration tool for SQLAlchemy."
 category = "main"
 optional = true
@@ -1063,8 +1063,8 @@ elasticsearch6 = ["invenio-search[elasticsearch6] (>=1.4.2,<1.5.0)"]
 elasticsearch7 = ["invenio-search[elasticsearch7] (>=1.4.2,<1.5.0)"]
 files = ["invenio-files-rest (>=1.3.2,<1.4.0)", "invenio-iiif (>=1.2.0,<1.3.0)", "invenio-previewer (>=1.3.2,<1.4.0)", "invenio-records-files (>=1.2.1,<1.3.0)"]
 metadata = ["invenio-indexer (>=1.2.1,<1.3.0)", "invenio-jsonschemas (>=1.1.4,<1.2.0)", "invenio-oaiserver (>=1.4.0,<1.5.0)", "invenio-pidstore (>=1.2.3,<1.3.0)", "invenio-records-rest (>=1.9.0,<1.10.0)", "invenio-records-ui (>=1.2.0,<1.3.0)", "invenio-records (>=1.6.1,<1.7.0)", "invenio-search-ui (>=2.0.6,<2.1.0)"]
-mysql = ["invenio-db[versioning,mysql] (>=1.0.9,<1.1.0)"]
-postgresql = ["invenio-db[versioning,postgresql] (>=1.0.9,<1.1.0)"]
+mysql = ["invenio-db[mysql,versioning] (>=1.0.9,<1.1.0)"]
+postgresql = ["invenio-db[postgresql,versioning] (>=1.0.9,<1.1.0)"]
 sqlite = ["invenio-db[versioning] (>=1.0.9,<1.1.0)"]
 tests = ["pytest-invenio (>=1.4.0,<1.5.0)"]
 
@@ -1085,9 +1085,9 @@ invenio-i18n = ">=1.2.0"
 [package.extras]
 all = ["Sphinx (>=3)", "cachelib (>=0.1)", "pytest-invenio (>=1.4.1)", "redis (>=2.10.5)"]
 docs = ["Sphinx (>=3)"]
-mysql = ["invenio-db[versioning,mysql] (>=1.0.8)"]
-postgresql = ["invenio-db[versioning,postgresql] (>=1.0.8)"]
-sqlite = ["invenio-db[versioning,sqlite] (>=1.0.8)"]
+mysql = ["invenio-db[mysql,versioning] (>=1.0.8)"]
+postgresql = ["invenio-db[postgresql,versioning] (>=1.0.8)"]
+sqlite = ["invenio-db[sqlite,versioning] (>=1.0.8)"]
 tests = ["cachelib (>=0.1)", "pytest-invenio (>=1.4.1)", "redis (>=2.10.5)"]
 
 [[package]]
@@ -1124,8 +1124,8 @@ ua-parser = ">=0.7.3"
 admin = ["invenio-admin (>=1.2.1)"]
 all = ["invenio-admin (>=1.2.1)", "Sphinx (==4.2.0)", "pytest-invenio (>=1.4.2)"]
 docs = ["Sphinx (==4.2.0)"]
-mysql = ["invenio-db[versioning,mysql] (>=1.0.9)"]
-postgresql = ["invenio-db[versioning,postgresql] (>=1.0.9)"]
+mysql = ["invenio-db[mysql,versioning] (>=1.0.9)"]
+postgresql = ["invenio-db[postgresql,versioning] (>=1.0.9)"]
 sqlite = ["invenio-db[versioning] (>=1.0.9)"]
 tests = ["pytest-invenio (>=1.4.2)"]
 
@@ -1317,8 +1317,8 @@ WTForms = ">=2.0"
 [package.extras]
 all = ["Sphinx (>=4.2.0)", "sphinxcontrib-httpdomain (>=1.4.0)", "Flask-BabelEx (>=0.9.4)", "Flask-Menu (>=0.5.0)", "invenio-access (>=1.2.0)", "invenio-accounts (>=1.4.0)", "invenio-admin (>=1.2.0)", "mock (>=1.3.0)", "pytest-invenio (>=1.4.2)"]
 docs = ["Sphinx (>=4.2.0)", "sphinxcontrib-httpdomain (>=1.4.0)"]
-mysql = ["invenio-db[versioning,mysql] (>=1.0.9)"]
-postgresql = ["invenio-db[versioning,postgresql] (>=1.0.9)"]
+mysql = ["invenio-db[mysql,versioning] (>=1.0.9)"]
+postgresql = ["invenio-db[postgresql,versioning] (>=1.0.9)"]
 sqlite = ["invenio-db[versioning] (>=1.0.9)"]
 tests = ["Flask-BabelEx (>=0.9.4)", "Flask-Menu (>=0.5.0)", "invenio-access (>=1.2.0)", "invenio-accounts (>=1.4.0)", "invenio-admin (>=1.2.0)", "mock (>=1.3.0)", "pytest-invenio (>=1.4.2)"]
 
@@ -1378,9 +1378,9 @@ invenio-records-files = ">=1.0.0"
 Wand = ">=0.4.4"
 
 [package.extras]
-all = ["Sphinx (>=3.3.1,<3.4)", "invenio-db[versioning,postgresql] (>=1.0.9)", "pytest-invenio (>=1.4.2)"]
+all = ["Sphinx (>=3.3.1,<3.4)", "invenio-db[postgresql,versioning] (>=1.0.9)", "pytest-invenio (>=1.4.2)"]
 docs = ["Sphinx (>=3.3.1,<3.4)"]
-tests = ["invenio-db[versioning,postgresql] (>=1.0.9)", "pytest-invenio (>=1.4.2)"]
+tests = ["invenio-db[postgresql,versioning] (>=1.0.9)", "pytest-invenio (>=1.4.2)"]
 
 [[package]]
 name = "invenio-indexer"
@@ -1520,8 +1520,8 @@ WTForms-Alchemy = ">=0.15.0"
 admin = ["invenio-admin (>=1.2.1)"]
 all = ["invenio-admin (>=1.2.1)", "Sphinx (>=4.2.0)", "redis (>=2.10.5)", "pytest-invenio (>=1.4.0)"]
 docs = ["Sphinx (>=4.2.0)"]
-mysql = ["invenio-db[versioning,mysql] (>=1.0.9,<2.0.0)"]
-postgresql = ["invenio-db[versioning,postgresql] (>=1.0.9,<2.0.0)"]
+mysql = ["invenio-db[mysql,versioning] (>=1.0.9,<2.0.0)"]
+postgresql = ["invenio-db[postgresql,versioning] (>=1.0.9,<2.0.0)"]
 redis = ["redis (>=2.10.5)"]
 sqlite = ["invenio-db[versioning] (>=1.0.9,<2.0.0)"]
 tests = ["pytest-invenio (>=1.4.0)"]
@@ -1632,8 +1632,8 @@ jsonschema = ">=3.0.0,<5.0.0"
 admin = ["invenio-admin (>=1.2.1)"]
 all = ["Sphinx (==4.2.0)", "invenio-admin (>=1.2.1)", "pytest-invenio (>=1.4.1)"]
 docs = ["Sphinx (==4.2.0)"]
-mysql = ["invenio-db[versioning,mysql] (>=1.0.9,<1.1.0)"]
-postgresql = ["invenio-db[versioning,postgresql] (>=1.0.9,<1.1.0)"]
+mysql = ["invenio-db[mysql,versioning] (>=1.0.9,<1.1.0)"]
+postgresql = ["invenio-db[postgresql,versioning] (>=1.0.9,<1.1.0)"]
 sqlite = ["invenio-db[versioning] (>=1.0.9,<1.1.0)"]
 tests = ["pytest-invenio (>=1.4.1)"]
 
@@ -1654,8 +1654,8 @@ invenio-records-rest = ">=1.6.3"
 [package.extras]
 all = ["Sphinx (>=1.5.1)", "check-manifest (>=0.25)", "coverage (>=4.0)", "invenio-indexer (>=1.1.0)", "invenio-search[elasticsearch6] (>=1.2.0)", "isort (>=4.3.4)", "mock (>=1.3.0)", "pydocstyle (>=1.0.0)", "pytest-cov (>=1.8.0)", "pytest-pep8 (>=1.0.6)", "pytest (>=3.7.0)"]
 docs = ["Sphinx (>=1.5.1)"]
-mysql = ["invenio-db[versioning,mysql] (>=1.0.0)"]
-postgresql = ["invenio-db[versioning,postgresql] (>=1.0.0)"]
+mysql = ["invenio-db[mysql,versioning] (>=1.0.0)"]
+postgresql = ["invenio-db[postgresql,versioning] (>=1.0.0)"]
 sqlite = ["invenio-db[versioning] (>=1.0.0)"]
 tests = ["check-manifest (>=0.25)", "coverage (>=4.0)", "invenio-indexer (>=1.1.0)", "invenio-search[elasticsearch6] (>=1.2.0)", "isort (>=4.3.4)", "mock (>=1.3.0)", "pydocstyle (>=1.0.0)", "pytest-cov (>=1.8.0)", "pytest-pep8 (>=1.0.6)", "pytest (>=3.7.0)"]
 
@@ -1677,8 +1677,8 @@ all = ["Sphinx (>=3)", "pytest-mock (>=1.6.0)", "pytest-invenio (>=1.4.1)", "inv
 docs = ["Sphinx (>=3)"]
 elasticsearch6 = ["invenio-search[elasticsearch6] (>=1.4.1,<2.0.0)"]
 elasticsearch7 = ["invenio-search[elasticsearch7] (>=1.4.1,<2.0.0)"]
-mysql = ["invenio-db[versioning,mysql] (>=1.0.9,<2.0.0)"]
-postgresql = ["invenio-db[versioning,postgresql] (>=1.0.9,<2.0.0)"]
+mysql = ["invenio-db[mysql,versioning] (>=1.0.9,<2.0.0)"]
+postgresql = ["invenio-db[postgresql,versioning] (>=1.0.9,<2.0.0)"]
 sqlite = ["invenio-db[versioning] (>=1.0.9,<2.0.0)"]
 tests = ["pytest-mock (>=1.6.0)", "pytest-invenio (>=1.4.1)", "invenio-accounts (>=1.4.3)", "invenio-app (>=1.3.0)", "Sphinx (>=3)"]
 
@@ -1708,12 +1708,12 @@ wand = ">=0.6.6,<0.7.0"
 xmltodict = ">=0.12.0,<0.13.0"
 
 [package.extras]
-all = ["Sphinx (==4.2.0)", "invenio-db[versioning,mysql] (>=1.0.12,<2.0.0)", "invenio-db[versioning,postgresql] (>=1.0.12,<2.0.0)", "invenio-db[versioning] (>=1.0.12,<2.0.0)", "invenio-app (>=1.3.1)", "pytest-invenio (>=1.4.3)"]
+all = ["Sphinx (==4.2.0)", "invenio-db[mysql,versioning] (>=1.0.12,<2.0.0)", "invenio-db[postgresql,versioning] (>=1.0.12,<2.0.0)", "invenio-db[versioning] (>=1.0.12,<2.0.0)", "invenio-app (>=1.3.1)", "pytest-invenio (>=1.4.3)"]
 docs = ["Sphinx (==4.2.0)"]
 elasticsearch6 = ["invenio-search[elasticsearch6] (>=1.4.2,<2.0.0)"]
 elasticsearch7 = ["invenio-search[elasticsearch7] (>=1.4.2,<2.0.0)"]
-mysql = ["invenio-db[versioning,mysql] (>=1.0.12,<2.0.0)"]
-postgresql = ["invenio-db[versioning,postgresql] (>=1.0.12,<2.0.0)"]
+mysql = ["invenio-db[mysql,versioning] (>=1.0.12,<2.0.0)"]
+postgresql = ["invenio-db[postgresql,versioning] (>=1.0.12,<2.0.0)"]
 sqlite = ["invenio-db[versioning] (>=1.0.12,<2.0.0)"]
 tests = ["invenio-app (>=1.3.1)", "pytest-invenio (>=1.4.3)"]
 
@@ -1762,9 +1762,9 @@ invenio-pidstore = ">=1.2.0"
 invenio-records = ">=1.0.0"
 
 [package.extras]
-all = ["Sphinx (>=1.5.1)", "invenio-access (>=1.0.0)", "invenio-accounts (>=1.3.0)", "invenio-db[versioning,mysql,postgresql] (>=1.0.0)", "pytest-invenio (>=1.4.0)"]
+all = ["Sphinx (>=1.5.1)", "invenio-access (>=1.0.0)", "invenio-accounts (>=1.3.0)", "invenio-db[mysql,postgresql,versioning] (>=1.0.0)", "pytest-invenio (>=1.4.0)"]
 docs = ["Sphinx (>=1.5.1)"]
-tests = ["invenio-access (>=1.0.0)", "invenio-accounts (>=1.3.0)", "invenio-db[versioning,mysql,postgresql] (>=1.0.0)", "pytest-invenio (>=1.4.0)"]
+tests = ["invenio-access (>=1.0.0)", "invenio-accounts (>=1.3.0)", "invenio-db[mysql,postgresql,versioning] (>=1.0.0)", "pytest-invenio (>=1.4.0)"]
 
 [[package]]
 name = "invenio-rest"
@@ -3069,8 +3069,8 @@ content-hash = "5b146dd144e33c9b388803eef320a61a79e993d5703d5de4dd74d5c0a9b6cc18
 
 [metadata.files]
 alembic = [
-    {file = "alembic-1.7.6-py3-none-any.whl", hash = "sha256:ad842f2c3ab5c5d4861232730779c05e33db4ba880a08b85eb505e87c01095bc"},
-    {file = "alembic-1.7.6.tar.gz", hash = "sha256:6c0c05e9768a896d804387e20b299880fe01bc56484246b0dffe8075d6d3d847"},
+    {file = "alembic-1.7.7-py3-none-any.whl", hash = "sha256:29be0856ec7591c39f4e1cb10f198045d890e6e2274cf8da80cb5e721a09642b"},
+    {file = "alembic-1.7.7.tar.gz", hash = "sha256:4961248173ead7ce8a21efb3de378f13b8398e6630fab0eb258dc74a8af24c58"},
 ]
 amqp = [
     {file = "amqp-5.1.0-py3-none-any.whl", hash = "sha256:a575f4fa659a2290dc369b000cff5fea5c6be05fe3f2d5e511bcf56c7881c3ef"},

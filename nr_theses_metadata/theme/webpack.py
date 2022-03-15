@@ -21,7 +21,7 @@ theme = WebpackThemeBundle(
             entry={
                 # TODO: these assets may be an external library dependency or generated
                 "nr-theses-metadata-record-landing-page": "./js/nr_theses_metadata/record_landing_page/index.js",
-                "nr-theses-metadata-deposit": "./js/nr_theses_metadata/deposit/index.js",
+                # "nr-theses-metadata-deposit": "./js/nr_theses_metadata/deposit/index.js",
                 "nr-theses-metadata-search": "./js/nr_theses_metadata/search/index.js",
             },
             dependencies={

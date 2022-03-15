@@ -133,8 +133,7 @@ export const NRResultsListItem = ({ result, index }) => {
         </Item.Header>
         <Item.Meta
           title={i18next.t('Creators and contributors')}
-          className="creatibutors"
-          style={{ position: 'relative' }}
+          className="creatibutors creatibutor-list"
         >
           <SearchItemCreatibutors creators={creators} />
           {contributors && (

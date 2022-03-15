@@ -1,0 +1,102 @@
+<!--
+ Copyright (c) 2022 CESNET
+ 
+ This software is released under the MIT License.
+ https://opensource.org/licenses/MIT
+-->
+
+
+{%- macro accessRightsIcon(accessRights) -%}
+{%- if accessRights == "otevřený přístup" -%}
+/static/icons/locks/zamky_open_access.svg
+{%- elif accessRights == "omezený přístup" -%}
+/static/icons/locks/zamky_Partialy_closed_access.svg
+{%- else -%}
+/static/icons/locks/zamky_Closed_access.svg
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro accessRightsFile(file_type, accessRights, classes) -%}
+<div style="position: relative;">
+    <img style="display: block; width: 100%; height: auto; padding-bottom: 8px;"
+         src="/static/icons/files/{{file_type}}.svg"
+         title="typ přístupu"
+    />
+    <img class="ui mini image" style="position: absolute; bottom: 0; right: 0; margin-right: 2px;"
+         src="{{accessRightsIcon(accessRights)}}"
+         title="typ přístupu"
+    />
+</div>
+{%- endmacro -%}
+
+{%- macro accessRightsText(accessRights) -%}
+{%- if accessRights == "otevřený přístup" -%}
+Hlavní text práce<!-- volně dostupný -->
+{%- elif accessRights == "omezený přístup" -%}
+Hlavní text práce<!-- s omezeným přístupem -->
+{%- else -%}
+Hlavní text práce<!-- nedostupný -->
+{%- endif -%}
+{%- endmacro -%}
+
+
+{% macro langtag(lang) -%}
+<div class="ui basic green reduced label">{{lang.upper()}}</div>
+{%- endmacro %}
+
+{% macro vertbar() %}
+<div class="value-separator"><div class="vertical-bar"></div></div>
+{% endmacro %}
+
+{% macro double_vertbar() %}
+<div class="value-separator"><div class="vertical-bar"></div><div class="vertical-bar"></div></div>
+
+{% endmacro %}
+
+{% macro systemIdentifier(si) %}
+<div style="display: flex; align-items: center" class="ui small labels">
+    {% if si.identifier.startswith('http://') or si.identifier.startswith('https://') %}
+    <a href="{{si.identifier}}" target="_blank" class="ui basic blue image label">
+        {{ si.scheme }}
+        <div class="detail {%- if si.identifier|length + si.scheme|length > 50 %} multiline{%- endif %}">
+            {{si.identifier }}
+        </div>
+    </a>
+    {% else %}
+    <div class="ui basic blue image label">
+        {{ si.scheme }}
+        <div class="detail {%- if si.identifier|length + si.scheme|length > 50 %} multiline{%- endif %}">
+            {{ si.identifier }}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endmacro %}
+
+
+{% macro creatibutor_link(creatibutor) %}
+<dd class="creatibutor-wrap">
+    <a class="ui tooltip-popup creatibutor-link"
+    {% if creatibutor.affiliations %}
+        data-content="{{ creatibutor.affiliations|join('; ', attribute='1') }}"
+    {% endif %}
+    href="{{url_for('invenio_search_ui.search', q='metadata.creators.fullName:"' + creatibutor.fullName + '"')}}"
+    >
+        <span class="creatibutor-name">
+            {{- creatibutor.fullName -}}
+        </span>
+        {%- if creatibutor.affiliations -%}
+        <sup class="font-tiny">
+            {%- for affiliation in creatibutor.affiliations -%}
+            {{ affiliation[0] }}{{ ", " if not loop.last }}
+            {%- endfor -%}
+        </sup>
+        {%- endif -%}
+    </a>
+    {% if creatibutor.role %}
+    <span class="contributor-role">
+        &nbsp;({{ creatibutor.role}})
+    </span>
+    {% endif %}
+</dd>
+{% endmacro %}

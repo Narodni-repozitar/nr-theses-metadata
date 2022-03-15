@@ -644,7 +644,7 @@ a.subject:hover {
 }
 
 .ui.label .detail.multiline {
-  width: 100%;
+  width: -webkit-fill-available;
   margin-top: 0.5em !important;
   margin-left: -0.5em !important;
 }
@@ -655,4 +655,9 @@ a.subject:hover {
   opacity: unset;
   border: solid 1px @green;
   border-left-width: 0px;
+}
+
+.creatibutor-list {
+  display: flex !important;
+  flex-direction: row;
 }

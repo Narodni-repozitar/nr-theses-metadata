@@ -1,0 +1,33 @@
+{#
+    Copyright (C) 2020 CERN.
+    Copyright (C) 2020 Northwestern University.
+    Copyright (C) 2021 Graz University of Technology.
+    Copyright (C) 2021-2022 New York University.
+
+    Invenio RDM Records is free software; you can redistribute it and/or modify
+    it under the terms of the MIT License; see LICENSE file for more details.
+#}
+
+{%- from "nr_theses_metadata/records/macros.html" import double_vertbar, vertbar, creatibutor_link %}
+
+
+<div class="display-row">
+    <label class="ui bolder label">Osoby: </label>
+    <div class="creatibutor-list">
+    {% for person in metadata.creators %}
+        {{ creatibutor_link(person) }}
+        {% if not loop.last %}
+        {{ vertbar() }}
+        {% endif %}
+    {% endfor %}
+    {% if metadata.contributors %}
+    {{ double_vertbar() }}
+    {% for person in metadata.contributors %}
+        {{ creatibutor_link(person) }}
+        {% if not loop.last %}
+        {{ vertbar() }}
+        {% endif%}
+    {% endfor %}
+    {% endif %}
+    </div>
+</div>

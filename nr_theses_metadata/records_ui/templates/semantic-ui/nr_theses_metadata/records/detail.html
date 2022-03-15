@@ -5,72 +5,7 @@
 {%- set title = record.metadata.title -%}
 {%- set metadata = record.metadata %}
 
-{%- macro accessRightsIcon(accessRights) -%}
-{%- if accessRights == "otevřený přístup" -%}
-/static/icons/locks/zamky_open_access.svg
-{%- elif accessRights == "omezený přístup" -%}
-/static/icons/locks/zamky_Partialy_closed_access.svg
-{%- else -%}
-/static/icons/locks/zamky_Closed_access.svg
-{%- endif -%}
-{%- endmacro -%}
-
-{%- macro accessRightsFile(file_type, accessRights, classes) -%}
-<div style="position: relative;">
-    <img style="display: block; width: 100%; height: auto; padding-bottom: 8px;"
-         src="/static/icons/files/{{file_type}}.svg"
-         title="typ přístupu"
-    />
-    <img class="ui mini image" style="position: absolute; bottom: 0; right: 0; margin-right: 2px;"
-         src="{{accessRightsIcon(accessRights)}}"
-         title="typ přístupu"
-    />
-</div>
-{%- endmacro -%}
-
-{%- macro accessRightsText(accessRights) -%}
-{%- if accessRights == "otevřený přístup" -%}
-Hlavní text práce<!-- volně dostupný -->
-{%- elif accessRights == "omezený přístup" -%}
-Hlavní text práce<!-- s omezeným přístupem -->
-{%- else -%}
-Hlavní text práce<!-- nedostupný -->
-{%- endif -%}
-{%- endmacro -%}
-
-
-{% macro langtag(lang) -%}
-<div class="ui basic green reduced label">{{lang.upper()}}</div>
-{%- endmacro %}
-
-{% macro vertbar() %}
-<div class="value-separator"><div class="vertical-bar"></div></div>
-{% endmacro %}
-
-{% macro double_vertbar() %}
-<div class="value-separator"><div class="vertical-bar"></div><div class="vertical-bar"></div></div>
-
-{% endmacro %}
-
-{% macro systemIdentifier(si) %}
-<div style="display: flex; align-items: center" class="ui small labels">
-    {% if si.identifier.startswith('http://') or si.identifier.startswith('https://') %}
-    <a href="{{si.identifier}}" target="_blank" class="ui basic blue image label">
-        {{ si.scheme }}
-        <div class="detail {%- if si.identifier|length + si.scheme|length > 50 %} multiline{%- endif %}">
-            {{si.identifier }}
-        </div>
-    </a>
-    {% else %}
-    <div class="ui basic blue image label">
-        {{ si.scheme }}
-        <div class="detail {%- if si.identifier|length + si.scheme|length > 50 %} multiline{%- endif %}">
-            {{ si.identifier }}
-        </div>
-    </div>
-    {% endif %}
-</div>
-{% endmacro %}
+{%- from "nr_theses_metadata/records/macros.html" import double_vertbar, systemIdentifier, accessRightsText, accessRightsIcon, accessRightsFile, langtag, vertbar %}
 
 
 {%- block page_body %}
@@ -134,20 +69,9 @@ Hlavní text práce<!-- nedostupný -->
                             {% endfor %}
                         </div>
                         <div class="ui inverted vertical transparent section">
-                            <div class="display-row">
-                                <label class="ui bolder label">Osoby: </label>
-                                <div>
-                                    {% for person in metadata.creators %}
-                                    {% if loop.index0 %} {{ vertbar() }} {% endif %}
-                                    {{ person.fullName }}
-                                    {% endfor %}
-                                    {% if metadata.contributors %} {{ double_vertbar() }}{%endif%}
-                                    {% for person in metadata.contributors %}
-                                    {% if loop.index0 %} {{ vertbar() }} {% endif %}
-                                    {{ person.fullName }} ({{person.role}})
-                                    {% endfor %}
-                                </div>
-                            </div>
+                            {% if metadata.creators or metadata.contributors %}
+                            {%- include "nr_theses_metadata/records/details/creatibutors.html" %}
+                            {% endif %}
                         </div>
                         <div class="ui inverted vertical transparent section">
                             <div class="display-row">
