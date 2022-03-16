@@ -1362,9 +1362,12 @@
         },
         "nr-theses-metadata": {
             "hashes": [
+                "sha256:1a4b4a6c3501a19a75b394e00451a94ddc053bf17e651c33e5beb35025205aae",
                 "sha256:48ca4df74633c0b9c7cb609cb710aa821191f718c31c214a9613a077ed6dc3cb",
                 "sha256:4c317d46549da39f6f920e2a0e76845835947b57427d12b24f4f0552227630f3",
-                "sha256:9202f3c5131dfdd6e5157c8e3cf0e34079b5f72550115314267669b6512b4187"
+                "sha256:8b36bb00d34a07c1d4df9fd5287dcaa82d7ec20150e662a34e48caca96851245",
+                "sha256:9202f3c5131dfdd6e5157c8e3cf0e34079b5f72550115314267669b6512b4187",
+                "sha256:96f427c1a7d1fed8f07fbe76db01c558ba6e7cbeac17791fe895b3a1f2e119dc"
             ],
             "path": "./dist/nr-theses-metadata-1.0.0.dev1.tar.gz",
             "version": "==1.0.0.dev1"
@@ -1376,6 +1379,8 @@
                 "s3"
             ],
             "hashes": [
+                "sha256:0849188bd5688d0bf27aebde5b39417b1a55425ca00d094f2fa2d25f7c875bd1",
+                "sha256:08f152c6cadbfaed58d0b9ebe204e7fa9053a99124c3e353418e00303c444a59",
                 "sha256:25bfebfec764e41052f2c4dfb731b0995fd8a1255b68025975a81e5f4a2efcc9",
                 "sha256:2ea41ffd9e621cd20255d884f3174706774f0be6446f56a106d717f2953b576b",
                 "sha256:35a618daefc34f3368e9b623f72f843cb32b7e5950cb647bc60f8f702e766260",
@@ -1387,6 +1392,7 @@
                 "sha256:a2f3ee161c54a336336948c577236c993ac145268b136fc132a27a4f44810fc0",
                 "sha256:ce61c42ed9877a000e1fcd9df4cc16ac35ac29187b2699020b75ececd3a1ab1a",
                 "sha256:d4a6f937300e2942bfb1223a1099edf2e84217502e91039481e11c08512d3685",
+                "sha256:dfc0668e0e0161b15225539fae821c3eb7d6ec0d3f618ef8690455436c195f1d",
                 "sha256:e6f59560dfe788f8ce76c1b93cbd1d79e1d6b66605555c34fa051c0b8f001e1a",
                 "sha256:e921ba63bc5146df53dafb413f392edcd0363aa2b193de3c7e89fbc9d003d89a",
                 "sha256:f052bb11039ce2aa3d4d7e8ed1d9ef2042133179c3aac7c073e18695edac9e8e"

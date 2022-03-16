@@ -110,6 +110,13 @@ class NrThesesMetadataSearchOptions(InvenioSearchOptions):
         "updated": facets.updated,
         "_schema": facets._schema,
     }
+
+    # TODO: Expand max results to accommodate more records
+    pagination_options = {
+        "default_results_per_page": 25,
+        "default_max_results": 1000
+    }
+
     sort_options = {
         "bestmatch": dict(
             title=_("Best match"),
