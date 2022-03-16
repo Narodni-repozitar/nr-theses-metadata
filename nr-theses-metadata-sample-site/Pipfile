@@ -13,8 +13,10 @@ ipython = "!=8.1.0"
 uwsgi = ">=2.0"
 uwsgitop = ">=0.11"
 uwsgi-tools = ">=1.1.1"
-nr-theses-metadata-sample-app = {path = "./dist/nr-theses-metadata-sample-app-1.0.0.dev1.tar.gz", extras = ["postgresql", "elasticsearch7", "s3"]}
-nr-theses-metadata = {path = "./dist/nr-theses-metadata-1.0.0.dev1.tar.gz"}
+nr-theses-metadata-sample-app = {path = "../nr-theses-metadata-sample-app", extras = ["postgresql", "elasticsearch7", "s3"]}
+# nr-theses-metadata-sample-app = {path = "./dist/nr-theses-metadata-sample-app-1.0.0.dev1.tar.gz", extras = ["postgresql", "elasticsearch7", "s3"]}
+# nr-theses-metadata = {path = "./dist/nr-theses-metadata-1.0.0.dev1.tar.gz"}
+
 
 [requires]
 python_version = "3.9"
