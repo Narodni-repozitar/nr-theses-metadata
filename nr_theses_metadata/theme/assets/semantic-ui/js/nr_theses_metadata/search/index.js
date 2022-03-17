@@ -7,7 +7,7 @@
 // under the terms of the MIT License; see LICENSE file for more details.
 import React, { Component } from 'react'
 import { withState } from 'react-searchkit'
-import { createSearchAppInit } from '@js/invenio_search_ui'
+import { createSearchAppInit, defaultComponents } from '@js/invenio_search_ui'
 import {
   NRBucketAggregationElement,
   NRRecordFacets,
@@ -20,6 +20,8 @@ import {
   NREmptyResults,
   NRErrorComponent,
   NRToggleComponent,
+  NRBucketAggregationsModal,
+  NRBucketAggregationsValuesModal,
 } from './components'
 
 class _StateLogger extends Component {
@@ -44,6 +46,9 @@ const initSearchApp = createSearchAppInit({
   'BucketAggregationValues.element': NRRecordFacetsValues,
   'ResultsGrid.item': NRResultsGridItem,
   'EmptyResults.element': NREmptyResults,
+  'BucketAggregation.element.modal': NRBucketAggregationsModal,
+  'BucketAggregationValues.element.modal': NRBucketAggregationsValuesModal,
+
   // ResultsList: renderResultsList,
   'ResultsList.item': NRResultsListItem,
   'SearchApp.facets': NRRecordFacets,

@@ -19,6 +19,7 @@ import {
   Label,
   List,
   Message,
+  Container,
   Segment,
 } from 'semantic-ui-react'
 import { BucketAggregation, withState } from 'react-searchkit'
@@ -302,6 +303,115 @@ export const NRRecordFacets = ({ aggs, currentResultsState }) => {
         )
       })}
     </aside>
+  )
+}
+
+export const NRBucketAggregationsModal = ({
+  agg,
+  title,
+  containerCmp,
+  updateQueryFilters,
+}) => {
+  const clearFacets = () => {
+    if (containerCmp?.props.selectedFilters.length) {
+      updateQueryFilters([agg.aggName, ''], containerCmp.props.selectedFilters)
+    }
+  }
+
+  const hasSelections = () => {
+    return !!containerCmp?.props.selectedFilters.length
+  }
+
+  return (
+    <Container>
+      <Button.Group floated="right">
+        <Button
+          basic
+          icon
+          size="mini"
+          floated="right"
+          onClick={clearFacets}
+          aria-label={i18next.t('Clear selection')}
+          title={i18next.t('Clear selection')}
+          disabled={!hasSelections()}
+        >
+          {i18next.t('Clear')}
+        </Button>
+      </Button.Group>
+      <Grid>
+        <Grid.Column stretched>{containerCmp}</Grid.Column>
+      </Grid>
+    </Container>
+    // <Card.Group itemsPerRow={3}>
+    //   {buckets.map((bucket) => (
+    //     <Card fluid key={bucket.key}>
+    //       <Card.Header>
+    //         <Checkbox
+    //           // label={bucket.label || keyValue(bucket)}
+    //           value={bucket.key}
+    //           aria-describedby={`${keyValue(bucket)}-count`}
+    //           // id={`${keyValue(bucket)}-facet-checkbox`}
+    //           onClick={() => onFilterClicked(bucket.key)}
+    //           checked={isSelected}
+    //         />
+    //         {bucket.label}
+    //         <Label circular id={`${keyValue(bucket)}-count`}>
+    //           {bucket.doc_count}
+    //         </Label>
+    //       </Card.Header>
+    //     </Card>
+    //   ))}
+    // </Card.Group>
+  )
+}
+
+export const NRBucketAggregationsValuesModal = ({
+  bucket,
+  isSelected,
+  onFilterClicked,
+  getChildAggCmps,
+}) => {
+  const childAggCmps = getChildAggCmps(bucket)
+  const [isActive, setisActive] = useState(false)
+  const hasChildren = childAggCmps && childAggCmps.props.buckets.length > 0
+  const keyField = bucket.key_as_string ? bucket.key_as_string : bucket.key
+  return (
+    <List.Item key={bucket.key}>
+      <div
+        className={`facet-wrapper title ${
+          hasChildren ? '' : 'facet-subtitle'
+        } ${isActive ? 'active' : ''}`}
+      >
+        <List.Content className="facet-count">
+          <Label circular id={`${keyField}-count`}>
+            {bucket.doc_count}
+          </Label>
+        </List.Content>
+        {hasChildren ? (
+          <Button
+            className="iconhold"
+            icon={`angle ${isActive ? 'down' : 'right'} icon`}
+            onClick={() => setisActive(!isActive)}
+            aria-label={`${
+              isActive
+                ? i18next.t('hide subfacets')
+                : i18next.t('show subfacets')
+            }`}
+          />
+        ) : null}
+        <Checkbox
+          label={bucket.label || keyField}
+          id={`${keyField}-facet-checkbox`}
+          aria-describedby={`${keyField}-count`}
+          value={keyField}
+          onClick={() => onFilterClicked(keyField)}
+          checked={isSelected}
+        />
+      </div>
+      <div className={`content facet-content ${isActive ? 'active' : ''}`}>
+        {childAggCmps}
+      </div>
+    </List.Item>
   )
 }
 
