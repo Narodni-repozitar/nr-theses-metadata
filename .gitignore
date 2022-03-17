@@ -81,4 +81,4 @@ docker_services.yml
 #pyproject.toml
 clear.sh
 run.py
-
+node_modules

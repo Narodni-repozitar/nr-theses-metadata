@@ -1,0 +1,205 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"mime-version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
+"POT-Creation-Date: 2022-03-17T13:42:42.951Z\n"
+"PO-Revision-Date: 2022-03-17T13:42:42.951Z\n"
+"Language: cs\n"
+
+msgid "Copy to clipboard"
+msgstr "Kopírovat do schránky"
+
+msgid "Copied!"
+msgstr "Zkopírováno"
+
+msgid "Files"
+msgstr "Soubory"
+
+msgid "The record has no files."
+msgstr "Záznam neobsahuje žádné soubory."
+
+msgid "Basic information"
+msgstr "Základní údaje"
+
+msgid "Creators"
+msgstr "Autoři"
+
+msgid "Recommended information"
+msgstr "Doporučené údaje"
+
+msgid "Add contributor"
+msgstr "Přidat přispěvatele"
+
+msgid "Contributors"
+msgstr "Přispěvatelé"
+
+msgid "Alternate identifiers"
+msgstr "Alternativní identifikátory"
+
+msgid "Alternate identifier(s)"
+msgstr "Alternativní identifikátor(y)"
+
+msgid "Related works"
+msgstr "Související díla"
+
+msgid "Visibility"
+msgstr "Viditelnost"
+
+msgid "Edit"
+msgstr "Upravit"
+
+msgid "An error occurred while generating the citation."
+msgstr "Při generování citace došlo k chybě."
+
+msgid "Citation"
+msgstr "Citace"
+
+msgid "Style"
+msgstr "Styl"
+
+msgid "Version"
+msgstr "Verze"
+
+msgid "Preview"
+msgstr "Náhled"
+
+msgid "Only published versions are displayed."
+msgstr "Zobrazují se pouze zveřejněné verze."
+
+msgid "View all {{total}} versions"
+msgstr "Zobrazit všech {{total}} verzí"
+
+msgid "You don't have permissions to share this record."
+msgstr "Ke sdílení tohoto záznamu nemáte oprávnění."
+
+msgid "Share"
+msgstr "Sdílet"
+
+msgid "Can view"
+msgstr "Může zobrazit"
+
+msgid "Can preview"
+msgstr "Může zobrazit náhled"
+
+msgid "Can edit"
+msgstr "Může upravovat"
+
+msgid "Get a link"
+msgstr "Získat odkaz"
+
+msgid "Copy link"
+msgstr "Zkopírovat odkaz"
+
+msgid "Copied"
+msgstr "Zkopírováno"
+
+msgid "No link has been created. Click on 'Get a Link' to make a new link"
+msgstr ""
+"Nebyl vytvořen žádný odkaz. Kliknutím na \"Získat odkaz\" vytvoříte nový "
+"odkaz."
+
+msgid "Delete link"
+msgstr "Smazat odkaz"
+
+msgid "Done"
+msgstr "Hotovo"
+
+msgid "Anyone with this link <1>can view all versions</1> of this record & files."
+msgstr ""
+"Kdokoli s tímto odkazem <1>může zobrazit všechny verze</1> tohoto záznamu a "
+"souborů."
+
+msgid ""
+"Anyone with this link <2>can view all published and unpublished "
+"versions</2> of this record & files."
+msgstr ""
+"Kdokoli s tímto odkazem <2>může zobrazit všechny zveřejněné i nezveřejněné "
+"verze</2> tohoto záznamu a souborů."
+
+msgid ""
+"Anyone with an account and this link <2>can edit all versions</2> of this "
+"record & files."
+msgstr ""
+"Kdokoli s účtem a tímto odkazem <2>může upravovat všechny verze</2> tohoto "
+"záznamu a souborů."
+
+msgid "Publication date"
+msgstr "Datum vydání"
+
+msgid "Resource type"
+msgstr "Druh záznamu"
+
+msgid "Access status"
+msgstr "Přístup k záznamu"
+
+msgid "Languages"
+msgstr "Jazyky"
+
+msgid "Original NUSL identifier"
+msgstr "Původní NUŠL identifikátor"
+
+msgid "Creators and contributors"
+msgstr "Autoři a přispěvatelé"
+
+msgid "Subjects"
+msgstr "Témata"
+
+msgid "Search"
+msgstr "Hledat"
+
+msgid "hide subfacets"
+msgstr "skrýt dílčí sady"
+
+msgid "show subfacets"
+msgstr "zobrazit dílčí sady"
+
+msgid "Search guide"
+msgstr "Průvodce vyhledáváním"
+
+msgid "filters"
+msgstr "filtry"
+
+msgid "Clear selection"
+msgstr "Vymazat výběr"
+
+msgid "Clear"
+msgstr "Vymazat"
+
+msgid "We couldn't find any matches for "
+msgstr "Nenašli jsme žádné shody pro "
+
+msgid "your search"
+msgstr "váš vyhledávací dotaz"
+
+msgid "Start over"
+msgstr "Začít znovu"
+
+msgid "ProTip"
+msgstr "ProTip"
+
+msgid "will give you all the publications from 2017 until today"
+msgstr "vám poskytne všechny publikace od roku 2017 do současnosti."
+
+msgid "For more tips, check out our "
+msgstr "Další tipy naleznete v našem "
+
+msgid "search guide"
+msgstr "průvodci vyhledáváním"
+
+msgid " for defining advanced search queries"
+msgstr " pro definování pokročilých vyhledávacích dotazů"
+
+msgid "ORCID profile"
+msgstr "ORCID profil"
+
+msgid "ROR profile"
+msgstr "ROR profil"
+
+msgid "result(s) found"
+msgstr "nalezené záznamy"
+
+msgid "Sort by"
+msgstr "Řadit dle"

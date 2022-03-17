@@ -177,7 +177,7 @@ export class RDMDepositForm extends Component {
                 <AccordionField
                   fieldPath=""
                   active={true}
-                  label={i18next.t('Basic OAREPO information')}
+                  label={i18next.t('Basic information')}
                   ui={this.accordionStyle}
                 >
                   {this.config.pids.map((pid) => (
