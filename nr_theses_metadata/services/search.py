@@ -1,5 +1,6 @@
 from invenio_records_resources.services import SearchOptions as InvenioSearchOptions
-
+from invenio_records_resources.services.records.params import FacetsParam, PaginationParam, QueryParser, QueryStrParam, \
+    SortParam
 from . import facets
 
 
@@ -7,9 +8,36 @@ def _(x):
     """Identity function for string extraction."""
     return x
 
+class ExpandableFacetsParam(FacetsParam):
+    def apply(self, identity, search, params):
+        """Add aggregations representing the facets."""
+
+        print(params)
+
+        for aggName in self.facets.keys():
+            # Set initial facet size
+            self.facets[aggName]._params['size'] = 10
+
+        if '__expanded__' in params.get('facets').keys():
+            expanded_facets = params['facets']['__expanded__']
+            if len(expanded_facets) and expanded_facets[0] in self.facets:
+                # Set expanded facet size
+                self.facets[expanded_facets[0]]._params['size'] = self.config.max_facet_size
+            del params['facets']['__expanded__']
+
+        return super().apply(identity, search, params)
 
 class NrThesesMetadataSearchOptions(InvenioSearchOptions):
     """NrThesesMetadataRecord search options."""
+
+    params_interpreters_cls = [
+        QueryStrParam,
+        PaginationParam,
+        SortParam,
+        ExpandableFacetsParam
+    ]
+
+    max_facet_size = 2000
 
     facets = {
         "metadata_dateDefended": facets.metadata_dateDefended,

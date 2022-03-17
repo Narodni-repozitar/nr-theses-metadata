@@ -301,12 +301,6 @@ export const NRRecordFacets = ({ aggs, currentResultsState }) => {
           </div>
         )
       })}
-      <Card className="borderless-facet">
-        <Card.Content>
-          <Card.Header as="h2">{i18next.t('Help')}</Card.Header>
-          <SearchHelpLinks />
-        </Card.Content>
-      </Card>
     </aside>
   )
 }
