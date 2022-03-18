@@ -77,7 +77,7 @@ export const NRResultsListItem = ({ result, index }) => {
   }
   const access_status = _capitalize(access_rights)
   const access_status_icon = 'unlock'
-  const creators = result.ui.creators.slice(0, 3)
+  const creators = result.ui.creators?.slice(0, 3)
   const contributors = result.ui.contributors?.slice(0, 3)
 
   const languages = _get(result, 'ui.languages')
@@ -124,7 +124,7 @@ export const NRResultsListItem = ({ result, index }) => {
             )}
             {access_status}
           </Label>
-          {languages.map((lang, index) => (
+          {languages?.map((lang, index) => (
             <Label
               size="tiny"
               title={i18next.t('Languages')}
@@ -155,7 +155,7 @@ export const NRResultsListItem = ({ result, index }) => {
           title={i18next.t('Creators and contributors')}
           className="creatibutors creatibutor-list"
         >
-          <SearchItemCreatibutors creators={creators} />
+          {creators && <SearchItemCreatibutors creators={creators} />}
           {contributors && (
             <Fragment>
               <ValueSeparator double></ValueSeparator>

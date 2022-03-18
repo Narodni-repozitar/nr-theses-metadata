@@ -1,3 +1,4 @@
+from elasticsearch_dsl import Q
 from invenio_records_resources.services import SearchOptions as InvenioSearchOptions
 from invenio_records_resources.services.records.params import FacetsParam, PaginationParam, QueryParser, QueryStrParam, \
     SortParam
@@ -12,18 +13,29 @@ class ExpandableFacetsParam(FacetsParam):
     def apply(self, identity, search, params):
         """Add aggregations representing the facets."""
 
-        print(params)
-
         for aggName in self.facets.keys():
             # Set initial facet size
             self.facets[aggName]._params['size'] = 10
 
-        if '__expanded__' in params.get('facets').keys():
+        if '__expanded__' in params.get('facets', {}).keys():
             expanded_facets = params['facets']['__expanded__']
             if len(expanded_facets) and expanded_facets[0] in self.facets:
                 # Set expanded facet size
                 self.facets[expanded_facets[0]]._params['size'] = self.config.max_facet_size
             del params['facets']['__expanded__']
+
+        return super().apply(identity, search, params)
+        
+
+class MissingFacetsParam(FacetsParam):
+    def apply(self, identity, search, params):
+        """Evaluate the facets on the search."""
+        # Add filters        
+        facets_values = params.pop("facets", {})
+        for name, values in facets_values.items():
+            if '__missing__' in values and name in self.facets:
+                self._filters[name] = ~Q('exists', field=self.facets[name]._params['field'])
+                #TODO: delete missing value from facet values
 
         return super().apply(identity, search, params)
 
@@ -34,6 +46,7 @@ class NrThesesMetadataSearchOptions(InvenioSearchOptions):
         QueryStrParam,
         PaginationParam,
         SortParam,
+        # MissingFacetsParam,
         ExpandableFacetsParam
     ]
 
