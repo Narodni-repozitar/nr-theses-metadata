@@ -27,4 +27,4 @@ cd ../nr-theses-metadata-sample-site
 # Clear pipenv cache to avoid hash issues
 pipenv --clear
 pipenv lock
-invenio-cli containers build
+#invenio-cli containers build

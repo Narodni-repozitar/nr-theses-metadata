@@ -54,9 +54,9 @@ metadata_dateModified = TermsFacet(missing='__missing__', field="metadata.dateMo
 
 metadata_abstract = TermsFacet(missing='__missing__', field="metadata.abstract", label=_('Abstract'))
 
-metadata_methods = TermsFacet(missing='__missing__', field="metadata.methods", label=_('Methods'))
+metadata_methods = TermsFacet(field="metadata.methods", label=_('Methods'))
 
-metadata_technicalInfo = TermsFacet(missing='__missing__', field="metadata.technicalInfo", label=_('Technical info'))
+metadata_technicalInfo = TermsFacet(field="metadata.technicalInfo", label=_('Technical info'))
 
 metadata_accessRights = TermsFacet(missing='__missing__', field="metadata.accessRights", label=_('Access rights'))
 
@@ -100,14 +100,14 @@ metadata_creators_authorityIdentifiers_scheme = TermsFacet(missing='__missing__'
     label=_('Creator identifier scheme')
 )
 
-metadata_creators_authorityIdentifiers = TermsFacet(missing='__missing__', 
+metadata_creators_authorityIdentifiers = TermsFacet(
     field="metadata.creators.authorityIdentifiers",
     label=_('Creator identifiers')
 )
 
 metadata_creators_affiliations = TermsFacet(missing='__missing__', field="metadata.creators.affiliations", label=_('Affiliation'))
 
-metadata_creators = TermsFacet(missing='__missing__', field="metadata.creators", label=_('Creators'))
+metadata_creators = TermsFacet(field="metadata.creators", label=_('Creators'))
 
 metadata_contributors_role = TermsFacet(missing='__missing__', field="metadata.contributors.role", label=_('Contributor role'))
 
@@ -125,7 +125,7 @@ metadata_contributors_authorityIdentifiers_scheme = TermsFacet(missing='__missin
     label=_('Contributor identifier scheme')
 )
 
-metadata_contributors_authorityIdentifiers = TermsFacet(missing='__missing__', 
+metadata_contributors_authorityIdentifiers = TermsFacet( 
     field="metadata.contributors.authorityIdentifiers",
     label=_('Contributor identifiers')
 )
@@ -135,11 +135,11 @@ metadata_contributors_affiliations = TermsFacet(missing='__missing__',
     label=_('Contributor affiliation')
 )
 
-metadata_contributors = TermsFacet(missing='__missing__', field="metadata.contributors", label=_('Contributors'))
+metadata_contributors = TermsFacet(field="metadata.contributors", label=_('Contributors'))
 
 metadata_subjects_subjectScheme = TermsFacet(missing='__missing__', field="metadata.subjects.subjectScheme", label=_('Subject scheme'))
 
-metadata_subjects_subject = TermsFacet(missing='__missing__', field="metadata.subjects.subject", label=_('Subject'))
+metadata_subjects_subject = TermsFacet(field="metadata.subjects.subject", label=_('Subject'))
 
 metadata_subjects_valueURI = TermsFacet(missing='__missing__', field="metadata.subjects.valueURI", label=_('Subject URI'))
 
@@ -148,7 +148,7 @@ metadata_subjects_classificationCode = TermsFacet(missing='__missing__',
     label=_('Subject code')
 )
 
-metadata_subjects = TermsFacet(missing='__missing__', field="metadata.subjects", label=_('Subjects'))
+metadata_subjects = TermsFacet(field="metadata.subjects", label=_('Subjects'))
 
 metadata_subjectCategories = TermsFacet(missing='__missing__', field="metadata.subjectCategories", label=_('Subject category'))
 
@@ -210,7 +210,7 @@ metadata_relatedItems_itemCreators_authorityIdentifiers_scheme = TermsFacet(miss
     label=_('Related item creator identifier scheme')
 )
 
-metadata_relatedItems_itemCreators_authorityIdentifiers = TermsFacet(missing='__missing__', 
+metadata_relatedItems_itemCreators_authorityIdentifiers = TermsFacet(
     field="metadata.relatedItems.itemCreators.authorityIdentifiers",
     label=_('Related item creator identifiers')
 )
@@ -220,7 +220,7 @@ metadata_relatedItems_itemCreators_affiliations = TermsFacet(missing='__missing_
     label=_('Related item creator identifiers')
 )
 
-metadata_relatedItems_itemCreators = TermsFacet(missing='__missing__', 
+metadata_relatedItems_itemCreators = TermsFacet(
     field="metadata.relatedItems.itemCreators",
     label=_('Related item creators')
 )
@@ -250,7 +250,7 @@ metadata_relatedItems_itemContributors_authorityIdentifiers_scheme = TermsFacet(
     label=_('Related item contributor identifier scheme')
 )
 
-metadata_relatedItems_itemContributors_authorityIdentifiers = TermsFacet(missing='__missing__', 
+metadata_relatedItems_itemContributors_authorityIdentifiers = TermsFacet(
     field="metadata.relatedItems.itemContributors.authorityIdentifiers",
     label=_('Related item contributor identifiers')
 )
@@ -260,7 +260,7 @@ metadata_relatedItems_itemContributors_affiliations = TermsFacet(missing='__miss
     label=_('Related item contributor affiliation')
 )
 
-metadata_relatedItems_itemContributors = TermsFacet(missing='__missing__', 
+metadata_relatedItems_itemContributors = TermsFacet(
     field="metadata.relatedItems.itemContributors",
     label=_('Related item contributors')
 )
@@ -275,10 +275,10 @@ metadata_relatedItems_itemPIDs_scheme = TermsFacet(missing='__missing__',
     label=_('Related item PID scheme')
 )
 
-metadata_relatedItems_itemPIDs = TermsFacet(missing='__missing__', field="metadata.relatedItems.itemPIDs",
+metadata_relatedItems_itemPIDs = TermsFacet(field="metadata.relatedItems.itemPIDs",
                                             label=_('Related item PIDs'))
 
-metadata_relatedItems = TermsFacet(missing='__missing__', field="metadata.relatedItems", label=_('Related items'))
+metadata_relatedItems = TermsFacet(field="metadata.relatedItems", label=_('Related items'))
 
 metadata_fundingReferences_projectID = TermsFacet(missing='__missing__', 
     field="metadata.fundingReferences.projectID",
@@ -290,7 +290,7 @@ metadata_fundingReferences_funder = TermsFacet(missing='__missing__',
     label=_('Funder')
 )
 
-metadata_fundingReferences = TermsFacet(missing='__missing__', field="metadata.fundingReferences", label=_('Funding'))
+metadata_fundingReferences = TermsFacet(field="metadata.fundingReferences", label=_('Funding'))
 
 metadata_geoLocations_geoLocationPlace = TermsFacet(missing='__missing__', 
     field="metadata.geoLocations.geoLocationPlace",
@@ -309,13 +309,13 @@ metadata_geoLocations_geoLocationPoint_pointLatitude = TermsFacet(
     label=_('Location (Lat)')
 )
 
-metadata_geoLocations = TermsFacet(missing='__missing__', field="metadata.geoLocations", label=_('Locations'))
+metadata_geoLocations = TermsFacet(field="metadata.geoLocations", label=_('Locations'))
 
 metadata_series_seriesTitle = TermsFacet(missing='__missing__', field="metadata.series.seriesTitle", label=_('Series title'))
 
 metadata_series_seriesVolume = TermsFacet(missing='__missing__', field="metadata.series.seriesVolume", label=_('Series volume'))
 
-metadata_series = TermsFacet(missing='__missing__', field="metadata.series", label=_('Series'))
+metadata_series = TermsFacet(field="metadata.series", label=_('Series'))
 
 metadata_objectIdentifiers_identifier = TermsFacet(missing='__missing__', 
     field="metadata.objectIdentifiers.identifier",
@@ -327,7 +327,7 @@ metadata_objectIdentifiers_scheme = TermsFacet(missing='__missing__',
     label=_('Identifier scheme')
 )
 
-metadata_objectIdentifiers = TermsFacet(missing='__missing__', field="metadata.objectIdentifiers", label=_('Identifiers'))
+metadata_objectIdentifiers = TermsFacet(field="metadata.objectIdentifiers", label=_('Identifiers'))
 
 metadata_systemIdentifiers_identifier = TermsFacet(missing='__missing__', 
     field="metadata.systemIdentifiers.identifier",
@@ -339,7 +339,7 @@ metadata_systemIdentifiers_scheme = TermsFacet(missing='__missing__',
     label=_('System identifier scheme')
 )
 
-metadata_systemIdentifiers = TermsFacet(missing='__missing__', field="metadata.systemIdentifiers",
+metadata_systemIdentifiers = TermsFacet(field="metadata.systemIdentifiers",
                                         label=_('System identifiers'))
 
 metadata_events_eventDate = TermsFacet(missing='__missing__', field="metadata.events.eventDate", label=_('Event date'))
@@ -354,9 +354,9 @@ metadata_events_eventLocation_country = TermsFacet(missing='__missing__',
     label=_('Event country')
 )
 
-metadata_events = TermsFacet(missing='__missing__', field="metadata.events", label=_('Events'))
+metadata_events = TermsFacet(field="metadata.events", label=_('Events'))
 
-metadata_collections = TermsFacet(missing='__missing__', field="metadata.collections", label=_('Collections'))
+metadata_collections = TermsFacet(field="metadata.collections", label=_('Collections'))
 
 _id = TermsFacet(missing='__missing__', field="id", label=_('ID'))
 
