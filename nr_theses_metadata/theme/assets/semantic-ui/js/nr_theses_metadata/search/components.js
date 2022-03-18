@@ -6,23 +6,33 @@
 //
 // Invenio App RDM is free software; you can redistribute it and/or modify it
 // under the terms of the MIT License; see LICENSE file for more details.
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, createContext } from 'react'
 import {
   Button,
   Card,
   Checkbox,
   Grid,
+  Modal,
   Header,
   Icon,
   Input,
   Item,
   Label,
   List,
+  Menu,
+  Dimmer,
+  Loader,
+  Divider,
   Message,
   Container,
   Segment,
 } from 'semantic-ui-react'
-import { BucketAggregation, withState } from 'react-searchkit'
+import {
+  BucketAggregation,
+  withState,
+  SearchBar as RSKSearchBar,
+  ActiveFilters,
+} from 'react-searchkit'
 import _get from 'lodash/get'
 import _capitalize from 'lodash/capitalize'
 import _truncate from 'lodash/truncate'
@@ -33,9 +43,18 @@ import {
   localizedDescription,
   localizedSubjects,
   SearchItemCreatibutors,
-  SearchItemLanguages,
 } from '../utils'
 import { ValueSeparator } from '../components/ValueSeparator'
+import _unionWith from 'lodash/unionWith'
+import _isEqual from 'lodash/isEqual'
+import _sortBy from 'lodash/sortBy'
+import _isEmpty from 'lodash/isEmpty'
+import _last from 'lodash/last'
+import _countBy from 'lodash/countBy'
+import _throttle from 'lodash/throttle'
+import _remove from 'lodash/remove'
+
+export const BucketsFilterContext = createContext('')
 
 export const NRResultsListItem = ({ result, index }) => {
   const access_rights = _get(result, 'ui.accessRights', 'open')
@@ -230,50 +249,33 @@ export const NRRecordSearchBarElement = withState(
   },
 )
 
-export const NRRecordFacetsValues = ({
-  bucket,
-  isSelected,
-  onFilterClicked,
-  getChildAggCmps,
-}) => {
+export const NRRecordFacetsValues = (props) => {
+  const {
+    bucket,
+    isSelected,
+    onFilterClicked,
+    getChildAggCmps,
+    keyField,
+  } = props
+  const label = bucket.label
+    ? bucket.label
+    : `${keyField} (${bucket.doc_count.toLocaleString('en-US')})`
   const childAggCmps = getChildAggCmps(bucket)
-  const [isActive, setisActive] = useState(false)
-  const hasChildren = childAggCmps && childAggCmps.props.buckets.length > 0
-  const keyField = bucket.key_as_string ? bucket.key_as_string : bucket.key
+
   return (
     <List.Item key={bucket.key}>
-      <div
-        className={`facet-wrapper title ${
-          hasChildren ? '' : 'facet-subtitle'
-        } ${isActive ? 'active' : ''}`}
-      >
+      <div className="facet-wrapper facet-subtitle">
         <List.Content className="facet-count">
-          <Label circular id={`${keyField}-count`}>
-            {bucket.doc_count}
-          </Label>
+          <Label circular>{bucket.doc_count}</Label>
         </List.Content>
-        {hasChildren ? (
-          <Button
-            className="iconhold"
-            icon={`angle ${isActive ? 'down' : 'right'} icon`}
-            onClick={() => setisActive(!isActive)}
-            aria-label={`${
-              isActive
-                ? i18next.t('hide subfacets')
-                : i18next.t('show subfacets')
-            }`}
-          />
-        ) : null}
         <Checkbox
-          label={bucket.label || keyField}
-          id={`${keyField}-facet-checkbox`}
-          aria-describedby={`${keyField}-count`}
-          value={keyField}
-          onClick={() => onFilterClicked(keyField)}
+          label={
+            label === '__missing__' ? `— ${i18next.t('Missing')} —` : label
+          }
+          value={bucket.key}
+          onClick={() => onFilterClicked(bucket.key)}
           checked={isSelected}
         />
-      </div>
-      <div className={`content facet-content ${isActive ? 'active' : ''}`}>
         {childAggCmps}
       </div>
     </List.Item>
@@ -295,6 +297,7 @@ export const SearchHelpLinks = () => {
 export const NRRecordFacets = ({ aggs, currentResultsState }) => {
   return (
     <aside aria-label={i18next.t('filters')} id="search-filters">
+      <AdvancedSearch aggs={aggs} />
       {aggs.map((agg, index) => {
         return (
           <div className="ui accordion" key={`${agg.title}-${index}`}>
@@ -303,115 +306,6 @@ export const NRRecordFacets = ({ aggs, currentResultsState }) => {
         )
       })}
     </aside>
-  )
-}
-
-export const NRBucketAggregationsModal = ({
-  agg,
-  title,
-  containerCmp,
-  updateQueryFilters,
-}) => {
-  const clearFacets = () => {
-    if (containerCmp?.props.selectedFilters.length) {
-      updateQueryFilters([agg.aggName, ''], containerCmp.props.selectedFilters)
-    }
-  }
-
-  const hasSelections = () => {
-    return !!containerCmp?.props.selectedFilters.length
-  }
-
-  return (
-    <Container>
-      <Button.Group floated="right">
-        <Button
-          basic
-          icon
-          size="mini"
-          floated="right"
-          onClick={clearFacets}
-          aria-label={i18next.t('Clear selection')}
-          title={i18next.t('Clear selection')}
-          disabled={!hasSelections()}
-        >
-          {i18next.t('Clear')}
-        </Button>
-      </Button.Group>
-      <Grid>
-        <Grid.Column stretched>{containerCmp}</Grid.Column>
-      </Grid>
-    </Container>
-    // <Card.Group itemsPerRow={3}>
-    //   {buckets.map((bucket) => (
-    //     <Card fluid key={bucket.key}>
-    //       <Card.Header>
-    //         <Checkbox
-    //           // label={bucket.label || keyValue(bucket)}
-    //           value={bucket.key}
-    //           aria-describedby={`${keyValue(bucket)}-count`}
-    //           // id={`${keyValue(bucket)}-facet-checkbox`}
-    //           onClick={() => onFilterClicked(bucket.key)}
-    //           checked={isSelected}
-    //         />
-    //         {bucket.label}
-    //         <Label circular id={`${keyValue(bucket)}-count`}>
-    //           {bucket.doc_count}
-    //         </Label>
-    //       </Card.Header>
-    //     </Card>
-    //   ))}
-    // </Card.Group>
-  )
-}
-
-export const NRBucketAggregationsValuesModal = ({
-  bucket,
-  isSelected,
-  onFilterClicked,
-  getChildAggCmps,
-}) => {
-  const childAggCmps = getChildAggCmps(bucket)
-  const [isActive, setisActive] = useState(false)
-  const hasChildren = childAggCmps && childAggCmps.props.buckets.length > 0
-  const keyField = bucket.key_as_string ? bucket.key_as_string : bucket.key
-  return (
-    <List.Item key={bucket.key}>
-      <div
-        className={`facet-wrapper title ${
-          hasChildren ? '' : 'facet-subtitle'
-        } ${isActive ? 'active' : ''}`}
-      >
-        <List.Content className="facet-count">
-          <Label circular id={`${keyField}-count`}>
-            {bucket.doc_count}
-          </Label>
-        </List.Content>
-        {hasChildren ? (
-          <Button
-            className="iconhold"
-            icon={`angle ${isActive ? 'down' : 'right'} icon`}
-            onClick={() => setisActive(!isActive)}
-            aria-label={`${
-              isActive
-                ? i18next.t('hide subfacets')
-                : i18next.t('show subfacets')
-            }`}
-          />
-        ) : null}
-        <Checkbox
-          label={bucket.label || keyField}
-          id={`${keyField}-facet-checkbox`}
-          aria-describedby={`${keyField}-count`}
-          value={keyField}
-          onClick={() => onFilterClicked(keyField)}
-          checked={isSelected}
-        />
-      </div>
-      <div className={`content facet-content ${isActive ? 'active' : ''}`}>
-        {childAggCmps}
-      </div>
-    </List.Item>
   )
 }
 
@@ -561,3 +455,271 @@ export const NRErrorComponent = ({ error }) => {
     </Message>
   )
 }
+
+export const NRBucketAggregationsModal = ({
+  agg,
+  containerCmp,
+  updateQueryFilters,
+}) => {
+  const [filter, setFilter] = useState('')
+
+  const clearFacets = () => {
+    if (containerCmp?.props.selectedFilters.length) {
+      updateQueryFilters([agg.aggName, ''], containerCmp.props.selectedFilters)
+    }
+  }
+
+  const hasSelections = () => {
+    return !!containerCmp?.props.selectedFilters.length
+  }
+
+  const filterBuckets = (value) => {
+    setFilter(value)
+  }
+
+  const debouncedFilterBuckets = _throttle(filterBuckets, 1000, {
+    trailing: true,
+    leading: true,
+  })
+
+  return (
+    <Container>
+      <Grid>
+        <Grid.Row reversed="computer tablet">
+          <Grid.Column>
+            <Segment>
+              <Input
+                icon="filter"
+                iconPosition="left"
+                transparent
+                style={{ width: '370px' }}
+                onChange={(e) => debouncedFilterBuckets(e.target.value)}
+                placeholder={i18next.t('Filter...')}
+              />
+              {(hasSelections() && (
+                <Button
+                  compact
+                  basic
+                  negative
+                  size="mini"
+                  floated="right"
+                  onClick={clearFacets}
+                  aria-label={i18next.t('Clear selection')}
+                  title={i18next.t('Clear selection')}
+                  disabled={!hasSelections()}
+                >
+                  {i18next.t('Clear')}
+                </Button>
+              )) ||
+                ''}
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column stretched>
+            <BucketsFilterContext.Provider value={filter}>
+              {containerCmp}
+            </BucketsFilterContext.Provider>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </Container>
+  )
+}
+
+export const NRBucketContainerElementModal = ({ valuesCmp, overridableId }) => {
+  const filteredValuesCmp = (value) => {
+    if (value !== '' && value.length > 2) {
+      return valuesCmp.filter(({ props }) => {
+        console.log(
+          props.bucket.label.toLowerCase(),
+          value.toLowerCase(),
+          props.bucket.label.toLowerCase().includes(value.toLowerCase()),
+        )
+        return props.bucket.label.toLowerCase().includes(value.toLowerCase())
+      })
+    }
+    return valuesCmp
+  }
+
+  return (
+    <BucketsFilterContext.Consumer>
+      {(value) => <List>{filteredValuesCmp(value)}</List>}
+    </BucketsFilterContext.Consumer>
+  )
+}
+
+export const NRBucketAggregationsValuesModal = (props) => {
+  return <NRRecordFacetsValues {...props} />
+}
+
+export const AdvancedSearchTrigger = ({ open }) => {
+  return (
+    <Overridable id={'SearchApp.advancedSearchTrigger'}>
+      <>
+        <Segment size="mini" basic>
+          <Button
+            fluid
+            aria-label={i18next.t('Advanced search')}
+            content={i18next.t('Advanced search')}
+            icon="searchengin"
+            basic
+            onClick={open}
+          />
+          <Divider inverted />
+        </Segment>
+      </>
+    </Overridable>
+  )
+}
+
+export const AdvancedSearchModal = ({
+  aggs,
+  currentQueryState,
+  updateQueryState,
+  currentResultsState,
+}) => {
+  const [open, setOpen] = useState(false)
+
+  const expandedAggName = _last(
+    currentQueryState.hiddenParams?.find((p) => p[0] === '__expanded__'),
+  )
+
+  const otherHiddenParams = currentQueryState.hiddenParams?.filter(
+    (p) => p[0] !== '__expanded__',
+  )
+  const expandedAgg = aggs.find((a) => a.aggName === expandedAggName) || null
+
+  const activeAggs = _countBy(currentQueryState.filters, (filter) => {
+    return filter[0]
+  })
+
+  const onOpen = () => {
+    setOpen(true)
+    selectAggItem(expandedAggName || _sortBy(aggs, ['title'])[0])
+  }
+
+  const onClose = () => {
+    setOpen(false)
+    selectAggItem({ aggName: null })
+  }
+
+  const selectAggItem = ({ aggName }) => {
+    if (!aggName && expandedAggName) {
+      updateQueryState({
+        ...currentQueryState,
+        ...{
+          hiddenParams: otherHiddenParams,
+        },
+      })
+    } else {
+      const mergedHiddenParams = _unionWith(
+        !_isEmpty(otherHiddenParams) ? otherHiddenParams : [],
+        [['__expanded__', aggName]],
+        _isEqual,
+      )
+
+      updateQueryState({
+        ...currentQueryState,
+        ...{ hiddenParams: mergedHiddenParams },
+      })
+    }
+  }
+
+  return (
+    <Overridable id={'SearchApp.advancedSearch'} aggs={aggs}>
+      <>
+        {_isEmpty(currentResultsState.error) && aggs.length && (
+          <Modal
+            dimmer="blurring"
+            onClose={onClose}
+            onOpen={onOpen}
+            open={open}
+            closeIcon
+            trigger={<AdvancedSearchTrigger open={onOpen} />}
+          >
+            <Modal.Header>
+              <Header>{i18next.t('Advanced search')}</Header>
+              <Label basic size="large" color="blue" attached="top right">
+                <Icon name="help circle" />
+                <a href="/help/search" target="_blank">
+                  {i18next.t('Search guide')}
+                </a>
+              </Label>
+            </Modal.Header>
+            <Modal.Content style={{ maxHeight: '70vh' }}>
+              <Grid>
+                <Grid.Row>
+                  <Grid.Column>
+                    <RSKSearchBar />
+                  </Grid.Column>
+                </Grid.Row>
+                <Grid.Row stretched>
+                  <Grid.Column
+                    style={{ maxHeight: 'calc(70vh - 12em)' }}
+                    className="scrolling content"
+                    width={4}
+                  >
+                    <Menu fluid vertical tabular>
+                      {_sortBy(aggs, ['title']).map((agg, index) => (
+                        <Menu.Item
+                          name={agg.aggName}
+                          key={index}
+                          active={expandedAggName === agg.aggName}
+                          onClick={() => selectAggItem(agg)}
+                        >
+                          {agg.aggName in activeAggs && (
+                            <Label>{activeAggs[agg.aggName]}</Label>
+                          )}
+                          {agg.title}
+                        </Menu.Item>
+                      ))}
+                    </Menu>
+                  </Grid.Column>
+                  <Grid.Column
+                    style={{ maxHeight: 'calc(70vh - 12em)' }}
+                    className="scrolling content"
+                    width={12}
+                  >
+                    {(!currentResultsState.loading && expandedAgg && (
+                      <BucketAggregation
+                        title={expandedAggName}
+                        agg={expandedAgg}
+                        overridableId="modal"
+                      />
+                    )) || (
+                      <Dimmer active inverted>
+                        <Loader active size="huge" />
+                      </Dimmer>
+                    )}
+                  </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                  <Grid.Column>
+                    <Segment compact basic size="mini">
+                      <ActiveFilters />
+                    </Segment>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+            </Modal.Content>
+            <Modal.Actions>
+              <Button
+                // TODO: translate these once this package has its own translations
+                content={i18next.t('Browse {{num}} records', {
+                  num: currentResultsState.data?.total || 0,
+                })}
+                labelPosition="right"
+                icon="search"
+                onClick={onClose}
+                positive
+              />
+            </Modal.Actions>
+          </Modal>
+        )}
+      </>
+    </Overridable>
+  )
+}
+
+export const AdvancedSearch = withState(AdvancedSearchModal)

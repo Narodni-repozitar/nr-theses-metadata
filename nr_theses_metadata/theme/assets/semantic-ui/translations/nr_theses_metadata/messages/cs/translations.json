@@ -1,6 +1,6 @@
 {
   "Copy to clipboard": "Kopírovat do schránky",
-  "Copied!": "Zkopírováno",
+  "Copied!": "Zkopírováno!",
   "Files": "Soubory",
   "The record has no files.": "Záznam neobsahuje žádné soubory.",
   "Basic information": "Základní údaje",
@@ -28,7 +28,7 @@
   "Get a link": "Získat odkaz",
   "Copy link": "Zkopírovat odkaz",
   "Copied": "Zkopírováno",
-  "No link has been created. Click on 'Get a Link' to make a new link": "Nebyl vytvořen žádný odkaz. Kliknutím na \"Získat odkaz\" vytvoříte nový odkaz.",
+  "No link has been created. Click on 'Get a Link' to make a new link": "Nebyl vytvořen žádný odkaz. Kliknutím na \"Získat odkaz\" vytvoříte nový odkaz",
   "Delete link": "Smazat odkaz",
   "Done": "Hotovo",
   "Anyone with this link <1>can view all versions</1> of this record & files.": "Kdokoli s tímto odkazem <1>může zobrazit všechny verze</1> tohoto záznamu a souborů.",
@@ -42,8 +42,6 @@
   "Creators and contributors": "Autoři a přispěvatelé",
   "Subjects": "Témata",
   "Search": "Hledat",
-  "hide subfacets": "skrýt dílčí sady",
-  "show subfacets": "zobrazit dílčí sady",
   "Search guide": "Průvodce vyhledáváním",
   "filters": "filtry",
   "Clear selection": "Vymazat výběr",
@@ -52,12 +50,14 @@
   "your search": "váš vyhledávací dotaz",
   "Start over": "Začít znovu",
   "ProTip": "ProTip",
-  "will give you all the publications from 2017 until today": "vám poskytne všechny publikace od roku 2017 do současnosti.",
+  "will give you all the publications from 2017 until today": "vám poskytne všechny publikace od roku 2017 do současnosti",
   "For more tips, check out our ": "Další tipy naleznete v našem ",
   "search guide": "průvodci vyhledáváním",
   " for defining advanced search queries": " pro definování pokročilých vyhledávacích dotazů",
   "ORCID profile": "ORCID profil",
   "ROR profile": "ROR profil",
-  "result(s) found": "nalezené záznamy",
-  "Sort by": "Řadit dle"
+  "Advanced search": "Rozšířené vyhledávání",
+  "Browse {{num}} records": "Procházet {{num}} záznamů",
+  "Missing": "Nevyplněno",
+  "Filter...": "Filtrovat..."
 }

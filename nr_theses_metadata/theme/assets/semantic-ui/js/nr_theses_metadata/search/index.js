@@ -22,6 +22,7 @@ import {
   NRToggleComponent,
   NRBucketAggregationsModal,
   NRBucketAggregationsValuesModal,
+  NRBucketContainerElementModal,
 } from './components'
 
 class _StateLogger extends Component {
@@ -48,7 +49,7 @@ const initSearchApp = createSearchAppInit({
   'EmptyResults.element': NREmptyResults,
   'BucketAggregation.element.modal': NRBucketAggregationsModal,
   'BucketAggregationValues.element.modal': NRBucketAggregationsValuesModal,
-
+  'BucketAggregationContainer.element.modal': NRBucketContainerElementModal,
   // ResultsList: renderResultsList,
   'ResultsList.item': NRResultsListItem,
   'SearchApp.facets': NRRecordFacets,

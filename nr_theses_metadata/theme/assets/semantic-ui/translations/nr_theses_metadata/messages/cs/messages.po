@@ -5,15 +5,15 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
-"POT-Creation-Date: 2022-03-17T13:42:42.951Z\n"
-"PO-Revision-Date: 2022-03-17T13:42:42.951Z\n"
+"POT-Creation-Date: 2022-03-18T17:26:16.547Z\n"
+"PO-Revision-Date: 2022-03-18T17:26:16.547Z\n"
 "Language: cs\n"
 
 msgid "Copy to clipboard"
 msgstr "Kopírovat do schránky"
 
 msgid "Copied!"
-msgstr "Zkopírováno"
+msgstr "Zkopírováno!"
 
 msgid "Files"
 msgstr "Soubory"
@@ -99,7 +99,7 @@ msgstr "Zkopírováno"
 msgid "No link has been created. Click on 'Get a Link' to make a new link"
 msgstr ""
 "Nebyl vytvořen žádný odkaz. Kliknutím na \"Získat odkaz\" vytvoříte nový "
-"odkaz."
+"odkaz"
 
 msgid "Delete link"
 msgstr "Smazat odkaz"
@@ -150,12 +150,6 @@ msgstr "Témata"
 msgid "Search"
 msgstr "Hledat"
 
-msgid "hide subfacets"
-msgstr "skrýt dílčí sady"
-
-msgid "show subfacets"
-msgstr "zobrazit dílčí sady"
-
 msgid "Search guide"
 msgstr "Průvodce vyhledáváním"
 
@@ -181,7 +175,7 @@ msgid "ProTip"
 msgstr "ProTip"
 
 msgid "will give you all the publications from 2017 until today"
-msgstr "vám poskytne všechny publikace od roku 2017 do současnosti."
+msgstr "vám poskytne všechny publikace od roku 2017 do současnosti"
 
 msgid "For more tips, check out our "
 msgstr "Další tipy naleznete v našem "
@@ -198,8 +192,14 @@ msgstr "ORCID profil"
 msgid "ROR profile"
 msgstr "ROR profil"
 
-msgid "result(s) found"
-msgstr "nalezené záznamy"
+msgid "Advanced search"
+msgstr "Rozšířené vyhledávání"
 
-msgid "Sort by"
-msgstr "Řadit dle"
+msgid "Browse {{num}} records"
+msgstr "Procházet {{num}} záznamů"
+
+msgid "Missing"
+msgstr "Nevyplněno"
+
+msgid "Filter..."
+msgstr "Filtrovat..."

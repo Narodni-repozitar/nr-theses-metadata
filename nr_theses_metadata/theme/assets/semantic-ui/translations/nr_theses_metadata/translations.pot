@@ -5,9 +5,12 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2022-03-17T13:34:19.169Z\n"
-"PO-Revision-Date: 2022-03-17T13:34:19.169Z\n"
+"POT-Creation-Date: 2022-03-18T17:26:12.695Z\n"
+"PO-Revision-Date: 2022-03-18T17:26:12.695Z\n"
 "Language: en\n"
+
+msgid "Basic information"
+msgstr "Basic information"
 
 msgid "Copy to clipboard"
 msgstr "Copy to clipboard"
@@ -143,11 +146,8 @@ msgstr "Subjects"
 msgid "Search"
 msgstr "Search"
 
-msgid "hide subfacets"
-msgstr "hide subfacets"
-
-msgid "show subfacets"
-msgstr "show subfacets"
+msgid "Missing"
+msgstr "Missing"
 
 msgid "Search guide"
 msgstr "Search guide"
@@ -185,11 +185,17 @@ msgstr "search guide"
 msgid " for defining advanced search queries"
 msgstr " for defining advanced search queries"
 
+msgid "Filter..."
+msgstr "Filter..."
+
+msgid "Advanced search"
+msgstr "Advanced search"
+
+msgid "Browse {{num}} records"
+msgstr "Browse {{num}} records"
+
 msgid "ORCID profile"
 msgstr "ORCID profile"
 
 msgid "ROR profile"
 msgstr "ROR profile"
-
-msgid "Basic information"
-msgstr "Basic information"
