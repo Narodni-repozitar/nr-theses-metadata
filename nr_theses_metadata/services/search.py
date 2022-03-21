@@ -31,11 +31,11 @@ class MissingFacetsParam(FacetsParam):
     def apply(self, identity, search, params):
         """Evaluate the facets on the search."""
         # Add filters        
-        facets_values = params.pop("facets", {})
+        facets_values = params.get("facets", {})
         for name, values in facets_values.items():
             if '__missing__' in values and name in self.facets:
                 self._filters[name] = ~Q('exists', field=self.facets[name]._params['field'])
-                #TODO: delete missing value from facet values
+                # TODO: pop __missing__ from facet values
 
         return super().apply(identity, search, params)
 
@@ -46,7 +46,7 @@ class NrThesesMetadataSearchOptions(InvenioSearchOptions):
         QueryStrParam,
         PaginationParam,
         SortParam,
-        # MissingFacetsParam,
+        MissingFacetsParam,
         ExpandableFacetsParam
     ]
 
