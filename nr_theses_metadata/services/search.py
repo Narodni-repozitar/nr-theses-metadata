@@ -34,12 +34,10 @@ class MissingFacetsParam(FacetsParam):
         facets_values = params.get("facets", {})
         for name, values in facets_values.items():
             if '__missing__' in values and name in self.facets:
-                self._filters[name] = ~Q('exists', field=self.facets[name]._params['field'])
+                self._filters[f"__missing__{name}"] = ~Q('exists', field=self.facets[name]._params['field'])
                 values.remove('__missing__')
                 
     
-        print(params['facets'])
-
         return super().apply(identity, search, params)
 
 class NrThesesMetadataSearchOptions(InvenioSearchOptions):
