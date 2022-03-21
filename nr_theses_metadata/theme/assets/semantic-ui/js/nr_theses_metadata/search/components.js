@@ -53,6 +53,7 @@ import _last from 'lodash/last'
 import _countBy from 'lodash/countBy'
 import _throttle from 'lodash/throttle'
 import _remove from 'lodash/remove'
+import { merge } from 'lodash'
 
 export const BucketsFilterContext = createContext('')
 
@@ -531,11 +532,6 @@ export const NRBucketContainerElementModal = ({ valuesCmp, overridableId }) => {
   const filteredValuesCmp = (value) => {
     if (value !== '' && value.length > 2) {
       return valuesCmp.filter(({ props }) => {
-        console.log(
-          props.bucket.label.toLowerCase(),
-          value.toLowerCase(),
-          props.bucket.label.toLowerCase().includes(value.toLowerCase()),
-        )
         return props.bucket.label.toLowerCase().includes(value.toLowerCase())
       })
     }
@@ -585,10 +581,19 @@ export const AdvancedSearchModal = ({
     currentQueryState.hiddenParams?.find((p) => p[0] === '__expanded__'),
   )
 
+  const resultsAggregations = currentResultsState.data?.aggregations
+
+  const usableAggs = aggs.filter(
+    (agg) =>
+      agg.aggName in resultsAggregations &&
+      resultsAggregations[agg.aggName].buckets.length,
+  )
+
   const otherHiddenParams = currentQueryState.hiddenParams?.filter(
     (p) => p[0] !== '__expanded__',
   )
-  const expandedAgg = aggs.find((a) => a.aggName === expandedAggName) || null
+  const expandedAgg =
+    usableAggs.find((a) => a.aggName === expandedAggName) || null
 
   const activeAggs = _countBy(currentQueryState.filters, (filter) => {
     return filter[0]
@@ -618,7 +623,6 @@ export const AdvancedSearchModal = ({
         [['__expanded__', aggName]],
         _isEqual,
       )
-
       updateQueryState({
         ...currentQueryState,
         ...{ hiddenParams: mergedHiddenParams },
@@ -661,7 +665,7 @@ export const AdvancedSearchModal = ({
                     width={4}
                   >
                     <Menu fluid vertical tabular>
-                      {_sortBy(aggs, ['title']).map((agg, index) => (
+                      {_sortBy(usableAggs, ['title']).map((agg, index) => (
                         <Menu.Item
                           name={agg.aggName}
                           key={index}

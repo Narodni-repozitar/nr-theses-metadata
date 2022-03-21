@@ -16,13 +16,13 @@ NR_THESES_METADATA_UI_RESOURCE_CLASS = NrThesesMetadataUIResource
 NR_THESES_METADATA_RECORDS_UI_RESOURCE_CONFIG = NrThesesMetadataRecordsUIResourceConfig
 NR_THESES_METADATA_RECORDS_UI_RESOURCE_CLASS = NrThesesMetadataRecordsUIResource
 
-# if False:
-#     import logging
+if False:
+    import logging
 
-#     es_trace_logger = logging.getLogger('elasticsearch.trace')
-#     es_trace_logger.setLevel(logging.DEBUG)
-#     handler = logging.StreamHandler()
-#     es_trace_logger.addHandler(handler)
+    es_trace_logger = logging.getLogger('elasticsearch.trace')
+    es_trace_logger.setLevel(logging.DEBUG)
+    handler = logging.StreamHandler()
+    es_trace_logger.addHandler(handler)
 
 
 # TODO: generate facet config by model builder
