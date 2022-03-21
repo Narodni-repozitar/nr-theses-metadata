@@ -24,6 +24,7 @@ import {
   Loader,
   Divider,
   Message,
+  Pagination,
   Container,
   Segment,
 } from 'semantic-ui-react'
@@ -53,7 +54,6 @@ import _last from 'lodash/last'
 import _countBy from 'lodash/countBy'
 import _throttle from 'lodash/throttle'
 import _remove from 'lodash/remove'
-import { merge } from 'lodash'
 
 export const BucketsFilterContext = createContext('')
 
@@ -480,7 +480,7 @@ export const NRBucketAggregationsModal = ({
 
   const debouncedFilterBuckets = _throttle(filterBuckets, 1000, {
     trailing: true,
-    leading: true,
+    leading: false,
   })
 
   return (
@@ -488,37 +488,33 @@ export const NRBucketAggregationsModal = ({
       <Grid>
         <Grid.Row reversed="computer tablet">
           <Grid.Column>
-            <Segment>
-              <Input
-                icon="filter"
-                iconPosition="left"
-                transparent
-                style={{ width: '370px' }}
-                onChange={(e) => debouncedFilterBuckets(e.target.value)}
-                placeholder={i18next.t('Filter...')}
-              />
+            <Menu secondary>
+              <Menu.Item>
+                <Input
+                  icon="filter"
+                  iconPosition="left"
+                  transparent
+                  onChange={(e) => debouncedFilterBuckets(e.target.value)}
+                  placeholder={i18next.t('Filter...')}
+                />
+              </Menu.Item>
               {(hasSelections() && (
-                <Button
-                  compact
-                  basic
-                  negative
-                  size="mini"
-                  floated="right"
+                <Menu.Item
+                  position="right"
                   onClick={clearFacets}
                   aria-label={i18next.t('Clear selection')}
-                  title={i18next.t('Clear selection')}
-                  disabled={!hasSelections()}
+                  name={i18next.t('Clear selection')}
                 >
-                  {i18next.t('Clear')}
-                </Button>
+                  {i18next.t('Clear selection')}
+                </Menu.Item>
               )) ||
                 ''}
-            </Segment>
+            </Menu>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column stretched>
-            <BucketsFilterContext.Provider value={filter}>
+            <BucketsFilterContext.Provider value={{ filter: filter }}>
               {containerCmp}
             </BucketsFilterContext.Provider>
           </Grid.Column>
@@ -538,9 +534,37 @@ export const NRBucketContainerElementModal = ({ valuesCmp, overridableId }) => {
     return valuesCmp
   }
 
+  const [currentPage, setCurrentPage] = useState(1)
+  const pageSize = 10
+
+  const onPageChange = (event, { activePage }) => {
+    setCurrentPage(activePage)
+  }
+
+  const lastValueIndex = currentPage * pageSize
+  const firstValueIndex = lastValueIndex - pageSize
+  const currentValuesCmp = (filter) =>
+    filteredValuesCmp(filter).slice(firstValueIndex, lastValueIndex)
+
   return (
     <BucketsFilterContext.Consumer>
-      {(value) => <List>{filteredValuesCmp(value)}</List>}
+      {({ filter }) => (
+        <Fragment>
+          {valuesCmp.length > pageSize && (
+            <Pagination
+              activePage={currentPage}
+              onPageChange={onPageChange}
+              secondary
+              pointing
+              fluid
+              totalPages={Math.ceil(
+                filteredValuesCmp(filter).length / pageSize,
+              )}
+            />
+          )}
+          <List>{currentValuesCmp(filter)}</List>
+        </Fragment>
+      )}
     </BucketsFilterContext.Consumer>
   )
 }
@@ -701,7 +725,7 @@ export const AdvancedSearchModal = ({
                 <Grid.Row>
                   <Grid.Column>
                     <Segment compact basic size="mini">
-                      <ActiveFilters />
+                      <ActiveFilters aggs={aggs} />
                     </Segment>
                   </Grid.Column>
                 </Grid.Row>

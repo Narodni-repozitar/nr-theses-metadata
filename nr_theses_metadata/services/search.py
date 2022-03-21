@@ -13,21 +13,21 @@ class ExtendedFacetsParam(FacetsParam):
     def apply(self, identity, search, params):
         """Add aggregations representing the facets."""
 
+        for facet_name in self.facets.keys():
+            if 'facets' in params and '__expanded__' in params['facets'] and facet_name in params['facets']['__expanded__']:
+                print('expandign ', facet_name)
+                self.facets[facet_name]._params['size'] = self.config.max_facet_size
+            else:
+                self.facets[facet_name]._params['size'] = 10
+
+        params['facets'].pop('__expanded__', None)
+
         facets_values = dict(params.get("facets", {}))
         for name, values in facets_values.items():
-            
-            if name == '__expanded__':
-                for facet_name in values:
-                    if facet_name in self.facets:
-                        # Set expanded facet size
-                        print('expanding ', facet_name)
-                        self.facets[facet_name]._params['size'] = self.config.max_facet_size
-                del params['facets']['__expanded__']
-            else:
-                if '__missing__' in values and name in self.facets:
-                    self._filters[f"__missing__{name}"] = ~Q('exists', field=self.facets[name]._params['field'])
-                    values.remove('__missing__')
-        print('damn size ',self.facets['metadata_creators_fullName']._params.get('size'))
+            if '__missing__' in values and name in self.facets:
+                self._filters[f"__missing__{name}"] = ~Q('exists', field=self.facets[name]._params['field'])
+                values.remove('__missing__')
+        
         return super().apply(identity, search, params)
 
 
@@ -41,7 +41,8 @@ class NrThesesMetadataSearchOptions(InvenioSearchOptions):
         ExtendedFacetsParam,
     ]
 
-    max_facet_size = 2000
+    # More than that is currently unreasonable slow on all fronts
+    max_facet_size = 10000
 
     facets = {
         "metadata_dateDefended": facets.metadata_dateDefended,

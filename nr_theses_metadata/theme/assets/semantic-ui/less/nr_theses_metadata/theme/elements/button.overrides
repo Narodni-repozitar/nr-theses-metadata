@@ -23,3 +23,7 @@ button.iconhold  {
         background-color: inherit;
     }
 }
+
+.ui.search.button {
+    background-color: @green;
+}
