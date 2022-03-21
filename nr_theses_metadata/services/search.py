@@ -24,12 +24,10 @@ class ExtendedFacetsParam(FacetsParam):
                         self.facets[facet_name]._params['size'] = self.config.max_facet_size
                 del params['facets']['__expanded__']
             else:
-                self.facets[name]._params['size'] = 10
-
                 if '__missing__' in values and name in self.facets:
                     self._filters[f"__missing__{name}"] = ~Q('exists', field=self.facets[name]._params['field'])
                     values.remove('__missing__')
-        print(self.facets['metadata_creators_fullName']._params['size'])
+        print('damn size ',self.facets['metadata_creators_fullName']._params.get('size'))
         return super().apply(identity, search, params)
 
 
