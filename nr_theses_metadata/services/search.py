@@ -35,7 +35,10 @@ class MissingFacetsParam(FacetsParam):
         for name, values in facets_values.items():
             if '__missing__' in values and name in self.facets:
                 self._filters[name] = ~Q('exists', field=self.facets[name]._params['field'])
-                # TODO: pop __missing__ from facet values
+                values.remove('__missing__')
+                
+    
+        print(params['facets'])
 
         return super().apply(identity, search, params)
 
