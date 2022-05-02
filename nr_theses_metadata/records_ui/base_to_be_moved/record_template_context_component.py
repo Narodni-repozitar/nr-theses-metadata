@@ -1,3 +1,5 @@
+import os
+import json
 from copy import deepcopy
 from typing import List, Dict
 
@@ -38,11 +40,16 @@ class RecordTemplateContextComponent:
 
         def wrapped(**kwargs):
             _opts = {**opts, **kwargs}
-            return SearchAppConfig.generate(_opts, **overrides)
+            generated = SearchAppConfig.generate(_opts, **overrides)
+            # TODO: refactor - no hardcoded path here
+            cwd = os.path.dirname(__file__)
+            with open(os.path.join(cwd, '../../oarepo_ui/definitions/ui-model.json'), 'r') as ui_config:
+                generated['ui'] = json.load(ui_config)
+            return generated
 
         context_key = getattr(self.resource.config, self.config_context_key, self.config_context_key_default)
         template_contexts[context_key] = wrapped
-
+        
 
 class OptionsSelector:
     """Generic helper to select and validate facet/sort options."""
