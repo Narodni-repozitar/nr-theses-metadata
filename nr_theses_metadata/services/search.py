@@ -15,10 +15,9 @@ class ExtendedFacetsParam(FacetsParam):
 
         for facet_name in self.facets.keys():
             if 'facets' in params and '__expanded__' in params['facets'] and facet_name in params['facets']['__expanded__']:
-                print('expandign ', facet_name)
                 self.facets[facet_name]._params['size'] = self.config.max_facet_size
-            else:
-                self.facets[facet_name]._params['size'] = 10
+            # else:
+            #     self.facets[facet_name]._params['size'] = 10
 
         params['facets'].pop('__expanded__', None)
 
@@ -29,6 +28,19 @@ class ExtendedFacetsParam(FacetsParam):
                 values.remove('__missing__')
         
         return super().apply(identity, search, params)
+    
+    def filter(self, search):
+        """Apply a post filter on the search."""
+        if not self._filters:
+            return search
+
+        filters = list(self._filters.values())
+
+        facet_filter = filters[0]
+        for f in filters[1:]:
+            facet_filter &= f
+
+        return search.filter(facet_filter)
 
 
 class NrThesesMetadataSearchOptions(InvenioSearchOptions):
@@ -47,7 +59,8 @@ class NrThesesMetadataSearchOptions(InvenioSearchOptions):
     facets = {
         "metadata_dateDefended": facets.metadata_dateDefended,
         "metadata_defended": facets.metadata_defended,
-        "metadata_collection": facets.metadata_collection,
+        # "metadata_defended_missing": facets.metadata_defended_missing,
+        # "metadata_collection": facets.metadata_collection,
         "metadata_resourceType": facets.metadata_resourceType,
         "metadata_dateIssued": facets.metadata_dateIssued,
         "metadata_dateAvailable": facets.metadata_dateAvailable,
