@@ -31,7 +31,10 @@ $defs:
         uniqueItems[]: true
 
       affiliations[]:
-        oarepo:use: "#/$defs/TaxonomyTerm"
+        oarepo:vocabularies:
+          type: institutions
+          fields: [ id, title ]
+#        oarepo:use: "#/$defs/TaxonomyTerm"
         $description: taxonomie institutions
         oarepo:sample:
           faker: company
@@ -65,7 +68,10 @@ $defs:
         type: keyword
         required: true
       country:
-        oarepo:use: "#/$defs/TaxonomyTerm"
+        oarepo:vocabularies:
+          type: countries
+          fields: [ id, title ]
+#        oarepo:use: "#/$defs/TaxonomyTerm"
 
   Longitude:
     type: number
@@ -94,7 +100,10 @@ $defs:
         oarepo:use: "#/$defs/Authority"
         properties:
           role:
-            oarepo:use: "#/$defs/TaxonomyTerm"
+            oarepo:vocabularies:
+              type: contributor-types
+              fields: [ id, title ]
+#            oarepo:use: "#/$defs/TaxonomyTerm"
         uniqueItems[]: true
 
       itemPIDs[]:
@@ -127,10 +136,16 @@ $defs:
 
       itemRelationType:
         description: typ vztahu k původnímu popisovanému dok.
-        oarepo:use: "#/$defs/TaxonomyTerm"
+        oarepo:vocabularies:
+          type: item-relation-types
+          fields: [ id, title ]
+#        oarepo:use: "#/$defs/TaxonomyTerm"
 
       itemResourceType:
-        oarepo:use: "#/$defs/TaxonomyTerm"
+        oarepo:vocabularies:
+          type: related-resource-types
+          fields: [ id, title ]
+#        oarepo:use: "#/$defs/TaxonomyTerm"
 
   FundingReference:
     $description: informace o přidruženém projektu
@@ -148,7 +163,10 @@ $defs:
       fundingProgram:
         type: fulltext
       funder:
-        oarepo:use: "#/$defs/TaxonomyTerm"
+        oarepo:vocabularies:
+          type: funders
+          fields: [ id, title ]
+#        oarepo:use: "#/$defs/TaxonomyTerm"
         #required: true
 
   GeoLocation:
@@ -235,11 +253,17 @@ $defs:
         uniqueItems[]: true
         properties:
           role:
-            oarepo:use: "#/$defs/TaxonomyTerm"
+            oarepo:vocabularies:
+              type: contributor-types
+              fields: [ id, title ]
+#            oarepo:use: "#/$defs/TaxonomyTerm"
 
       resourceType:
         $description: Taxonomy driven typology of objects that's possible to store in the repository
-        oarepo:use: "#/$defs/TaxonomyTerm"
+#        oarepo:use: "#/$defs/TaxonomyTerm"
+        oarepo:vocabularies:
+          type: resource-types
+          fields: [ id, title ]
         required: true
         oarepo:sample: ["Bakalářská práce", "Diplomová práce"]
 
@@ -302,13 +326,19 @@ $defs:
       subjectCategories[]:
         $description: >
           FRASCATI oborové třídění - může sloužit jako podklad pro oborové filtrování
-        oarepo:use: "#/$defs/TaxonomyTerm"
+#        oarepo:use: "#/$defs/TaxonomyTerm"
+        oarepo:vocabularies:
+          type: subject-categories
+          fields: [ id, title ]
         uniqueItems[]: true
         oarepo:sample: ["Pravděpodobnost a statistika", "Matematika", "Chemické vědy"]
 
       languages[]:
         $description: ISO 639-2 B in slug, ISO 639-2 T in alias, ISO 639-1 as Alpha2.
-        oarepo:use: "#/$defs/TaxonomyTerm"
+#        oarepo:use: "#/$defs/TaxonomyTerm"
+        oarepo:vocabularies:
+          type: languages
+          fields: [ id, title ]
         minItems[]: 1
         required: true
         uniqueItems[]: true
@@ -338,7 +368,10 @@ $defs:
       rights[]:
         $description: >
           Any license or copyright information for this resource. Taxonomy field.
-        oarepo:use: "#/$defs/TaxonomyTerm"
+#        oarepo:use: "#/$defs/TaxonomyTerm"
+        oarepo:vocabularies:
+          type: licenses
+          fields: [ id, title ]
         uniqueItems[]: true
         oarepo:sample: ["CC BY", "CC BY-SA", "CC BY-NC", "CC BY-ND", "CC BY-NC-SA", "CC BY-NC-ND"]
 
@@ -347,7 +380,10 @@ $defs:
           Taxonomy driven list of possible access to the document - open,
           embargoed, restirected and metadata only access. Based on COAR
           vocabulary - http://vocabularies.coar-repositories.org/documentation/access_rights/",
-        oarepo:use: "#/$defs/TaxonomyTerm"
+#        oarepo:use: "#/$defs/TaxonomyTerm"
+        oarepo:vocabularies:
+          type: access-rights
+          fields: [ id, title ]
         oarepo:sample: [open, embargoed, restricted, "metadata only"]
 
       relatedItems[]:

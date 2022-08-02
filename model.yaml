@@ -28,7 +28,10 @@ model:
           - true
           - false
         degreeGrantor[]:
-          oarepo:use: "#/$defs/TaxonomyTerm"
+#          oarepo:use: "#/$defs/TaxonomyTerm"
+          oarepo:vocabularies:
+            type: institutions
+            fields: [id, title]
         studyFields[]:
           type: keyword
         # todo: this will be moved later to secondary community
